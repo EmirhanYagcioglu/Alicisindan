@@ -14,7 +14,7 @@ public class Postgresql {
     // Database key values.
     private final static String url = "jdbc:postgresql://cs-database.c3ivdppj1ho1.eu-north-1.rds.amazonaws.com:5432/alicisindan";
     private final static String username = "postgres";
-    private final static String password = "18122003ct";
+    private final static String password = "sifre";
 
     public static Connection connection;
 
