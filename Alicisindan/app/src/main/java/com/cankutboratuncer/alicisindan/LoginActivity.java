@@ -14,7 +14,6 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText usernameEmail, password;
     CheckBox remember;
-
     Button signIn, googleSignIn, facebookSignIn;
 
     TextView signUp;
@@ -30,8 +29,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         signUpButtonListenner();
-
-
     }
 
     private void signUpButtonListenner() {
