@@ -1,4 +1,4 @@
-package com.cankutboratuncer.alicisindan;
+package com.example.apptest;
 
 import org.junit.Test;
 

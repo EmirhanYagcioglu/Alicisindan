@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
+    tools:context=".Entry"
     android:background="@drawable/login_background"
     android:theme="@style/Theme.Login">
 
@@ -147,7 +147,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/forgotPasswordText"
+        android:id="@+id/forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
