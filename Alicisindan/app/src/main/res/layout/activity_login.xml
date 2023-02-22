@@ -110,7 +110,8 @@
             android:layout_below="@id/button_login"
             android:layout_centerHorizontal="true"
             android:text="or"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textColor="@color/color_darkest"/>
 
         <Button
             android:id="@+id/button_google_login"

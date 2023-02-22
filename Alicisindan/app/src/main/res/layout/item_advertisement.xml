@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
     app:cardCornerRadius="4dp"
-    android:elevation="4dp">
+    android:elevation="4dp"
+    android:backgroundTint="@color/color_darkest">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -34,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/card_view_advertisement_image"
             android:layout_toEndOf="@+id/card_view_advertisement_image"
-            android:text="The Ad Title" />
+            android:text="The Ad Title"
+            android:textColor="@color/color_brightest"/>
 
         <TextView
             android:id="@+id/text_view_advertisement_description"
@@ -43,7 +45,8 @@
             android:layout_below="@id/text_view_advertisement_title"
             android:layout_marginTop="4dp"
             android:layout_toEndOf="@+id/card_view_advertisement_image"
-            android:text="This will be our descrption of the ad" />
+            android:text="This will be our descrption of the ad"
+            android:textColor="@color/color_brightest" />
 
         <TextView
             android:id="@+id/text_view_advertisement_price"
@@ -52,7 +55,8 @@
             android:layout_alignBottom="@id/card_view_advertisement_image"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="8dp"
-            android:text="1.000.000 ₺" />
+            android:text="1.000.000 ₺"
+            android:textColor="@color/color_brightest" />
 
     </RelativeLayout>
 

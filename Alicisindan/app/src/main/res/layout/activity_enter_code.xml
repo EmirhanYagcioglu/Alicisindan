@@ -47,6 +47,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/background_text_field"
             android:hint="Enter code"
+            android:inputType="number"
             android:paddingHorizontal="8dp"
             android:paddingVertical="16dp"
             android:text=""
