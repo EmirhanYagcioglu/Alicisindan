@@ -1,4 +1,4 @@
-package com.example.apptest;
+package com.alicisindan;
 
 import org.junit.Test;
 

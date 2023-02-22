@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUp"
-    android:background="@drawable/login_background"
-    android:theme="@style/Theme.Login">
+    android:background="@drawable/background_login"
+    android:theme="@style/Theme.Login"
+    tools:context=".SignUp">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -18,32 +18,32 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textNamePrompt1"
+            android:id="@+id/text_view_prompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
             android:text="Sign Up"
             android:textColor="@color/color_brightest"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <LinearLayout
-            android:id="@+id/name"
+            android:id="@+id/linear_layout_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textNamePrompt1"
+            android:layout_below="@+id/text_view_prompt"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
             android:weightSum="2">
 
             <EditText
-                android:id="@+id/firstNameText"
+                android:id="@+id/edit_text_first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="3dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="3dp"
                 android:layout_weight="1"
-                android:background="@drawable/login_text_background"
+                android:background="@drawable/background_text_field"
                 android:hint="First Name"
                 android:padding="8dp"
                 android:text=""
@@ -52,13 +52,13 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/lastNameText"
+                android:id="@+id/edit_text_last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="24dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="24dp"
                 android:layout_weight="1"
-                android:background="@drawable/login_text_background"
+                android:background="@drawable/background_text_field"
                 android:hint="Last Name"
                 android:padding="8dp"
                 android:text=""
@@ -68,15 +68,14 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/emailText"
+            android:id="@+id/edit_text_email"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/name"
-            android:layout_marginLeft="24dp"
+            android:layout_below="@+id/linear_layout_name"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="6dp"
-            android:layout_marginRight="24dp"
-            android:background="@drawable/login_text_background"
+            android:background="@drawable/background_text_field"
             android:ems="10"
             android:hint="Email Address"
             android:inputType="textEmailAddress"
@@ -87,15 +86,14 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/phoneText"
+            android:id="@+id/edit_text_phone"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/emailText"
-            android:layout_marginLeft="24dp"
+            android:layout_below="@+id/edit_text_email"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="6dp"
-            android:layout_marginRight="24dp"
-            android:background="@drawable/login_text_background"
+            android:background="@drawable/background_text_field"
             android:ems="10"
             android:hint="Phone Number"
             android:inputType="phone"
@@ -106,15 +104,14 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/passwordText"
+            android:id="@+id/edit_text_password"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/phoneText"
-            android:layout_marginLeft="24dp"
+            android:layout_below="@+id/edit_text_phone"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="6dp"
-            android:layout_marginRight="24dp"
-            android:background="@drawable/login_text_background"
+            android:background="@drawable/background_text_field"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
@@ -125,15 +122,14 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/passwordTextCheck"
+            android:id="@+id/edit_text_password_check"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/passwordText"
-            android:layout_marginLeft="24dp"
+            android:layout_below="@+id/edit_text_password"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="6dp"
-            android:layout_marginRight="24dp"
-            android:background="@drawable/login_text_background"
+            android:background="@drawable/background_text_field"
             android:ems="10"
             android:hint="Reenter Password"
             android:inputType="textPassword"
@@ -144,15 +140,14 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/addressText"
+            android:id="@+id/edit_text_address"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/passwordTextCheck"
-            android:layout_marginLeft="24dp"
+            android:layout_below="@+id/edit_text_password_check"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="6dp"
-            android:layout_marginRight="24dp"
-            android:background="@drawable/login_text_background"
+            android:background="@drawable/background_text_field"
             android:ems="10"
             android:hint="Address"
             android:inputType="textPostalAddress"
@@ -163,15 +158,14 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/birthdayText"
+            android:id="@+id/edit_text_birthday"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/addressText"
-            android:layout_marginLeft="24dp"
+            android:layout_below="@+id/edit_text_address"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="6dp"
-            android:layout_marginRight="24dp"
-            android:background="@drawable/login_text_background"
+            android:background="@drawable/background_text_field"
             android:ems="10"
             android:hint="Birthday"
             android:padding="8dp"
@@ -181,11 +175,11 @@
             android:textSize="14sp" />
 
         <CheckBox
-            android:id="@+id/tacCheck"
+            android:id="@+id/checkbox_terms_and_conditions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/birthdayText"
-            android:layout_marginLeft="24dp"
+            android:layout_below="@+id/edit_text_birthday"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="6dp"
             android:text="I read and accept the terms and conditions"
             android:textColor="@color/color_brightest" />
@@ -193,23 +187,22 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/button_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/color_dark"
         android:text="submit"
-        app:layout_constraintBottom_toTopOf="@+id/hasAccountText"
+        app:layout_constraintBottom_toTopOf="@+id/text_view_has_account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/hasAccountText"
+        android:id="@+id/text_view_has_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:onClick="hasAccount"
         android:text="Already have an account? Click here"
         android:textColor="@color/color_brightest"
         android:textStyle="bold"
