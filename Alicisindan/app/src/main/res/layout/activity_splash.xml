@@ -7,14 +7,14 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_100sdp"
         android:scaleType="centerCrop"
         android:src="@drawable/person_image_1"
-        app:layout_constraintBottom_toBottomOf="@id/widget"
+        app:layout_constraintBottom_toBottomOf="@id/frameLayoutBottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-         />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/widget"
@@ -56,12 +56,13 @@
             android:textSize="@dimen/_14ssp" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_32sdp"
             android:background="@drawable/main_button_background"
             android:fontFamily="@font/lato_bold"
-            android:text="Get Started"
+            android:text="@string/get_started"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/_18ssp" />

@@ -4,17 +4,16 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cankutboratuncer.alicisindan.databinding.ActivityMainBinding;
+import com.cankutboratuncer.alicisindan.databinding.ActivitySignInBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
+    ActivitySignInBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivitySignInBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
     }
 }
-
