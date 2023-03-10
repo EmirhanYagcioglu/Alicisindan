@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SignInActivity">
+    tools:context=".activities.SignInActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -91,7 +91,9 @@
         android:layout_marginTop="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_20sdp"
         android:text="@string/have_already_an_account"
-        android:textColor="@color/yellow" />
+        android:textColor="@color/yellow"
+        android:textSize="@dimen/_11ssp"
+        android:fontFamily="@font/lato"/>
 
     <CheckBox
         android:layout_width="wrap_content"

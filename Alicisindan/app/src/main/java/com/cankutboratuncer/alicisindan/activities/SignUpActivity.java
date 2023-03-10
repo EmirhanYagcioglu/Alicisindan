@@ -1,8 +1,10 @@
-package com.cankutboratuncer.alicisindan;
+package com.cankutboratuncer.alicisindan.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.cankutboratuncer.alicisindan.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
