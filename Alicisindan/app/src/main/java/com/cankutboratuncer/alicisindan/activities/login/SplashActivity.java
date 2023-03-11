@@ -1,4 +1,4 @@
-package com.cankutboratuncer.alicisindan.activities;
+package com.cankutboratuncer.alicisindan.activities.login;
 
 import android.content.Intent;
 import android.os.Bundle;

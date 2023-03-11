@@ -1,4 +1,4 @@
-package com.cankutboratuncer.alicisindan.activities;
+package com.cankutboratuncer.alicisindan.activities.main;
 
 import android.os.Bundle;
 

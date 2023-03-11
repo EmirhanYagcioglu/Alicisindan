@@ -25,4 +25,21 @@
     <string name="what_is_your_phone_number">What Is Your Phone Number?</string>
     <string name="please_enter_your_phone_number_to_verify_your_account">Please enter your phone number to verify your account</string>
     <string name="phoneNo">(535) 123 45 67</string>
+    <string name="phone_verification">Phone Verification</string>
+    <string name="please_enter_code_sent_to">Please enter Code sent to</string>
+    <string name="verify">Verify</string>
+    <string name="_0">0</string>
+    <string name="categories">Categories</string>
+    <string name="what_are_you_looking_for">What are you looking for?</string>
+    <string name="my_posts">My Posts</string>
+    <string name="full_name">Full Name</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="log_out">Log Out</string>
+    <string name="help">Help</string>
+    <string name="favorite">Favorite</string>
+    <string name="account">Account</string>
+    <string name="messages">Messages</string>
+    <string name="featured">Featured</string>
+    <string name="see_all">See All</string>
+    <string name="notification_icon">notification_icon</string>
 </resources>

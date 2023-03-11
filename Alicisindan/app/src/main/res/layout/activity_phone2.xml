@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.SignInActivity">
+    tools:context=".activities.login.PhoneActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -42,9 +42,11 @@
         android:background="@drawable/edit_text_background"
         android:orientation="horizontal">
 
-        <Spinner
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="match_parent" />
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/phoneNumber_countryPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center" />
 
         <EditText
             android:id="@+id/fullName"

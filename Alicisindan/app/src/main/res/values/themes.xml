@@ -3,4 +3,7 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
+    <style name="ImageView.Round" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

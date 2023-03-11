@@ -51,18 +51,7 @@ dependencies {
     // Rounded ImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
-    // Firebase
-    implementation platform('com.google.firebase:firebase-bom:31.2.2')
-    implementation 'com.google.firebase:firebase-messaging:23.1.1'
-    implementation 'com.google.firebase:firebase-firestore:24.4.3'
-
-    // MultiDex
-    implementation 'androidx.multidex:multidex:2.0.1'
-
-    // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
-    implementation 'androidx.work:work-runtime-ktx:2.8.0'
-    implementation 'androidx.activity:activity:1.6.1'
+    // Flag
+    implementation 'com.hbb20:ccp:2.5.1'
 
 }
