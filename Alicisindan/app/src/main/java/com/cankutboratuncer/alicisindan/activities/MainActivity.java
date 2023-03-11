@@ -18,14 +18,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView = findViewById(R.id.mainActivity_bottomNavigationBar_main);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         loadFragment(new HomeFragment());
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
@@ -51,8 +53,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
         return true;
     }
+
     void loadFragment(Fragment fragment) {
         //to attach fragment
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainActivity_frameLayout_main, fragment).commit();
     }
 }

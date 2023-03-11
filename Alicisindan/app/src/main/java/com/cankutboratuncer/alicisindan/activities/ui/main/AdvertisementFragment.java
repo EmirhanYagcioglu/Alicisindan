@@ -43,8 +43,7 @@ public class AdvertisementFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_advertisement, container, false);
 
@@ -60,7 +59,7 @@ public class AdvertisementFragment extends Fragment {
         advertisement_viewPager2.setAdapter(MyAdapter);
         advertisement_viewPager2.setOffscreenPageLimit(3);
 
-        float pageMargin= getResources().getDimensionPixelOffset(com.intuit.sdp.R.dimen._24sdp);
+        float pageMargin = getResources().getDimensionPixelOffset(com.intuit.sdp.R.dimen._24sdp);
         float pageOffset = getResources().getDimensionPixelOffset(com.intuit.sdp.R.dimen._24sdp);
 
         advertisement_viewPager2.setPageTransformer(new ViewPager2.PageTransformer() {

@@ -19,6 +19,7 @@ public class LoadingActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(() -> goToLogin(), 2000);
     }
+
     public void goToLogin() {
         Intent intent = new Intent(LoadingActivity.this, SplashActivity.class);
         startActivity(intent);

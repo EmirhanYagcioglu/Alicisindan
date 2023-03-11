@@ -7,13 +7,15 @@
     tools:context=".activities.ui.login.SignInActivity">
 
     <FrameLayout
+        android:id="@+id/signInActivity_frameLayout_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_120sdp"
-        android:background="@drawable/top_widget_background"
+        android:background="@drawable/background_top_widget"
         android:paddingHorizontal="@dimen/_20sdp"
         android:paddingVertical="@dimen/_32sdp">
 
         <TextView
+            android:id="@+id/signInActivity_textView_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -24,12 +26,12 @@
     </FrameLayout>
 
     <EditText
-        android:id="@+id/emailPhoneNumber"
+        android:id="@+id/signInActivity_editText_emailOrPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_64sdp"
-        android:background="@drawable/edit_text_background"
+        android:background="@drawable/background_edit_text"
         android:fontFamily="@font/lato"
         android:hint="@string/email_or_phone_number"
         android:imeOptions="actionNext"
@@ -39,11 +41,12 @@
         android:textColor="@color/primary_text" />
 
     <EditText
+        android:id="@+id/signInActivity_editText_password"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_24sdp"
-        android:background="@drawable/edit_text_background"
+        android:background="@drawable/background_edit_text"
         android:fontFamily="@font/lato"
         android:hint="@string/password"
         android:imeOptions="actionDone"
@@ -53,7 +56,7 @@
         android:textColor="@color/primary_text" />
 
     <TextView
-        android:id="@+id/buttonSignUp"
+        android:id="@+id/signInActivity_button_signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
@@ -63,12 +66,12 @@
         android:textColor="@color/yellow" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonSignIn"
+        android:id="@+id/signInActivity_button_signIn"
         android:layout_width="@dimen/_120sdp"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:background="@drawable/main_button_background"
+        android:background="@drawable/background_main_button"
         android:fontFamily="@font/lato_bold"
         android:text="@string/sign_in"
         android:textAllCaps="false"
@@ -76,6 +79,7 @@
         android:textSize="@dimen/_16ssp" />
 
     <TextView
+        android:id="@+id/signInActivity_textView_loginVia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -85,36 +89,33 @@
         android:textColor="@color/yellow" />
 
     <LinearLayout
+        android:id="@+id/signInActivity_linearLayout_loginVia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_12sdp"
         android:orientation="horizontal"
         android:padding="@dimen/_4sdp">
 
-
         <ImageButton
-            android:id="@+id/buttonGoogle"
+            android:id="@+id/signInActivity_button_google"
             android:layout_width="@dimen/_32sdp"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginStart="@dimen/_20sdp"
-            android:background="@drawable/google_button_background" />
-
+            android:background="@drawable/background_google_button" />
 
         <ImageButton
-            android:id="@+id/buttonFacebook"
+            android:id="@+id/signInActivity_button_facebook"
             android:layout_width="@dimen/_32sdp"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginStart="@dimen/_24sdp"
-            android:background="@drawable/facebook_button_background" />
-
+            android:background="@drawable/background_facebook_button" />
 
         <ImageButton
-            android:id="@+id/buttonTwitter"
+            android:id="@+id/signInActivity_button_twitter"
             android:layout_width="@dimen/_32sdp"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginStart="@dimen/_24sdp"
-            android:background="@drawable/twitter_button_background" />
-
+            android:background="@drawable/background_twitter_button" />
 
     </LinearLayout>
 

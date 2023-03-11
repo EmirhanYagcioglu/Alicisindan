@@ -13,4 +13,10 @@
         <item name="cornerSizeBottomRight">@dimen/_8sdp</item>
         <item name="cornerFamily">rounded</item>
     </style>
+    <style name="Theme.Alicisindan.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.Alicisindan.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Alicisindan.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -1,21 +1,22 @@
 package com.cankutboratuncer.alicisindan.activities.ui.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.cankutboratuncer.alicisindan.databinding.ActivityPhone2Binding;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.cankutboratuncer.alicisindan.databinding.ActivityPhoneBinding;
 
 public class PhoneActivity extends AppCompatActivity {
 
-    ActivityPhone2Binding binding;
+    ActivityPhoneBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityPhone2Binding.inflate(getLayoutInflater());
+        binding = ActivityPhoneBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.buttonVerification.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), PhoneVerificationActivity.class)));
-        binding.buttonSignIn.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SignInActivity.class)));
+        binding.phoneActivityButtonVerification.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), PhoneVerificationActivity.class)));
+        binding.phoneActivityButtonSignIn.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SignInActivity.class)));
     }
 }

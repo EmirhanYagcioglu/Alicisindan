@@ -17,7 +17,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySignInBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.buttonSignIn.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
-        binding.buttonSignUp.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), PhoneActivity.class)));
+        binding.signInActivityButtonSignIn.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
+        binding.signInActivityButtonSignUp.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), PhoneActivity.class)));
     }
 }

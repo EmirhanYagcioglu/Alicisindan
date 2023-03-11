@@ -7,13 +7,15 @@
     tools:context=".activities.ui.login.PhoneActivity">
 
     <FrameLayout
+        android:id="@+id/phoneActivity_frameLayout_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_120sdp"
-        android:background="@drawable/top_widget_background"
+        android:background="@drawable/background_top_widget"
         android:paddingHorizontal="@dimen/_20sdp"
         android:paddingVertical="@dimen/_32sdp">
 
         <TextView
+            android:id="@+id/phoneActivity_textView_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -24,6 +26,7 @@
     </FrameLayout>
 
     <TextView
+        android:id="@+id/phoneActivity_textView_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -35,21 +38,22 @@
         android:textSize="@dimen/_12ssp" />
 
     <LinearLayout
+        android:id="@+id/phoneActivity_linearLayout_phone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_40sdp"
-        android:background="@drawable/edit_text_background"
+        android:background="@drawable/background_edit_text"
         android:orientation="horizontal">
 
         <com.hbb20.CountryCodePicker
-            android:id="@+id/phoneNumber_countryPicker"
+            android:id="@+id/phoneActivity_countryPicker"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center" />
 
         <EditText
-            android:id="@+id/fullName"
+            android:id="@+id/phoneActivity_editText_phone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
             android:background="@null"
@@ -63,12 +67,12 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonVerification"
+        android:id="@+id/phoneActivity_button_verification"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_40sdp"
-        android:background="@drawable/main_button_background"
+        android:background="@drawable/background_main_button"
         android:fontFamily="@font/lato_bold"
         android:text="@string/send_verification_code"
         android:textAllCaps="false"
@@ -76,7 +80,7 @@
         android:textSize="@dimen/_16ssp" />
 
     <TextView
-        android:id="@+id/buttonSignIn"
+        android:id="@+id/phoneActivity_button_signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_8sdp"
     app:layout_constraintDimensionRatio="H,1:1"
-    app:layout_constraintWidth_percent="0.25"
-    android:layout_margin="@dimen/_8sdp">
+    app:layout_constraintWidth_percent="0.25">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -20,8 +20,8 @@
                 android:id="@+id/itemCategory_imageView_categoryImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintDimensionRatio="H,1:1"
-                android:src="@drawable/ic_launcher_background"/>
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintDimensionRatio="H,1:1" />
 
             <TextView
                 android:id="@+id/itemCategory_textView_categoryName"

@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
 
     void loadFragment(Fragment fragment) {
         //to attach fragment
-        getParentFragmentManager().beginTransaction().replace(R.id.frame_layout, fragment).commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.mainActivity_frameLayout_main, fragment).commit();
     }
 
     @Override

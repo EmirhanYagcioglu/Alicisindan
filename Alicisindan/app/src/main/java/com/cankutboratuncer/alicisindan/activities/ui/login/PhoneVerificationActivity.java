@@ -16,7 +16,7 @@ public class PhoneVerificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPhoneVerificationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.buttonVerify.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SignUpActivity.class)));
-        binding.buttonChangePhone.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), PhoneActivity.class)));
+        binding.phoneVerificationActivityButtonVerify.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SignUpActivity.class)));
+        binding.phoneVerificationActivityButtonChangePhone.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), PhoneActivity.class)));
     }
 }

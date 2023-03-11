@@ -6,30 +6,31 @@
     android:animateLayoutChanges="true">
 
     <ImageView
+        android:id="@+id/splashActivity_imageView_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/_100sdp"
         android:scaleType="centerCrop"
-        android:src="@drawable/person_image_1"
-        app:layout_constraintBottom_toBottomOf="@id/frameLayoutBottom"
+        android:src="@drawable/a_person_image_1"
+        app:layout_constraintBottom_toBottomOf="@id/splashActivity_frameLayout_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/widget"
+        android:id="@+id/splashActivity_imageView_widget"
         android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_100sdp"
         android:layout_marginBottom="@dimen/_200sdp"
-        android:background="@drawable/splash_widget_background"
+        android:background="@drawable/background_splash_widget"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/frameLayoutBottom" />
+        app:layout_constraintEnd_toEndOf="@id/splashActivity_frameLayout_bottom" />
 
     <LinearLayout
-        android:id="@+id/frameLayoutBottom"
+        android:id="@+id/splashActivity_frameLayout_bottom"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_232sdp"
-        android:background="@drawable/splash_text_background"
+        android:background="@drawable/background_splash_text"
         android:orientation="vertical"
         android:padding="@dimen/_32sdp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +38,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/mainTitle"
+            android:id="@+id/splashActivity_textView_mainTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -60,13 +61,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_32sdp"
-            android:background="@drawable/main_button_background"
+            android:background="@drawable/background_main_button"
             android:fontFamily="@font/lato_bold"
             android:text="@string/get_started"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/_18ssp" />
-
 
     </LinearLayout>
 
