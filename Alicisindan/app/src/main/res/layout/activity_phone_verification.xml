@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.login.PhoneVerificationActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
+        android:background="@drawable/top_widget_background"
+        android:paddingHorizontal="@dimen/_20sdp"
+        android:paddingVertical="@dimen/_32sdp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/lato_bold"
+            android:text="@string/phone_verification"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_24sdp" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_32sdp"
+        android:fontFamily="@font/lato"
+        android:text="@string/please_enter_code_sent_to"
+        android:textColor="@color/primary_text"
+        android:textSize="@dimen/_12ssp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_12ssp"
+            tools:text="+905551234567" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/buttonChangePhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:fontFamily="@font/lato"
+            android:text="Change phone number?"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_12ssp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/phoneNo1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_45sdp"
+            android:fontFamily="@font/lato"
+            android:hint="@string/_0"
+            android:imeOptions="actionNext"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:textColor="@color/primary_text" />
+
+        <EditText
+            android:id="@+id/phoneNo2"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_45sdp"
+            android:fontFamily="@font/lato"
+            android:hint="@string/_0"
+            android:imeOptions="actionNext"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:textColor="@color/primary_text" />
+
+        <EditText
+            android:id="@+id/phoneNo3"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_45sdp"
+            android:fontFamily="@font/lato"
+            android:hint="@string/_0"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:inputType="number"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:textColor="@color/primary_text" />
+
+        <EditText
+            android:id="@+id/phoneNo4"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_45sdp"
+            android:fontFamily="@font/lato"
+            android:hint="@string/_0"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:inputType="number"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:textColor="@color/primary_text" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonVerify"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:background="@drawable/main_button_background"
+        android:fontFamily="@font/lato_bold"
+        android:text="@string/verify"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16ssp" />
+
+    <TextView
+        android:id="@+id/buttonResendCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:fontFamily="@font/lato_bold"
+        android:text="Resend code"
+        android:textColor="@color/yellow"
+        android:textSize="@dimen/_16ssp" />
+
+</LinearLayout>
