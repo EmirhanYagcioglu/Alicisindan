@@ -1,6 +1,7 @@
-package com.cankutboratuncer.alicisindan.activities.main;
+package com.cankutboratuncer.alicisindan.activities.data;
 
 import com.cankutboratuncer.alicisindan.R;
+import com.cankutboratuncer.alicisindan.activities.ui.main.item.Category;
 
 import java.util.ArrayList;
 

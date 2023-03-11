@@ -1,11 +1,11 @@
-package com.cankutboratuncer.alicisindan.activities.login;
+package com.cankutboratuncer.alicisindan.activities.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cankutboratuncer.alicisindan.activities.main.MainActivity;
+import com.cankutboratuncer.alicisindan.activities.MainActivity;
 import com.cankutboratuncer.alicisindan.databinding.ActivitySignInBinding;
 
 public class SignInActivity extends AppCompatActivity {

@@ -1,11 +1,10 @@
-package com.cankutboratuncer.alicisindan.activities.login;
+package com.cankutboratuncer.alicisindan.activities.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.cankutboratuncer.alicisindan.activities.main.MainActivity;
 import com.cankutboratuncer.alicisindan.databinding.ActivityPhone2Binding;
 
 public class PhoneActivity extends AppCompatActivity {

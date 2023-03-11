@@ -1,4 +1,4 @@
-package com.cankutboratuncer.alicisindan.activities.main;
+package com.cankutboratuncer.alicisindan.activities.ui.main.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cankutboratuncer.alicisindan.R;
+import com.cankutboratuncer.alicisindan.activities.ui.main.item.Category;
 
 import java.util.ArrayList;
 
@@ -50,8 +51,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
 
         public void bind(Category category) {
-            this.categoryName.setText(category.name);
-            this.categoryImage.setImageResource(category.image);
+            this.categoryName.setText(category.getName());
+            this.categoryImage.setImageResource(category.getImage());
         }
     }
 }

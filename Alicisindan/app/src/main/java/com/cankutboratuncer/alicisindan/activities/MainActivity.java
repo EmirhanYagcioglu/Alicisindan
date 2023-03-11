@@ -1,4 +1,4 @@
-package com.cankutboratuncer.alicisindan.activities.main;
+package com.cankutboratuncer.alicisindan.activities;
 
 
 import android.os.Bundle;
@@ -9,6 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.cankutboratuncer.alicisindan.R;
+import com.cankutboratuncer.alicisindan.activities.ui.main.BuyFragment;
+import com.cankutboratuncer.alicisindan.activities.ui.main.ForumFragment;
+import com.cankutboratuncer.alicisindan.activities.ui.main.HomeFragment;
+import com.cankutboratuncer.alicisindan.activities.ui.main.ProfileFragment;
+import com.cankutboratuncer.alicisindan.activities.ui.main.SellFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
