@@ -56,6 +56,7 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/buttonChangePhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -130,7 +131,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonSignIn"
+        android:id="@+id/buttonVerify"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
@@ -143,6 +144,7 @@
         android:textSize="@dimen/_16ssp" />
 
     <TextView
+        android:id="@+id/buttonResendCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
