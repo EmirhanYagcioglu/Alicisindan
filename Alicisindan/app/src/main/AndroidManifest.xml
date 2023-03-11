@@ -16,15 +16,14 @@
             android:exported="false" />
         <activity
             android:name=".activities.login.LoadingActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.main.CategoriesFragment"
+            android:name=".activities.main.CategoryFragment"
             android:exported="false" />
         <activity
             android:name=".activities.main.ProfileFragment"
@@ -49,7 +48,11 @@
             android:exported="false" />
         <activity
             android:name=".activities.login.SplashActivity"
-            android:exported="true"/>
+            android:exported="true" />
+
+        <activity
+            android:name=".activities.login.PhoneActivity"
+            android:exported="true" />
 
 
         <meta-data

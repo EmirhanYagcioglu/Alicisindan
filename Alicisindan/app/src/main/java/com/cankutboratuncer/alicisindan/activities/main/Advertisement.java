@@ -1,4 +1,5 @@
 package com.cankutboratuncer.alicisindan.activities.main;
+
 public class Advertisement {
 
     // User advertisementOwner;

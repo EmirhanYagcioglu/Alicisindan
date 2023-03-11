@@ -74,7 +74,7 @@
                 android:textSize="@dimen/_16ssp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/full_name" />
+                android:text="@string/full_name" />
 
             <TextView
                 android:id="@+id/profileFragment_textView_phoneNumber"
@@ -87,7 +87,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profileFragment_textView_fullName"
-                tools:text="+90 555 444 44 44" />
+                android:text="+90 555 444 44 44" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

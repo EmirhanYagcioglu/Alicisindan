@@ -6,8 +6,9 @@ import java.util.ArrayList;
 
 public class CategoryTest {
     public static ArrayList<Category> categories = createSampleCategories();
+
     public static ArrayList<Category> createSampleCategories() {
-        ArrayList<Category> categoryArrayList= new ArrayList<>();
+        ArrayList<Category> categoryArrayList = new ArrayList<>();
         categoryArrayList.add(new Category("Cars", R.drawable.ic_launcher_background));
         categoryArrayList.add(new Category("Houses", R.drawable.ic_launcher_background));
         categoryArrayList.add(new Category("Phones", R.drawable.ic_launcher_background));
@@ -19,4 +20,3 @@ public class CategoryTest {
         return categoryArrayList;
     }
 }
-

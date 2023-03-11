@@ -1,6 +1,5 @@
 package com.cankutboratuncer.alicisindan.activities.main;
 
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

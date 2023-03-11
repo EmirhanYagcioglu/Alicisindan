@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_background"
-    tools:context=".activities.main.CategoriesFragment">
+    tools:context=".activities.main.CategoryFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/categoryFragment_layout_top"
@@ -60,7 +60,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="horizontal"
-        android:visibility="invisible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
