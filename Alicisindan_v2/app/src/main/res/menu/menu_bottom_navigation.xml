@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Home"
+        android:id="@+id/menu_home"
+        android:icon="@drawable/ic_menu_home"/>
+    <item
+        android:title="Buy"
+        android:id="@+id/menu_buy"
+        android:icon="@drawable/ic_menu_buy"/>
+    <item
+        android:title="Sell"
+        android:id="@+id/menu_sell"
+        android:icon="@drawable/ic_menu_sell"/>
+    <item
+        android:title="Forum"
+        android:id="@+id/menu_forum"
+        android:icon="@drawable/ic_menu_forum"/>
+    <item
+        android:title="Profile"
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/ic_menu_profile"/>
+
+</menu>
