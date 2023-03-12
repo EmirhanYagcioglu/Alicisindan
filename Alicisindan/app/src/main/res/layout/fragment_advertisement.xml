@@ -57,6 +57,32 @@
 
                     </LinearLayout>
 
+                    <ImageView
+                        android:id="@+id/advertisementFragment_imageView_chat"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:src="@drawable/background_circle"
+                        app:layout_constraintBottom_toBottomOf="@+id/advertisementFragment_layout_image"
+                        app:layout_constraintDimensionRatio="H,1:1"
+                        app:layout_constraintEnd_toEndOf="@+id/advertisementFragment_layout_image"
+                        app:layout_constraintWidth_percent="0.2"
+                        app:tint="@color/primary" />
+
+                    <ImageView
+                        android:id="@+id/advertisementFragment_imageView_chatIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:src="@drawable/ic_chat"
+                        app:layout_constraintBottom_toBottomOf="@+id/advertisementFragment_imageView_chat"
+                        app:layout_constraintDimensionRatio="H,1:1"
+                        app:layout_constraintEnd_toEndOf="@+id/advertisementFragment_imageView_chat"
+                        app:layout_constraintStart_toStartOf="@+id/advertisementFragment_imageView_chat"
+                        app:layout_constraintTop_toTopOf="@+id/advertisementFragment_imageView_chat"
+                        app:layout_constraintWidth_percent="0.14"
+                        app:tint="@color/white" />
+
                     <TextView
                         android:id="@+id/advertisementFragment_textView_tag"
                         android:layout_width="0dp"
@@ -145,6 +171,37 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/advertisementFragment_layout_relatedItems"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:padding="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/advertisementFragment_cardView_location">
+
+                <TextView
+                    android:id="@+id/advertisementFragment_textView_relatedItems"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Products related to this item"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/advertisementFragment_recyclerView_relatedItems"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:scrollbars="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/advertisementFragment_textView_relatedItems" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

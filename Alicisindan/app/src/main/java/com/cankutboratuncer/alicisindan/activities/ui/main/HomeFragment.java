@@ -50,7 +50,14 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        LinearLayoutManager horizontalRecyclerViewLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager horizontalRecyclerViewLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false) {
+            @Override
+            public boolean checkLayoutParams(RecyclerView.LayoutParams lp) {
+                // force height of viewHolder here, this will override layout_height from xml
+                lp.width = (int) (getWidth() / 4);
+                return true;
+            }
+        };
 
         RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.homeFragment_recyclerView_advertisements);
         RecyclerView recyclerViewForCategories = view.findViewById(R.id.homeFragment_recyclerView_categories);
@@ -80,7 +87,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
 
     void loadFragment(Fragment fragment) {
         //to attach fragment
-        getParentFragmentManager().beginTransaction().replace(R.id.mainActivity_frameLayout_main, fragment).commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.mainActivity_frameLayout_main, fragment).addToBackStack(null).commit();
     }
 
     @Override

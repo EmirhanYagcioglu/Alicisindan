@@ -56,6 +56,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     void loadFragment(Fragment fragment) {
         //to attach fragment
-        getSupportFragmentManager().beginTransaction().replace(R.id.mainActivity_frameLayout_main, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainActivity_frameLayout_main, fragment).addToBackStack(null).commit();
     }
 }
