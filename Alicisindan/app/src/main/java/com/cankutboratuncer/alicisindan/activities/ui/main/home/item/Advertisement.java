@@ -1,4 +1,4 @@
-package com.cankutboratuncer.alicisindan.activities.ui.main.item;
+package com.cankutboratuncer.alicisindan.activities.ui.main.home.item;
 
 public class Advertisement {
 

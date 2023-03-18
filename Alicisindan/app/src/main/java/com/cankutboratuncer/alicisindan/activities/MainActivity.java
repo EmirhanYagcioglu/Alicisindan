@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment;
 
 import com.cankutboratuncer.alicisindan.R;
 import com.cankutboratuncer.alicisindan.activities.ui.main.BuyFragment;
-import com.cankutboratuncer.alicisindan.activities.ui.main.ForumFragment;
-import com.cankutboratuncer.alicisindan.activities.ui.main.HomeFragment;
-import com.cankutboratuncer.alicisindan.activities.ui.main.ProfileFragment;
+import com.cankutboratuncer.alicisindan.activities.ui.main.forum.ForumFragment;
+import com.cankutboratuncer.alicisindan.activities.ui.main.home.HomeFragment;
+import com.cankutboratuncer.alicisindan.activities.ui.main.profile.ProfileFragment;
 import com.cankutboratuncer.alicisindan.activities.ui.main.SellFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

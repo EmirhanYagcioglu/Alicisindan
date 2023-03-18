@@ -1,4 +1,4 @@
-package com.cankutboratuncer.alicisindan.activities.ui.main.adapter;
+package com.cankutboratuncer.alicisindan.activities.ui.main.home.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

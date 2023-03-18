@@ -4,18 +4,13 @@
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Alicisindan"
         tools:targetApi="31">
         <activity
-            android:name=".OneActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SplashActivity"
+            android:name=".activities.ui.login.SplashActivity"
             android:exported="false"
             android:label="@string/title_activity_splash"
             android:theme="@style/Theme.Alicisindan.NoActionBar" />
@@ -32,13 +27,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.ui.main.CategoryFragment"
+            android:name=".activities.ui.main.home.CategoryFragment"
             android:exported="false" />
         <activity
-            android:name=".activities.ui.main.ProfileFragment"
+            android:name=".activities.ui.main.profile.ProfileFragment"
             android:exported="false" />
         <activity
-            android:name=".activities.ui.main.ForumFragment"
+            android:name=".activities.ui.main.forum.ForumFragment"
             android:exported="false" />
         <activity
             android:name=".activities.ui.main.SellFragment"
@@ -55,9 +50,6 @@
         <activity
             android:name=".activities.ui.login.SignInActivity"
             android:exported="false" />
-        <activity
-            android:name=".activities.ui.login.SplashActivity"
-            android:exported="true" />
         <activity
             android:name=".activities.ui.login.PhoneActivity"
             android:exported="true" />

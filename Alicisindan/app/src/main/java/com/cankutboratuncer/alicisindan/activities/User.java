@@ -1,6 +1,6 @@
 package com.cankutboratuncer.alicisindan.activities;
 
-import com.cankutboratuncer.alicisindan.activities.ui.main.item.Advertisement;
+import com.cankutboratuncer.alicisindan.activities.ui.main.home.item.Advertisement;
 
 public class User {
 

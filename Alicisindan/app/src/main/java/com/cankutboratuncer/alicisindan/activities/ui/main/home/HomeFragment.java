@@ -1,4 +1,4 @@
-package com.cankutboratuncer.alicisindan.activities.ui.main;
+package com.cankutboratuncer.alicisindan.activities.ui.main.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cankutboratuncer.alicisindan.R;
-import com.cankutboratuncer.alicisindan.activities.data.AdvertisementTest;
-import com.cankutboratuncer.alicisindan.activities.data.CategoryTest;
-import com.cankutboratuncer.alicisindan.activities.ui.main.adapter.AdvertisementAdapter;
-import com.cankutboratuncer.alicisindan.activities.ui.main.adapter.AdvertisementInterface;
-import com.cankutboratuncer.alicisindan.activities.ui.main.adapter.CategoryAdapter;
-import com.cankutboratuncer.alicisindan.activities.ui.main.item.Advertisement;
-import com.cankutboratuncer.alicisindan.activities.ui.main.item.Category;
+import com.cankutboratuncer.alicisindan.activities.data.database.AdvertisementTest;
+import com.cankutboratuncer.alicisindan.activities.data.database.CategoryTest;
+import com.cankutboratuncer.alicisindan.activities.ui.main.home.adapter.AdvertisementAdapter;
+import com.cankutboratuncer.alicisindan.activities.ui.main.home.adapter.AdvertisementInterface;
+import com.cankutboratuncer.alicisindan.activities.ui.main.home.adapter.CategoryAdapter;
+import com.cankutboratuncer.alicisindan.activities.ui.main.home.item.Advertisement;
+import com.cankutboratuncer.alicisindan.activities.ui.main.home.item.Category;
 
 import java.util.ArrayList;
 
