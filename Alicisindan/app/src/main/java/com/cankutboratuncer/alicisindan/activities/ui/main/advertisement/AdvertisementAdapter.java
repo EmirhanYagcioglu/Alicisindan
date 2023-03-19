@@ -1,4 +1,4 @@
-package com.cankutboratuncer.alicisindan.activities.ui.main.home.adapter;
+package com.cankutboratuncer.alicisindan.activities.ui.main.advertisement;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cankutboratuncer.alicisindan.R;
-import com.cankutboratuncer.alicisindan.activities.ui.main.home.item.Advertisement;
 
 import java.util.ArrayList;
 

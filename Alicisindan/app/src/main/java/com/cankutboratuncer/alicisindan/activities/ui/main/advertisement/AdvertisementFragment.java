@@ -1,4 +1,4 @@
-package com.cankutboratuncer.alicisindan.activities.ui.main.home;
+package com.cankutboratuncer.alicisindan.activities.ui.main.advertisement;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,10 +14,6 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.cankutboratuncer.alicisindan.R;
 import com.cankutboratuncer.alicisindan.activities.data.database.AdvertisementTest;
-import com.cankutboratuncer.alicisindan.activities.ui.main.home.adapter.AdvertisementAdapter;
-import com.cankutboratuncer.alicisindan.activities.ui.main.home.adapter.AdvertisementImageSliderAdapter;
-import com.cankutboratuncer.alicisindan.activities.ui.main.home.adapter.AdvertisementInterface;
-import com.cankutboratuncer.alicisindan.activities.ui.main.home.item.Advertisement;
 
 import java.util.ArrayList;
 

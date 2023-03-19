@@ -14,11 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cankutboratuncer.alicisindan.R;
 import com.cankutboratuncer.alicisindan.activities.data.database.AdvertisementTest;
 import com.cankutboratuncer.alicisindan.activities.data.database.CategoryTest;
-import com.cankutboratuncer.alicisindan.activities.ui.main.home.adapter.AdvertisementAdapter;
-import com.cankutboratuncer.alicisindan.activities.ui.main.home.adapter.AdvertisementInterface;
-import com.cankutboratuncer.alicisindan.activities.ui.main.home.adapter.CategoryAdapter;
-import com.cankutboratuncer.alicisindan.activities.ui.main.home.item.Advertisement;
-import com.cankutboratuncer.alicisindan.activities.ui.main.home.item.Category;
+import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.AdvertisementFragment;
+import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.AdvertisementAdapter;
+import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.AdvertisementInterface;
+import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.Advertisement;
 
 import java.util.ArrayList;
 

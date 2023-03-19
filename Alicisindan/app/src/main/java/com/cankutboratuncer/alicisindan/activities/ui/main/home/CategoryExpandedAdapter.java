@@ -1,4 +1,4 @@
-package com.cankutboratuncer.alicisindan.activities.ui.main.home.adapter;
+package com.cankutboratuncer.alicisindan.activities.ui.main.home;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cankutboratuncer.alicisindan.R;
-import com.cankutboratuncer.alicisindan.activities.ui.main.home.item.Category;
 
 import java.util.ArrayList;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
+public class CategoryExpandedAdapter extends RecyclerView.Adapter<CategoryExpandedAdapter.CategoryExpandedViewHolder> {
 
     private ArrayList<Category> categories;
 
-    public CategoryAdapter(ArrayList<Category> categories) {
+    public CategoryExpandedAdapter(ArrayList<Category> categories) {
         this.categories = categories;
     }
 
@@ -29,22 +28,22 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @NonNull
     @Override
-    public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category, parent, false);
-        return new CategoryViewHolder(view);
+    public CategoryExpandedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category_expanded, parent, false);
+        return new CategoryExpandedViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoryExpandedViewHolder holder, int position) {
         holder.bind(categories.get(position));
     }
 
-    static class CategoryViewHolder extends RecyclerView.ViewHolder {
+    static class CategoryExpandedViewHolder extends RecyclerView.ViewHolder {
 
         private TextView categoryName;
         private ImageView categoryImage;
 
-        public CategoryViewHolder(@NonNull View itemView) {
+        public CategoryExpandedViewHolder(@NonNull View itemView) {
             super(itemView);
             this.categoryName = itemView.findViewById(R.id.itemCategory_textView_categoryName);
             this.categoryImage = itemView.findViewById(R.id.itemCategory_imageView_categoryImage);
