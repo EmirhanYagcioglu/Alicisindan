@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_gradient_background"
-    tools:context=".activities.login.LoadingActivity">
+    android:background="@drawable/background_main_gradient"
+    tools:context=".activities.ui.login.LoadingActivity">
 
     <TextView
-        android:id="@+id/loading_textView_appName"
+        android:id="@+id/loadingActivity_textView_appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Alicisindan"

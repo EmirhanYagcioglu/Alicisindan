@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_background"
-    tools:context=".activities.main.HomeFragment">
+    tools:context=".activities.ui.main.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/homeFragment_layout_top"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/main_gradient_background"
+        android:background="@drawable/background_main_gradient"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.18"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/search_background" />
+            android:background="@drawable/background_search" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,10 +80,10 @@
             android:id="@+id/homeFragment_textView_categories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/categories"
-            android:textSize="@dimen/_16ssp"
             android:fontFamily="@font/lato"
+            android:text="@string/categories"
             android:textColor="@color/primary_text"
+            android:textSize="@dimen/_16ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -92,15 +92,15 @@
             android:id="@+id/homeFragment_textView_seeAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/lato"
             android:gravity="center"
             android:text="@string/see_all"
-            android:fontFamily="@font/lato"
             android:textColor="@color/gray"
+            app:drawableEndCompat="@drawable/ic_right_arrow"
+            app:drawableTint="@color/gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:drawableEndCompat="@drawable/ic_right_arrow"
-            app:drawableTint="@color/gray"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -120,10 +120,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_12sdp"
-        android:text="@string/featured"
-        android:textSize="@dimen/_16ssp"
         android:fontFamily="@font/lato"
+        android:text="@string/featured"
         android:textColor="@color/primary_text"
+        android:textSize="@dimen/_16ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeFragment_recyclerView_categories" />
@@ -132,6 +132,7 @@
         android:id="@+id/homeFragment_recyclerView_advertisements"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_8sdp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

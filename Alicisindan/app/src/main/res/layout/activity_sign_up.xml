@@ -4,16 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.login.SignUpActivity">
+    tools:context=".activities.ui.login.SignUpActivity">
 
     <FrameLayout
+        android:id="@+id/signUpActivity_frameLayout_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_120sdp"
-        android:background="@drawable/top_widget_background"
+        android:background="@drawable/background_top_widget"
         android:paddingHorizontal="@dimen/_20sdp"
         android:paddingVertical="@dimen/_32sdp">
 
         <TextView
+            android:id="@+id/signUpActivity_textView_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -24,12 +26,12 @@
     </FrameLayout>
 
     <EditText
-        android:id="@+id/fullName"
+        android:id="@+id/signUpActivity_editText_fullName"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_24sdp"
-        android:background="@drawable/edit_text_background"
+        android:background="@drawable/background_edit_text"
         android:fontFamily="@font/lato"
         android:hint="Full Name"
         android:imeOptions="actionNext"
@@ -39,12 +41,12 @@
         android:textColor="@color/primary_text" />
 
     <EditText
-        android:id="@+id/emailPhoneNumber"
+        android:id="@+id/signUpActivity_editText_emailOrPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_24sdp"
-        android:background="@drawable/edit_text_background"
+        android:background="@drawable/background_edit_text"
         android:fontFamily="@font/lato"
         android:hint="@string/email_or_phone_number"
         android:imeOptions="actionNext"
@@ -54,12 +56,12 @@
         android:textColor="@color/primary_text" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/signUpActivity_editText_password"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_24sdp"
-        android:background="@drawable/edit_text_background"
+        android:background="@drawable/background_edit_text"
         android:fontFamily="@font/lato"
         android:hint="@string/password"
         android:imeOptions="actionNext"
@@ -69,12 +71,12 @@
         android:textColor="@color/primary_text" />
 
     <EditText
-        android:id="@+id/confirmPassword"
+        android:id="@+id/signUpActivity_editText_confirmPassword"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_24sdp"
-        android:background="@drawable/edit_text_background"
+        android:background="@drawable/background_edit_text"
         android:fontFamily="@font/lato"
         android:hint="@string/confirm_password"
         android:imeOptions="actionDone"
@@ -84,18 +86,19 @@
         android:textColor="@color/primary_text" />
 
     <TextView
-        android:id="@+id/buttonSignIn"
+        android:id="@+id/signUpActivity_button_signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginTop="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_20sdp"
+        android:fontFamily="@font/lato"
         android:text="@string/have_already_an_account"
         android:textColor="@color/yellow"
-        android:textSize="@dimen/_11ssp"
-        android:fontFamily="@font/lato"/>
+        android:textSize="@dimen/_11ssp" />
 
     <CheckBox
+        android:id="@+id/signUpActivity_checkBox_termsAndServices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_20sdp"
@@ -103,14 +106,13 @@
         android:text="@string/i_have_read_and_acknowledged_the_terms_services"
         android:textSize="@dimen/_11ssp" />
 
-
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonSignUp"
+        android:id="@+id/signUpActivity_button_signUp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:background="@drawable/main_button_background"
+        android:background="@drawable/background_main_button"
         android:fontFamily="@font/lato_bold"
         android:text="@string/sign_up"
         android:textAllCaps="false"

@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_background"
-    tools:context=".activities.main.CategoryFragment">
+    tools:context=".activities.ui.main.CategoryFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/categoryFragment_layout_top"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/main_gradient_background"
+        android:background="@drawable/background_main_gradient"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.18"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/search_background" />
+            android:background="@drawable/background_search" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -4,16 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.login.PhoneVerificationActivity">
+    tools:context=".activities.ui.login.PhoneVerificationActivity">
 
     <FrameLayout
+        android:id="@+id/phoneVerificationActivity_frameLayout_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_120sdp"
-        android:background="@drawable/top_widget_background"
+        android:background="@drawable/background_top_widget"
         android:paddingHorizontal="@dimen/_20sdp"
         android:paddingVertical="@dimen/_32sdp">
 
         <TextView
+            android:id="@+id/phoneVerificationActivity_textView_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -24,6 +26,7 @@
     </FrameLayout>
 
     <TextView
+        android:id="@+id/phoneVerificationActivity_textView_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -35,6 +38,7 @@
         android:textSize="@dimen/_12ssp" />
 
     <LinearLayout
+        android:id="@+id/phoneVerificationActivity_linearLayout_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_20sdp"
@@ -42,6 +46,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/phoneVerificationActivity_textView_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -56,7 +61,7 @@
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/buttonChangePhone"
+            android:id="@+id/phoneVerificationActivity_button_changePhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -67,8 +72,8 @@
 
     </LinearLayout>
 
-
     <LinearLayout
+        android:id="@+id/phoneVerificationActivity_linearLayout_code"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
@@ -77,53 +82,53 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/phoneNo1"
+            android:id="@+id/phoneVerificationActivity_editText_codeDigit1"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_45sdp"
+            android:layout_marginHorizontal="@dimen/_8sdp"
             android:fontFamily="@font/lato"
             android:hint="@string/_0"
             android:imeOptions="actionNext"
-            android:layout_marginHorizontal="@dimen/_8sdp"
             android:importantForAutofill="no"
             android:inputType="number"
             android:paddingHorizontal="@dimen/_16sdp"
             android:textColor="@color/primary_text" />
 
         <EditText
-            android:id="@+id/phoneNo2"
+            android:id="@+id/phoneVerificationActivity_editText_codeDigit2"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_45sdp"
+            android:layout_marginHorizontal="@dimen/_8sdp"
             android:fontFamily="@font/lato"
             android:hint="@string/_0"
             android:imeOptions="actionNext"
-            android:layout_marginHorizontal="@dimen/_8sdp"
             android:importantForAutofill="no"
             android:inputType="number"
             android:paddingHorizontal="@dimen/_16sdp"
             android:textColor="@color/primary_text" />
 
         <EditText
-            android:id="@+id/phoneNo3"
+            android:id="@+id/phoneVerificationActivity_editText_codeDigit3"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_45sdp"
+            android:layout_marginHorizontal="@dimen/_8sdp"
             android:fontFamily="@font/lato"
             android:hint="@string/_0"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
-            android:layout_marginHorizontal="@dimen/_8sdp"
             android:inputType="number"
             android:paddingHorizontal="@dimen/_16sdp"
             android:textColor="@color/primary_text" />
 
         <EditText
-            android:id="@+id/phoneNo4"
+            android:id="@+id/phoneVerificationActivity_editText_codeDigit4"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_45sdp"
+            android:layout_marginHorizontal="@dimen/_8sdp"
             android:fontFamily="@font/lato"
             android:hint="@string/_0"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
-            android:layout_marginHorizontal="@dimen/_8sdp"
             android:inputType="number"
             android:paddingHorizontal="@dimen/_16sdp"
             android:textColor="@color/primary_text" />
@@ -131,12 +136,12 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonVerify"
+        android:id="@+id/phoneVerificationActivity_button_verify"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_40sdp"
-        android:background="@drawable/main_button_background"
+        android:background="@drawable/background_main_button"
         android:fontFamily="@font/lato_bold"
         android:text="@string/verify"
         android:textAllCaps="false"
@@ -144,7 +149,7 @@
         android:textSize="@dimen/_16ssp" />
 
     <TextView
-        android:id="@+id/buttonResendCode"
+        android:id="@+id/phoneVerificationActivity_button_resendCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
