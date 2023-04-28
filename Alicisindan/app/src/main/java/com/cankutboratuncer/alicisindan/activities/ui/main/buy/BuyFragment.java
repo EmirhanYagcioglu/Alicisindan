@@ -1,10 +1,9 @@
-package com.cankutboratuncer.alicisindan.activities.ui.main.home;
+package com.cankutboratuncer.alicisindan.activities.ui.main.buy;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -15,27 +14,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cankutboratuncer.alicisindan.R;
 import com.cankutboratuncer.alicisindan.activities.data.AdvertisementTest;
 import com.cankutboratuncer.alicisindan.activities.data.CategoryTest;
-import com.cankutboratuncer.alicisindan.activities.ui.adapter.CategoryAdapter;
-import com.cankutboratuncer.alicisindan.activities.ui.item.Category;
-import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.AdvertisementFragment;
 import com.cankutboratuncer.alicisindan.activities.ui.adapter.AdvertisementAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.adapter.AdvertisementInterface;
+import com.cankutboratuncer.alicisindan.activities.ui.adapter.CategoryAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.item.Advertisement;
-import com.cankutboratuncer.alicisindan.activities.ui.main.filter_search.FilterFragment;
+import com.cankutboratuncer.alicisindan.activities.ui.item.Category;
+import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.AdvertisementFragment;
+import com.cankutboratuncer.alicisindan.activities.ui.main.home.CategoryFragment;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment implements AdvertisementInterface {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link BuyFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class BuyFragment extends Fragment implements AdvertisementInterface {
 
     ArrayList<Advertisement> advertisements;
     ArrayList<Category> categories;
 
-    public HomeFragment() {
+    public BuyFragment() {
         // Required empty public constructor
     }
 
-    public static HomeFragment newInstance(int advertisementID) {
-        HomeFragment fragment = new HomeFragment();
+    public static BuyFragment newInstance(int advertisementID) {
+        BuyFragment fragment = new BuyFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -51,7 +55,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_buy, container, false);
 
         LinearLayoutManager horizontalRecyclerViewLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false) {
             @Override
@@ -62,8 +66,8 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
             }
         };
 
-        RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.homeFragment_recyclerView_advertisements);
-        RecyclerView recyclerViewForCategories = view.findViewById(R.id.homeFragment_recyclerView_categories);
+        RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.buyFragment_recyclerView_advertisements);
+        RecyclerView recyclerViewForCategories = view.findViewById(R.id.buyFragment_recyclerView_categories);
 
         advertisements = AdvertisementTest.advertisements;
         categories = CategoryTest.categories;
@@ -76,22 +80,11 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         recyclerViewForAdvertisements.setAdapter(advertisementAdapter);
         recyclerViewForCategories.setAdapter(categoryAdapter);
 
-
-
-        TextView textView_seeAll = view.findViewById(R.id.homeFragment_textView_seeAll);
+        TextView textView_seeAll = view.findViewById(R.id.buyFragment_textView_seeAll);
         textView_seeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new CategoryFragment();
-                loadFragment(fragment);
-            }
-        });
-
-        ImageView imageView_filter = view.findViewById(R.id.homeFragment_imageView_filter);
-        imageView_filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = new FilterFragment();
                 loadFragment(fragment);
             }
         });

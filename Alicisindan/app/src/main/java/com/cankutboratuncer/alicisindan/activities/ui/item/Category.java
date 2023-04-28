@@ -1,4 +1,4 @@
-package com.cankutboratuncer.alicisindan.activities.ui.main.home;
+package com.cankutboratuncer.alicisindan.activities.ui.item;
 
 public class Category {
 

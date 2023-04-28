@@ -33,12 +33,12 @@
             app:layout_constraintWidth_percent="0.6" />
 
         <ImageView
-            android:id="@+id/homeFragment_imageView_notifications"
+            android:id="@+id/homeFragment_imageView_filter"
             android:layout_width="@dimen/_24sdp"
             android:layout_height="@dimen/_24sdp"
             android:layout_marginEnd="@dimen/_12sdp"
             android:contentDescription="@string/notification_icon"
-            android:src="@drawable/ic_notification"
+            android:src="@drawable/ic_filter"
             app:layout_constraintBottom_toBottomOf="@+id/homeFragment_textView_appName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/homeFragment_textView_appName"

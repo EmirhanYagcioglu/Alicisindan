@@ -9,11 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.cankutboratuncer.alicisindan.R;
-import com.cankutboratuncer.alicisindan.activities.ui.main.BuyFragment;
+import com.cankutboratuncer.alicisindan.activities.ui.main.buy.BuyFragment;
 import com.cankutboratuncer.alicisindan.activities.ui.main.forum.ForumFragment;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.HomeFragment;
 import com.cankutboratuncer.alicisindan.activities.ui.main.profile.ProfileFragment;
-import com.cankutboratuncer.alicisindan.activities.ui.main.SellFragment;
+import com.cankutboratuncer.alicisindan.activities.ui.main.sell.SellFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -31,23 +31,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
-        switch (item.getItemId()) {
-            case R.id.menu_home:
-                fragment = new HomeFragment();
-                break;
-            case R.id.menu_buy:
-                fragment = new BuyFragment();
-                break;
-            case R.id.menu_sell:
-                fragment = new SellFragment();
-                break;
-            case R.id.menu_forum:
-                fragment = new ForumFragment();
-                break;
-            case R.id.menu_profile:
-                fragment = new ProfileFragment();
-                break;
+        if (item.getItemId() == R.id.menu_home) {
+            fragment = new HomeFragment();
+
+        } else if (item.getItemId() == R.id.menu_buy) {
+            fragment = new BuyFragment();
+        } else if (item.getItemId() == R.id.menu_sell) {
+            fragment = new SellFragment();
+        } else if (item.getItemId() == R.id.menu_forum) {
+            fragment = new ForumFragment();
+        } else if (item.getItemId() == R.id.menu_profile) {
+            fragment = new ProfileFragment();
         }
+
         if (fragment != null) {
             loadFragment(fragment);
         }

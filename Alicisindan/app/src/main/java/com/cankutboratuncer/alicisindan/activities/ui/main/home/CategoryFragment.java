@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cankutboratuncer.alicisindan.R;
-import com.cankutboratuncer.alicisindan.activities.data.database.CategoryTest;
+import com.cankutboratuncer.alicisindan.activities.data.CategoryTest;
+import com.cankutboratuncer.alicisindan.activities.ui.adapter.CategoryExpandedAdapter;
+import com.cankutboratuncer.alicisindan.activities.ui.item.Category;
 
 import java.util.ArrayList;
 

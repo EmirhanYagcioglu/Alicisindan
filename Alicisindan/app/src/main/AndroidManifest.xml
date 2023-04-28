@@ -36,10 +36,10 @@
             android:name=".activities.ui.main.forum.ForumFragment"
             android:exported="false" />
         <activity
-            android:name=".activities.ui.main.SellFragment"
+            android:name=".activities.ui.main.sell.SellFragment"
             android:exported="false" />
         <activity
-            android:name=".activities.ui.main.BuyFragment"
+            android:name=".activities.ui.main.buy.BuyFragment"
             android:exported="false" />
         <activity
             android:name=".activities.ui.login.PhoneVerificationActivity"

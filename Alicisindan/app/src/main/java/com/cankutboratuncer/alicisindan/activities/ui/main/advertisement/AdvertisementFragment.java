@@ -13,7 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.cankutboratuncer.alicisindan.R;
-import com.cankutboratuncer.alicisindan.activities.data.database.AdvertisementTest;
+import com.cankutboratuncer.alicisindan.activities.data.AdvertisementTest;
+import com.cankutboratuncer.alicisindan.activities.ui.adapter.AdvertisementAdapter;
+import com.cankutboratuncer.alicisindan.activities.ui.adapter.AdvertisementImageSliderAdapter;
+import com.cankutboratuncer.alicisindan.activities.ui.adapter.AdvertisementInterface;
+import com.cankutboratuncer.alicisindan.activities.ui.item.Advertisement;
 
 import java.util.ArrayList;
 

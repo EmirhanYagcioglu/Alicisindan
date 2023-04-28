@@ -30,14 +30,25 @@
         app:layout_constraintWidth_percent="0.2" />
 
     <TextView
-        android:id="@+id/itemAdvertisement_textView_title"
+        android:id="@+id/itemAdvertisement_textView_intent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="blablablablablablablablablablablablablablablablablablablabla"
+        android:text="user wants to banK"
+        android:textStyle="italic"
+        android:textSize="@dimen/_10ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemAdvertisement_imageView_image" />
+
+    <TextView
+        android:id="@+id/itemAdvertisement_textView_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:text="blablablablablablablablablablablablablablablablablablablabla"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemAdvertisement_textView_intent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/itemAdvertisement_layout_favorite"
