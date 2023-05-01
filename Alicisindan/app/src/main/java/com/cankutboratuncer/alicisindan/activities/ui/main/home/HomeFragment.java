@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        view.findViewById(R.id.homeFragment_imageView_notifications).setOnClickListener(v -> {
+        view.findViewById(R.id.buttonCreatePost).setOnClickListener(v -> {
             startActivity(new Intent(getContext(), PostAddCategoryActivity.class));
                 });
 
