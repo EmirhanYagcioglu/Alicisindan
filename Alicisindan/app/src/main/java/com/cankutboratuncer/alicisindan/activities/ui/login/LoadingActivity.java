@@ -14,6 +14,8 @@ import com.cankutboratuncer.alicisindan.databinding.ActivityLoadingBinding;
 public class LoadingActivity extends AppCompatActivity {
     ActivityLoadingBinding binding;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
