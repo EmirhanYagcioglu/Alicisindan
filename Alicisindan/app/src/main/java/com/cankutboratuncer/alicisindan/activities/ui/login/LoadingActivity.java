@@ -6,6 +6,9 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cankutboratuncer.alicisindan.activities.MainActivity;
+import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
+import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivityLoadingBinding;
 
 public class LoadingActivity extends AppCompatActivity {
@@ -17,12 +20,20 @@ public class LoadingActivity extends AppCompatActivity {
         binding = ActivityLoadingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Handler handler = new Handler();
-        handler.postDelayed(() -> goToLogin(), 2000);
+        handler.postDelayed(() -> checkIfSignedIn(), 1000);
     }
 
-    public void goToLogin() {
-        Intent intent = new Intent(LoadingActivity.this, SplashActivity.class);
-        startActivity(intent);
+    public void checkIfSignedIn() {
+        LocalSave localSave = new LocalSave(getApplicationContext());
+        if (localSave.getBoolean(Constants.KEY_IS_SIGNED_IN)) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
 
