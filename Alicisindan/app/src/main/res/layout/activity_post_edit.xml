@@ -287,18 +287,21 @@
                 app:layout_constraintTop_toBottomOf="@id/price">
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/imagesRow1_1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/background_edit_text_add_post" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/imagesRow1_2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/background_edit_text_add_post" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/imagesRow1_3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -318,18 +321,21 @@
                 app:layout_constraintTop_toBottomOf="@id/imagesRow1">
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/imagesRow2_1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/background_edit_text_add_post" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/imagesRow2_2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/background_edit_text_add_post" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/imagesRow2_3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -349,18 +355,21 @@
                 app:layout_constraintTop_toBottomOf="@id/imagesRow2">
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/imagesRow3_1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/background_edit_text_add_post" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/imagesRow3_2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/background_edit_text_add_post" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/imagesRow3_3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
