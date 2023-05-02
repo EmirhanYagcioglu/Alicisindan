@@ -77,4 +77,7 @@
     <string name="price">Price</string>
     <string name="condition">Condition</string>
     <string name="title">Title</string>
+    <string name="product_details">Product Details</string>
+    <string name="location">Location</string>
+    <string name="products_related_to_this_item">Products related to this item</string>
 </resources>

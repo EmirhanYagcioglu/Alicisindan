@@ -62,7 +62,7 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_advertisement, container, false);
 
-        view.findViewById(R.id.advertisementFragment_imageView_chatIcon).setOnClickListener(v -> {
+        view.findViewById(R.id.buttonMessage).setOnClickListener(v -> {
 
             if (localSave.getBoolean(Constants.KEY_IS_SIGNED_IN)){
                 Advertisement advertisement = new Advertisement();
@@ -106,39 +106,39 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
 
 
 
-        RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.advertisementFragment_recyclerView_relatedItems);
+        RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.relatedProducts);
         advertisements = AdvertisementTest.advertisements;
         recyclerViewForAdvertisements.setLayoutManager(horizontalRecyclerViewLayoutManager);
         AdvertisementAdapter advertisementAdapter = new AdvertisementAdapter(advertisements, this);
         recyclerViewForAdvertisements.setAdapter(advertisementAdapter);
 
-        ViewPager2 advertisement_viewPager2 = view.findViewById(R.id.advertisementFragment_viewPager);
-        images.add(R.drawable.ic_launcher_background);
-        images.add(R.drawable.ic_launcher_foreground);
-        images.add(R.drawable.ic_launcher_background);
-        images.add(R.drawable.ic_launcher_foreground);
-        AdvertisementImageSliderAdapter MyAdapter = new AdvertisementImageSliderAdapter(this.getContext(), images);
-
-        advertisement_viewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-
-        advertisement_viewPager2.setAdapter(MyAdapter);
-        advertisement_viewPager2.setOffscreenPageLimit(3);
-
-        float pageMargin = getResources().getDimensionPixelOffset(com.intuit.sdp.R.dimen._24sdp);
-        float pageOffset = getResources().getDimensionPixelOffset(com.intuit.sdp.R.dimen._24sdp);
-
-        advertisement_viewPager2.setPageTransformer((page, position) -> {
-            float myOffset = position * -(2 * pageOffset + pageMargin);
-            if (advertisement_viewPager2.getOrientation() == ViewPager2.ORIENTATION_HORIZONTAL) {
-                if (ViewCompat.getLayoutDirection(advertisement_viewPager2) == ViewCompat.LAYOUT_DIRECTION_RTL) {
-                    page.setTranslationX(-myOffset);
-                } else {
-                    page.setTranslationX(myOffset);
-                }
-            } else {
-                page.setTranslationY(myOffset);
-            }
-        });
+//        ViewPager2 advertisement_viewPager2 = view.findViewById(R.id.advertisementFragment_viewPager);
+//        images.add(R.drawable.ic_launcher_background);
+//        images.add(R.drawable.ic_launcher_foreground);
+//        images.add(R.drawable.ic_launcher_background);
+//        images.add(R.drawable.ic_launcher_foreground);
+//        AdvertisementImageSliderAdapter MyAdapter = new AdvertisementImageSliderAdapter(this.getContext(), images);
+//
+//        advertisement_viewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+//
+//        advertisement_viewPager2.setAdapter(MyAdapter);
+//        advertisement_viewPager2.setOffscreenPageLimit(3);
+//
+//        float pageMargin = getResources().getDimensionPixelOffset(com.intuit.sdp.R.dimen._24sdp);
+//        float pageOffset = getResources().getDimensionPixelOffset(com.intuit.sdp.R.dimen._24sdp);
+//
+//        advertisement_viewPager2.setPageTransformer((page, position) -> {
+//            float myOffset = position * -(2 * pageOffset + pageMargin);
+//            if (advertisement_viewPager2.getOrientation() == ViewPager2.ORIENTATION_HORIZONTAL) {
+//                if (ViewCompat.getLayoutDirection(advertisement_viewPager2) == ViewCompat.LAYOUT_DIRECTION_RTL) {
+//                    page.setTranslationX(-myOffset);
+//                } else {
+//                    page.setTranslationX(myOffset);
+//                }
+//            } else {
+//                page.setTranslationY(myOffset);
+//            }
+//        });
         return view;
     }
 
