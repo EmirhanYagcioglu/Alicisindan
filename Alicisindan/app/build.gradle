@@ -31,6 +31,16 @@ android {
         viewBinding true
     }
 
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    file("src/main/res/layouts/").listFiles(),
+                    "src/main/res/layouts",
+                    "src/main/res"
+            ]
+        }
+    }
+
 }
 
 dependencies {

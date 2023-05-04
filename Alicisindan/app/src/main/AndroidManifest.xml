@@ -14,13 +14,13 @@
         android:theme="@style/Theme.Alicisindan"
         tools:targetApi="31">
         <activity
-            android:name=".activities.ui.main.advertisement.PostEditActivity"
+            android:name=".activities.ui.main.advertisement.advertisement.PostEditActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ui.main.advertisement.PostAddSubCategoryActivity"
+            android:name=".activities.ui.main.advertisement.category.PostAddSubCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ui.main.advertisement.PostAddCategoryActivity"
+            android:name=".activities.ui.main.advertisement.category.PostAddCategoryActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ui.messaging.activities.ChatActivity"
@@ -31,7 +31,7 @@
             android:label="@string/title_activity_splash"
             android:theme="@style/Theme.Alicisindan.NoActionBar" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.ui.main.MainActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ui.login.LoadingActivity"
@@ -43,7 +43,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.ui.main.home.CategoryFragment"
+            android:name=".activities.ui.main.home.category.CategoryFragment"
             android:exported="false" />
         <activity
             android:name=".activities.ui.main.profile.ProfileFragment"
@@ -52,13 +52,10 @@
             android:name=".activities.ui.main.forum.ForumFragment"
             android:exported="false" />
         <activity
-            android:name=".activities.ui.main.SellFragment"
+            android:name=".activities.ui.main.home.pages.SellFragment"
             android:exported="false" />
         <activity
-            android:name=".activities.ui.main.BuyFragment"
-            android:exported="false" />
-        <activity
-            android:name=".activities.ui.login.PhoneVerificationActivity"
+            android:name=".activities.ui.main.home.pages.BuyFragment"
             android:exported="false" />
         <activity
             android:name=".activities.ui.login.SignUpActivity"
@@ -66,9 +63,6 @@
         <activity
             android:name=".activities.ui.login.SignInActivity"
             android:exported="false" />
-        <activity
-            android:name=".activities.ui.login.PhoneActivity"
-            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"
