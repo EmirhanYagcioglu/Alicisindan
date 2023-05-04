@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -12,12 +12,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Alicisindan"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".activities.ui.main.forum.category.ForumAddCategoryActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.ui.main.advertisement.advertisement.PostEditActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ui.main.advertisement.category.PostAddSubCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ui.main.forum.category.ForumAddSubCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ui.main.forum.category.ForumEditActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ui.main.advertisement.category.PostAddCategoryActivity"
@@ -35,7 +44,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.ui.login.LoadingActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,7 +58,7 @@
             android:name=".activities.ui.main.profile.ProfileFragment"
             android:exported="false" />
         <activity
-            android:name=".activities.ui.main.forum.ForumFragment"
+            android:name=".activities.ui.main.forum.forum.ForumFragment"
             android:exported="false" />
         <activity
             android:name=".activities.ui.main.home.pages.SellFragment"
@@ -58,7 +67,6 @@
             android:name=".activities.ui.main.home.pages.FilterFragment"
             android:exported="false" />
         <activity
-
             android:name=".activities.ui.main.home.pages.BuyFragment"
             android:exported="false" />
         <activity
@@ -74,7 +82,7 @@
 
         <service
             android:name=".activities.ui.messaging.firebase.MessagingService"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

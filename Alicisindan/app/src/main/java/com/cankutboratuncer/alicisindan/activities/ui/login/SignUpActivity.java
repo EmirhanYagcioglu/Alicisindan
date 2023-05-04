@@ -82,8 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
             String name = binding.signUpActivityEditTextName.toString();
             String surname = binding.signUpActivityEditTextSurname.toString();
             String phone = binding.signUpActivityEditTextEmailOrPhoneNumber.toString();
-            ;
-            String address = "123";
+            String address = binding.signUpActivityEditTextCountry + "/" + binding.signUpActivityEditTextCity;
             String birthday = "2000";
 
             User user = new User(id, username, name, surname, birthday, address, email, phone);
@@ -99,8 +98,6 @@ public class SignUpActivity extends AppCompatActivity {
                 loading(false);
                 showToast("The user couldn't registered");
             }
-
-
         } else {
             showToast("There is already a user with this email.");
         }
