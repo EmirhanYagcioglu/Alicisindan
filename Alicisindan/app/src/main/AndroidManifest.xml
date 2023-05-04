@@ -55,6 +55,10 @@
             android:name=".activities.ui.main.home.pages.SellFragment"
             android:exported="false" />
         <activity
+            android:name=".activities.ui.main.home.pages.FilterFragment"
+            android:exported="false" />
+        <activity
+
             android:name=".activities.ui.main.home.pages.BuyFragment"
             android:exported="false" />
         <activity
