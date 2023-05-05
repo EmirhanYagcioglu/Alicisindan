@@ -32,7 +32,7 @@ public class ForumAddCategoryActivity extends AppCompatActivity implements Forum
 
     @Override
     public void onUserClicked(String category) {
-        Intent intent = new Intent(getApplicationContext(), PostAddSubCategoryActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ForumAddSubCategoryActivity.class);
         intent.putExtra("category", category);
         startActivity(intent);
         finish();

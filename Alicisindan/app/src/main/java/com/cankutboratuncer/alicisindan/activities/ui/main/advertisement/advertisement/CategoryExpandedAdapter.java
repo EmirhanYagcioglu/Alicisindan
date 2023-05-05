@@ -47,7 +47,7 @@ public class CategoryExpandedAdapter extends RecyclerView.Adapter<CategoryExpand
 
         public CategoryExpandedViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.categoryName = itemView.findViewById(R.id.itemCategory_textView_categoryName);
+//            this.categoryName = itemView.findViewById(R.id.itemCategory_textView_categoryName);
             this.categoryImage = itemView.findViewById(R.id.itemCategory_imageView_categoryImage);
         }
 

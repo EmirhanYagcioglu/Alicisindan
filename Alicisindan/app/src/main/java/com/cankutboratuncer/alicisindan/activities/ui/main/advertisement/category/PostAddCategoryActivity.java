@@ -29,7 +29,7 @@ public class PostAddCategoryActivity extends AppCompatActivity implements Catego
     }
 
     private void loadCategories() {
-        CategoryAdapter usersAdapter = new CategoryAdapter(categories, this);
+        PostCategoryAdapter usersAdapter = new PostCategoryAdapter(categories, this);
         binding.categoriesRecyclerView.setAdapter(usersAdapter);
         binding.categoriesRecyclerView.setVisibility(View.VISIBLE);
         binding.categoriesRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),

@@ -1,4 +1,5 @@
 package com.cankutboratuncer.alicisindan.activities.utilities;
+import com.cankutboratuncer.alicisindan.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,17 +53,76 @@ public class Constants {
     public static final String REMOTE_MSG_DATA = "data";
     public static final String REMOTE_MSG_REGISTRATION_IDS = "registration_ids";
 
-    public static final ArrayList<String> categories = new ArrayList<>(Arrays.asList("Cars","Telephone", "House Appliance", "Electronics", "Motorcycle", "Other Vehicle", "Baby & Children Care", "Sports and Outdoors", "Hobbies and Entertainment", "Clothes and Accessories", "Stationery", "Books and Literature"));
+    public static final ArrayList<String> categories = new ArrayList<>(Arrays.asList("Cars","Telephone", "House Appliance", "Electronics", "Motorcycle", "Other Vehicles", "Baby & Children Care", "Sports and Outdoors", "Hobbies and Entertainment", "Clothes and Accessories", "Stationery", "Books and Literature"));
     public static final ArrayList<String> carCategory = new ArrayList<>(Arrays.asList("Cars","Car Spare Parts and Accessories", "Car Audio and Video Systems", "Wheel and Tire", "Rental Vehicles"));
-
+    public static final ArrayList<String> telephoneCategory = new ArrayList<>(Arrays.asList("Smart Phone", "Phone Accessories and Parts", "Other"));
+    public static final ArrayList<String> houseApplianceCategory = new ArrayList<>(Arrays.asList("Furniture", "Kitchenware and Tableware", "Decoration", "Garden", "Hand Tools", "Other"));
+    public static final ArrayList<String> electronicsCategory = new ArrayList<>(Arrays.asList("Desktop Computer", "Laptop", "Cameras", "Tablets", "Headphones", "TVs", "Smart Watches", "Gaming"));
+    public static final ArrayList<String> motorcycleCategory = new ArrayList<>(Arrays.asList("Motorcycle", "Motorcycle Parts", "Helmet", "Accessories"));
+    public static final ArrayList<String> otherVehiclesCategory = new ArrayList<>(Arrays.asList("Truck", "Minivan and Panelvan", "Caravan", "Other Vehicle Parts", "Other"));
+    public static final ArrayList<String> babyChildrenCategory = new ArrayList<>(Arrays.asList("Hygiene", "Clothes", "Baby & Children Furniture"));
+    public static final ArrayList<String> sportsOutdoorCategory = new ArrayList<>(Arrays.asList("Bicycle", "Exercise Equipment", "Sports equipment","Other"));
+    public static final ArrayList<String> hobbiesCategory = new ArrayList<>(Arrays.asList("Movie and Music", "Musical Instruments", "Board and Board Games","Pet Products","Other"));
+    public static final ArrayList<String> clothesCategory = new ArrayList<>(Arrays.asList("Tops", "Pants", "Jeans", "Dresses", "Coats", "Skirts", "Shoes", "Accessories"));
+    public static final ArrayList<String> stationaryCategory = new ArrayList<>(Arrays.asList("Pen and Pencil", "Notebooks", "Erasers & Lead", "Other"));
+    public static final ArrayList<String> booksCategory = new ArrayList<>(Arrays.asList("University books", "Preschool books", "Other"));
+    public static final ArrayList<Integer> categoryImages = new ArrayList<>(Arrays.asList(R.drawable.img_car, R.drawable.img_phone, R.drawable.img_sofa, R.drawable.img_pc, R.drawable.img_motorcycle, R.drawable.img_truck, R.drawable.img_baby, R.drawable.img_sport, R.drawable.img_music, R.drawable.img_shoe, R.drawable.img_book, R.drawable.img_pen));
     public static ArrayList<String> findSubCategory(String category){
         if(category.equals("Cars")){
             return carCategory;
+        }
+        else if (category.equals("Telephone")){
+            return telephoneCategory;
+        }
+        else if (category.equals("House Appliance")){
+            return houseApplianceCategory;
+        }
+        else if (category.equals("Electronics")){
+            return electronicsCategory;
+        }
+        else if (category.equals("Motorcycle")){
+            return motorcycleCategory;
+        }
+        else if (category.equals("Other Vehicles"))
+        {
+            return otherVehiclesCategory;
+        }
+        else if (category.equals("Baby & Children Care"))
+        {
+            return babyChildrenCategory;
+        }
+        else if (category.equals("Sports and Outdoors"))
+        {
+            return sportsOutdoorCategory;
+        }
+        else if (category.equals("Hobbies and Entertainment"))
+        {
+            return hobbiesCategory;
+        }
+        else if (category.equals("Clothing and Accessories"))
+        {
+            return clothesCategory;
+        }
+        else if (category.equals("Stationery"))
+        {
+            return stationaryCategory;
+        }
+        else if (category.equals("Books and Literature"))
+        {
+            return booksCategory;
         }
         else {
             return null;
         }
     }
+
+
+
+
+
+
+
+
 
     public static HashMap<String, String> remoteMsgHeaders = null;
 

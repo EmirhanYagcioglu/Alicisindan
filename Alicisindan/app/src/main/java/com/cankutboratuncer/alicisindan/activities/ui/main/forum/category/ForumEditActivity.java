@@ -16,6 +16,7 @@ import androidx.appcompat.widget.AppCompatImageButton;
 
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivityForumAddCategoryBinding;
+import com.cankutboratuncer.alicisindan.databinding.ActivityForumEditBinding;
 import com.cankutboratuncer.alicisindan.databinding.ActivityPostEditBinding;
 
 import java.io.ByteArrayOutputStream;
@@ -24,37 +25,23 @@ import java.io.InputStream;
 
 public class ForumEditActivity extends AppCompatActivity {
 
-    private ActivityForumAddCategoryBinding binding;
+    private ActivityForumEditBinding binding;
     private String encodedImage;
     private LocalSave localSave;
-    private int imageRow;
-    private int imageCol;
-    private AppCompatImageButton[][] imageButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityForumAddCategoryBinding.inflate(getLayoutInflater());
+        binding = ActivityForumEditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Intent intent = getIntent();
+        String category = intent.getStringExtra("category");
+        binding.subTitle.setText(category);
+        binding.image.setClipToOutline(true);
         localSave = new LocalSave(getApplicationContext());
-        initImageButton();
         setListeners();
     }
 
-    private void initImageButton(){
-        imageCol = 0;
-        imageRow = 0;
-        imageButtons = new AppCompatImageButton[3][3];
-        imageButtons[0] = new AppCompatImageButton[]{binding.imagesRow11, binding.imagesRow12, binding.imagesRow13};
-        imageButtons[1] = new AppCompatImageButton[]{binding.imagesRow21, binding.imagesRow22, binding.imagesRow23};
-        imageButtons[2] = new AppCompatImageButton[]{binding.imagesRow31, binding.imagesRow32, binding.imagesRow33};
-    }
-
-    private void updateImageRowCol(){
-        imageCol ++;
-        imageRow += imageCol == 3 ? 1 : 0;
-        imageCol = imageCol == 3 ? 0 : imageCol;
-    }
 
     private void showToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
@@ -79,8 +66,7 @@ public class ForumEditActivity extends AppCompatActivity {
                         try {
                             InputStream inputStream = getContentResolver().openInputStream(imageUri);
                             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                            imageButtons[imageRow][imageCol].setImageBitmap(bitmap);
-                            updateImageRowCol();
+                            binding.image.setImageBitmap(bitmap);
                             encodedImage = encodeImage(bitmap);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
@@ -91,37 +77,18 @@ public class ForumEditActivity extends AppCompatActivity {
     );
 
     private void setListeners() {
+
 //        binding.buttonPost.setOnClickListener(v -> {
 //            if (isValidSignUpDetails()) {
 //                signUp();
 //            }
 //        });
-        binding.imagesRow11.setOnClickListener(v -> {
+        binding.image.setOnClickListener(v -> {
             listenerFunction();
         });
-        binding.imagesRow12.setOnClickListener(v -> {
-            listenerFunction();
-        });
-        binding.imagesRow13.setOnClickListener(v -> {
-            listenerFunction();
-        });
-        binding.imagesRow21.setOnClickListener(v -> {
-            listenerFunction();
-        });
-        binding.imagesRow22.setOnClickListener(v -> {
-            listenerFunction();
-        });
-        binding.imagesRow23.setOnClickListener(v -> {
-            listenerFunction();
-        });
-        binding.imagesRow31.setOnClickListener(v -> {
-            listenerFunction();
-        });
-        binding.imagesRow32.setOnClickListener(v -> {
-            listenerFunction();
-        });
-        binding.imagesRow33.setOnClickListener(v -> {
-            listenerFunction();
+        binding.change.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), ForumAddCategoryActivity.class));
+            finish();
         });
     }
 

@@ -42,6 +42,8 @@
             android:background="@drawable/background_category"
             android:clipToPadding="false"
             android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
             android:overScrollMode="never"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

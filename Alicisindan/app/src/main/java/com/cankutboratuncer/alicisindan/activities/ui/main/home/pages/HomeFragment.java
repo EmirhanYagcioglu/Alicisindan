@@ -81,12 +81,9 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         recyclerViewForCategories.setAdapter(categoryAdapter);
 
         TextView textView_seeAll = view.findViewById(R.id.homeFragment_textView_seeAll);
-        textView_seeAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new CategoryFragment();
-                loadFragment(fragment);
-            }
+        textView_seeAll.setOnClickListener(v -> {
+            Fragment fragment = new CategoryFragment();
+            loadFragment(fragment);
         });
 
         return view;

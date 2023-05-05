@@ -1,5 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="lorem_ipsum">Lorem ipsum</string>
-    <string name="top_10_best_scooters">Top 10 Best Scooters</string>
-    <string name="title_image">Title image</string>
+    <string name="add_forum_post">Add Forum Post</string>
 </resources>

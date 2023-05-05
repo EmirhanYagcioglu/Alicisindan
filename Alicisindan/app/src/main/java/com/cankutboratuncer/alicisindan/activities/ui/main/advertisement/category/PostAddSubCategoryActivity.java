@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.PostEditActivity;
 import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
-import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivityPostAddSubCategoryBinding;
 
 import java.util.List;
@@ -17,7 +16,6 @@ import java.util.List;
 public class PostAddSubCategoryActivity extends AppCompatActivity implements CategoryListener{
 
     private ActivityPostAddSubCategoryBinding binding;
-    private LocalSave localSave;
     private List<String> subCategories;
 
     @Override
@@ -32,7 +30,7 @@ public class PostAddSubCategoryActivity extends AppCompatActivity implements Cat
     }
 
     private void loadSubCategories() {
-        CategoryAdapter usersAdapter = new CategoryAdapter(subCategories, this);
+        PostCategoryAdapter usersAdapter = new PostCategoryAdapter(subCategories, this);
         binding.categoriesRecyclerView.setAdapter(usersAdapter);
         binding.categoriesRecyclerView.setVisibility(View.VISIBLE);
         binding.categoriesRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));

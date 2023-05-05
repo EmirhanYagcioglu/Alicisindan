@@ -17,7 +17,7 @@ import java.util.List;
 public class ForumAddSubCategoryActivity extends AppCompatActivity implements ForumCategoryListener {
 
     private ActivityPostAddSubCategoryBinding binding;
-    private LocalSave localSave;
+    private String category;
     private List<String> subCategories;
 
     @Override
@@ -26,7 +26,7 @@ public class ForumAddSubCategoryActivity extends AppCompatActivity implements Fo
         binding = ActivityPostAddSubCategoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Intent intent = getIntent();
-        String category = intent.getStringExtra("category");
+        category = intent.getStringExtra("category");
         subCategories = Constants.findSubCategory(category);
         loadSubCategories();
     }
@@ -39,8 +39,9 @@ public class ForumAddSubCategoryActivity extends AppCompatActivity implements Fo
     }
 
     @Override
-    public void onUserClicked(String category) {
+    public void onUserClicked(String subCategory) {
         Intent intent = new Intent(getApplicationContext(), ForumEditActivity.class);
+        intent.putExtra("category", category + "/" + subCategory);
         startActivity(intent);
         finish();
     }

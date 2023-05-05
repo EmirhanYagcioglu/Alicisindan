@@ -32,7 +32,7 @@
                 android:fontFamily="@font/lato_bold"
                 android:textColor="@color/primary_text"
                 android:layout_marginStart="@dimen/_16sdp"
-                android:text="@string/top_10_best_scooters"
+                android:text="Top 10 best "
                 android:textSize="@dimen/_16ssp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +48,7 @@
                 android:layout_marginStart="@dimen/_16sdp"
                 android:fontFamily="@font/lato"
                 android:textColor="@color/gray"
-                android:text="@string/lorem_ipsum"
+                android:text="Lorem ipsum"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

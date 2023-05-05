@@ -10,12 +10,12 @@ import com.cankutboratuncer.alicisindan.databinding.ItemContainerCategoryBinding
 
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
+public class PostCategoryAdapter extends RecyclerView.Adapter<PostCategoryAdapter.CategoryViewHolder> {
 
     private final List<String> categories;
     private final CategoryListener categoryListener;
 
-    public CategoryAdapter(List<String> categories, CategoryListener categoryListener) {
+    public PostCategoryAdapter(List<String> categories, CategoryListener categoryListener) {
         this.categories = categories;
         this.categoryListener = categoryListener;
     }
