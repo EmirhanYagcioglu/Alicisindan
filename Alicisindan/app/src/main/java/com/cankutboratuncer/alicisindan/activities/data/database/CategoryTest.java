@@ -1,49 +1,41 @@
 package com.cankutboratuncer.alicisindan.activities.data.database;
 
-import com.cankutboratuncer.alicisindan.R;
+import android.util.Log;
+
+import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
 import com.cankutboratuncer.alicisindan.activities.utilities.Category;
 import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
 import com.cankutboratuncer.alicisindan.activities.utilities.Subcategory;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CategoryTest {
 
-    public static ArrayList<Category> categories = createCategories();
-    public static ArrayList<Subcategory> subcategories = createSubCategories();
+    public static ArrayList<AllCategories> categories = createCategories();
+    public static ArrayList<AllCategories> subcategories;
     // subcategories arraylist stores the subcategories for each category index
 
 
-    public static ArrayList<Category> createCategories() {
-        ArrayList<Category> categoryArrayList = new ArrayList<>();
-        for ( int i = 0; i < 12; i++ )
-        {
+    public static ArrayList<AllCategories> createCategories() {
+        ArrayList<AllCategories> categoryArrayList = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
             categoryArrayList.add(new Category(Constants.categories.get(i), Constants.categoryImages.get(i)));
         }
         return categoryArrayList;
     }
 
-    public static ArrayList<Subcategory> createSubCategories() {
-        ArrayList<Subcategory> subcategoryArrayList = new ArrayList<>();
-        for ( int i = 0; i < 12; i++ )
-        {
-            if (Constants.findSubCategory(  Constants.categories.get(i) ) != null)
-            {
-                for ( int j = 0; j < Constants.findSubCategory(  Constants.categories.get(i) ).size(); j++ )
-                {
-                    if (Constants.findSubCategory(  Constants.categories.get(i) ).get(j) != null)
-                    {
-                        subcategoryArrayList.add(new Subcategory(Constants.findSubCategory(  Constants.categories.get(i) ).get(j), categories.get(i), R.drawable.product_image));
-                    }
-                    else
-                    {
-                        subcategoryArrayList.add(null);
-                    }
+    public static ArrayList<AllCategories> createSubCategories(String category) {
+        ArrayList<AllCategories> subcategoryArrayList = new ArrayList<>();
+        for (int i = 0; i < Constants.categories.size(); i++) {
+            String categoryName = Constants.categories.get(i);
+            ArrayList<String> subcategories = Constants.findSubCategory(category);
+            if (categoryName.equals(category)) {
+                Log.d("catname", category + " " + categoryName + " " + i);
+                for (int j = 0; j < Objects.requireNonNull(subcategories).size(); j++) {
+                    subcategoryArrayList.add(new Subcategory(subcategories.get(j), (Category) categories.get(i), Constants.categoryImages.get(i)));
                 }
-            }
-            else
-            {
-                subcategoryArrayList.add(null);
+                break;
             }
         }
         return subcategoryArrayList;

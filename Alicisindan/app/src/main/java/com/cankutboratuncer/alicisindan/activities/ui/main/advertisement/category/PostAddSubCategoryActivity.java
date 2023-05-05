@@ -7,8 +7,12 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 
+import com.cankutboratuncer.alicisindan.activities.data.database.CategoryTest;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.PostEditActivity;
+import com.cankutboratuncer.alicisindan.activities.ui.main.forum.category.ForumEditActivity;
+import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
 import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
+import com.cankutboratuncer.alicisindan.activities.utilities.Subcategory;
 import com.cankutboratuncer.alicisindan.databinding.ActivityPostAddSubCategoryBinding;
 
 import java.util.List;
@@ -16,7 +20,8 @@ import java.util.List;
 public class PostAddSubCategoryActivity extends AppCompatActivity implements CategoryListener{
 
     private ActivityPostAddSubCategoryBinding binding;
-    private List<String> subCategories;
+    private List<AllCategories> subCategories;
+    String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +29,10 @@ public class PostAddSubCategoryActivity extends AppCompatActivity implements Cat
         binding = ActivityPostAddSubCategoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Intent intent = getIntent();
-        String category = intent.getStringExtra("category");
-        subCategories = Constants.findSubCategory(category);
+        category = intent.getStringExtra("category");
+        subCategories = CategoryTest.createSubCategories(category);
         loadSubCategories();
+
     }
 
     private void loadSubCategories() {
@@ -37,8 +43,9 @@ public class PostAddSubCategoryActivity extends AppCompatActivity implements Cat
     }
 
     @Override
-    public void onUserClicked(String category) {
+    public void onUserClicked(String subCategory) {
         Intent intent = new Intent(getApplicationContext(), PostEditActivity.class);
+        intent.putExtra("category", category + "/" + subCategory);
         startActivity(intent);
         finish();
     }

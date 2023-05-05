@@ -20,6 +20,7 @@ import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.adverti
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementInterface;
 import com.cankutboratuncer.alicisindan.activities.utilities.Advertisement;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.PostAddCategoryActivity;
+import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
 import com.cankutboratuncer.alicisindan.activities.utilities.Category;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryFragment;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment implements AdvertisementInterface {
 
     ArrayList<Advertisement> advertisements;
-    ArrayList<Category> categories;
+    ArrayList<AllCategories> categories;
 
     public HomeFragment() {
         // Required empty public constructor

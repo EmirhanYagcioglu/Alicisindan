@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.cankutboratuncer.alicisindan.R;
+import com.cankutboratuncer.alicisindan.activities.ui.main.forum.category.ForumAddCategoryActivity;
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivityPostEditBinding;
 
@@ -39,6 +40,9 @@ public class PostEditActivity extends AppCompatActivity {
         binding = ActivityPostEditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         localSave = new LocalSave(getApplicationContext());
+        Intent intent = getIntent();
+        String category = intent.getStringExtra("category");
+        binding.subTitle.setText(category);
         initImageButton();
         setListeners();
     }
@@ -50,6 +54,15 @@ public class PostEditActivity extends AppCompatActivity {
         imageButtons[0] = new AppCompatImageButton[]{binding.imagesRow11, binding.imagesRow12, binding.imagesRow13};
         imageButtons[1] = new AppCompatImageButton[]{binding.imagesRow21, binding.imagesRow22, binding.imagesRow23};
         imageButtons[2] = new AppCompatImageButton[]{binding.imagesRow31, binding.imagesRow32, binding.imagesRow33};
+        adjustImage();
+    }
+
+    private void adjustImage() {
+        for(int row = 0; row < imageButtons[0].length; row++){
+            for(int col = 0; col < imageButtons.length; col++){
+                imageButtons[row][col].setClipToOutline(true);
+            }
+        }
     }
 
     private void updateImageRowCol(){
@@ -98,6 +111,11 @@ public class PostEditActivity extends AppCompatActivity {
 //                signUp();
 //            }
 //        });
+
+        binding.change.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), ForumAddCategoryActivity.class));
+            finish();
+        });
         binding.imagesRow11.setOnClickListener(v -> {
             listenerFunction();
         });

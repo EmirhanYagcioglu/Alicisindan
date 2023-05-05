@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cankutboratuncer.alicisindan.R;
 import com.cankutboratuncer.alicisindan.activities.data.database.CategoryTest;
+import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
 import com.cankutboratuncer.alicisindan.activities.utilities.Category;
 
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public class CategoryFragment extends Fragment {
 
         RecyclerView recyclerViewForCategories = view.findViewById(R.id.categoryFragment_recyclerView_categories);
 
-        ArrayList<Category> categories = CategoryTest.categories;
+        ArrayList<AllCategories> categories = CategoryTest.categories;
 
         recyclerViewForCategories.setLayoutManager(horizontalRecyclerViewLayoutManager);
 

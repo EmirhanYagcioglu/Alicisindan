@@ -10,15 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cankutboratuncer.alicisindan.R;
+import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
 import com.cankutboratuncer.alicisindan.activities.utilities.Category;
 
 import java.util.ArrayList;
 
 public class CategoryExpandedAdapter extends RecyclerView.Adapter<CategoryExpandedAdapter.CategoryExpandedViewHolder> {
 
-    private ArrayList<Category> categories;
+    private ArrayList<AllCategories> categories;
 
-    public CategoryExpandedAdapter(ArrayList<Category> categories) {
+    public CategoryExpandedAdapter(ArrayList<AllCategories> categories) {
         this.categories = categories;
     }
 
@@ -36,7 +37,7 @@ public class CategoryExpandedAdapter extends RecyclerView.Adapter<CategoryExpand
 
     @Override
     public void onBindViewHolder(@NonNull CategoryExpandedViewHolder holder, int position) {
-        holder.bind(categories.get(position));
+        holder.bind((Category) categories.get(position));
     }
 
     static class CategoryExpandedViewHolder extends RecyclerView.ViewHolder {

@@ -7,6 +7,9 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 
+import com.cankutboratuncer.alicisindan.activities.data.database.CategoryTest;
+import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
+import com.cankutboratuncer.alicisindan.activities.utilities.Category;
 import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivityPostAddCategoryBinding;
@@ -17,14 +20,14 @@ public class PostAddCategoryActivity extends AppCompatActivity implements Catego
 
     private ActivityPostAddCategoryBinding binding;
     private LocalSave localSave;
-    private List<String> categories;
+    private List<AllCategories> categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPostAddCategoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        categories = Constants.categories;
+        categories = CategoryTest.categories;
         loadCategories();
     }
 

@@ -2,20 +2,23 @@ package com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.catego
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
+import com.cankutboratuncer.alicisindan.activities.utilities.Category;
 import com.cankutboratuncer.alicisindan.databinding.ItemContainerCategoryBinding;
 
 import java.util.List;
 
 public class PostCategoryAdapter extends RecyclerView.Adapter<PostCategoryAdapter.CategoryViewHolder> {
 
-    private final List<String> categories;
+    private final List<AllCategories> categories;
     private final CategoryListener categoryListener;
 
-    public PostCategoryAdapter(List<String> categories, CategoryListener categoryListener) {
+    public PostCategoryAdapter(List<AllCategories> categories, CategoryListener categoryListener) {
         this.categories = categories;
         this.categoryListener = categoryListener;
     }
@@ -29,7 +32,7 @@ public class PostCategoryAdapter extends RecyclerView.Adapter<PostCategoryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        holder.setCategoryTitle(categories.get(position));
+        holder.bind(categories.get(position));
     }
 
     @Override
@@ -40,15 +43,18 @@ public class PostCategoryAdapter extends RecyclerView.Adapter<PostCategoryAdapte
     class CategoryViewHolder extends RecyclerView.ViewHolder {
 
         ItemContainerCategoryBinding binding;
+        private ImageView categoryImage;
 
         CategoryViewHolder(ItemContainerCategoryBinding itemCategoryBinding) {
             super(itemCategoryBinding.getRoot());
             binding = itemCategoryBinding;
+            categoryImage = binding.categoryImage;
         }
 
-        void setCategoryTitle(String title) {
-            binding.categoryName.setText(title);
-            binding.getRoot().setOnClickListener(v -> categoryListener.onUserClicked(title));
+        void bind(AllCategories category) {
+            this.categoryImage.setImageResource(category.getImage());
+            binding.categoryName.setText(category.getName());
+            binding.getRoot().setOnClickListener(v -> categoryListener.onUserClicked(category.getName()));
         }
     }
 }
