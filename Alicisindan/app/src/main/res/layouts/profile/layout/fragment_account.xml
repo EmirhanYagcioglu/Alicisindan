@@ -32,12 +32,11 @@
         android:id="@+id/accountFragment_layout_main"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:padding="@dimen/_16sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountFragment_layout_top"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/accountFragment_layout_top">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/accountFragment_cardView_userInfo"
@@ -59,7 +58,7 @@
                 android:text="User Info"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/_16ssp"
-                app:drawableStartCompat="@drawable/ic_message"
+                app:drawableStartCompat="@drawable/ic_person"
                 app:drawableTint="@color/primary" />
         </androidx.cardview.widget.CardView>
 
@@ -83,7 +82,7 @@
                 android:text="Adress Info"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/_16ssp"
-                app:drawableStartCompat="@drawable/ic_message"
+                app:drawableStartCompat="@drawable/ic_location"
                 app:drawableTint="@color/primary" />
         </androidx.cardview.widget.CardView>
 
@@ -131,7 +130,7 @@
                 android:text="Change Password"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/_16ssp"
-                app:drawableStartCompat="@drawable/ic_message"
+                app:drawableStartCompat="@drawable/ic_lock"
                 app:drawableTint="@color/primary" />
         </androidx.cardview.widget.CardView>
 
@@ -155,7 +154,7 @@
                 android:text="Others"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/_16ssp"
-                app:drawableStartCompat="@drawable/ic_message"
+                app:drawableStartCompat="@drawable/ic_settings"
                 app:drawableTint="@color/primary" />
         </androidx.cardview.widget.CardView>
 
