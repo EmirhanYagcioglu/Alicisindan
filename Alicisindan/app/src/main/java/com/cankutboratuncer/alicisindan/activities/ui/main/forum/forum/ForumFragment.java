@@ -64,8 +64,7 @@ public class ForumFragment extends Fragment implements ForumInterface {
 
     @Override
     public void onItemClick(int position) {
-//        Fragment fragment = AdvertisementFragment.newInstance(advertisements.get(position).getAdvertisementID());
-//        loadFragment(fragment);
+        startActivity(new Intent(getContext(), ForumChatActivity.class));
     }
 
 }

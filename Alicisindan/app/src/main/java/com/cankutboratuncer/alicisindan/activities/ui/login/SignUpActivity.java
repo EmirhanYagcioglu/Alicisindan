@@ -8,6 +8,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
+import java.time.Instant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -74,18 +75,20 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void signUp() throws Exception {
         loading(true);
-        if (!User.emailExists(binding.signUpActivityEditTextEmailOrPhoneNumber.toString())) {
+        //testLog();
+        if (!User.emailExists(binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString())) {
             String id = "0";
-            String username = binding.signUpActivityEditTextUserName.toString();
-            String email = binding.signUpActivityEditTextEmailOrPhoneNumber.toString();
-            String password = binding.signUpActivityEditTextPassword.toString();
-            String name = binding.signUpActivityEditTextName.toString();
-            String surname = binding.signUpActivityEditTextSurname.toString();
-            String phone = binding.signUpActivityEditTextEmailOrPhoneNumber.toString();
-            String address = binding.signUpActivityEditTextCountry + "/" + binding.signUpActivityEditTextCity;
+            String username = binding.signUpActivityEditTextUserName.getText().toString();
+            System.out.println(username);
+            String email = binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString();
+            String password = binding.signUpActivityEditTextPassword.getText().toString();
+            String name = binding.signUpActivityEditTextName.getText().toString();
+            String surname = binding.signUpActivityEditTextSurname.getText().toString();
+            String phone = binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString();
+            String address = "123";
             String birthday = "2000";
-
-            User user = new User(id, username, name, surname, birthday, address, email, phone);
+            User user = new User(username,name,surname,birthday,address,email,phone);
+            //User user = new User(id, username, name, surname, birthday, address, email, phone, "");
             localSave.saveUser(user.getID(), user.getEmail(), user.getPhone(), user.getUsername(), password, user.getName(), "surname", user.getAddress());
             user.registerUser(password);
 
@@ -98,6 +101,8 @@ public class SignUpActivity extends AppCompatActivity {
                 loading(false);
                 showToast("The user couldn't registered");
             }
+
+
         } else {
             showToast("There is already a user with this email.");
         }
@@ -148,5 +153,20 @@ public class SignUpActivity extends AppCompatActivity {
             binding.signUpActivityButtonSignUp.setVisibility(View.VISIBLE);
             binding.signInActivityProgressBar.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private void testLog(){
+        String id = "0";
+        String username = binding.signUpActivityEditTextUserName.getText().toString();
+        System.out.println(username);
+        String email = binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString();
+        String password = binding.signUpActivityEditTextPassword.getText().toString();
+        String name = binding.signUpActivityEditTextName.getText().toString();
+        String surname = binding.signUpActivityEditTextSurname.getText().toString();
+        String phone = binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString();
+        String address = "123";
+        String birthday = "2000";
+        User user = new User(username,name,surname,birthday,address,email,phone);
+        localSave.saveUser(user.getID(), user.getEmail(), user.getPhone(), user.getUsername(), password, user.getName(), "surname", user.getAddress());
     }
 }

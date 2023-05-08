@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.cankutboratuncer.alicisindan.R;
+import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.PostAddCategoryActivity;
 import com.cankutboratuncer.alicisindan.activities.ui.main.forum.category.ForumAddCategoryActivity;
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivityPostEditBinding;
@@ -113,7 +114,7 @@ public class PostEditActivity extends AppCompatActivity {
 //        });
 
         binding.change.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), ForumAddCategoryActivity.class));
+            startActivity(new Intent(getApplicationContext(), PostAddCategoryActivity.class));
             finish();
         });
         binding.imagesRow11.setOnClickListener(v -> {

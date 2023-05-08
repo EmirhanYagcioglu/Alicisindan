@@ -24,6 +24,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/_80sdp"
         android:fontFamily="@font/lato"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:gravity="center_vertical"
         android:textColor="@color/text_dark"
         android:textSize="@dimen/_14ssp"

@@ -57,7 +57,7 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
 
         view.findViewById(R.id.buttonMessage).setOnClickListener(v -> {
 
-            if (localSave.getBoolean(Constants.KEY_IS_SIGNED_IN)){
+            if (localSave.getBoolean(Constants.KEY_IS_SIGNED_IN) || true){
                 Advertisement advertisement = new Advertisement();
 
                 advertisement.title = "Samsung Galaxy Tab S8 Ultra | Az Kullanılmış";
