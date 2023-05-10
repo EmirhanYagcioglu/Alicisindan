@@ -32,6 +32,9 @@ public class Constants {
     private static final ArrayList<String> CITY_TURKEY = new ArrayList<>(Arrays.asList("Adana","Adiyaman","Afyon","Agri","Aksaray","Amasya","Ankara","Antalya","Ardahan","Artvin","Aydin","Balikesir","Bartin","Batman","Bayburt","Bilecik","Bingol","Bitlis","Bolu","Burdur","Bursa","Canakkale","Cankiri","Corum","Denizli","Diyarbakir","Duzce","Edirne","Elazig","Erzincan","Erzurum","Eskisehir","Gaziantep","Giresun","Gumushane","Hakkari","Hatay","Igdir","Isparta","Istanbul","Izmir","Kahramanmaras","Karabuk","Karaman","Kars","Kastamonu","Kayseri","Kilis","Kirikkale","Kirklareli","Kirsehir","Kocaeli","Konya","Kutahya","Malatya","Manisa","Mardin","Mersin","Mugla","Mus","Nevsehir","Nigde","Ordu","Osmaniye","Rize","Sakarya","Samsun","Sanliurfa","Siirt","Sinop","Sirnak","Sivas","Tekirdag","Tokat","Trabzon","Tunceli","Usak","Van","Yalova","Yozgat","Zonguldak"));
     public static final ArrayList<ArrayList<String>> CITIES = new ArrayList<>(Arrays.asList(CITY_TURKEY));
 
+    public static final ArrayList<String> CAR_CAR_BRAND = new ArrayList<>(Arrays.asList("IPhone", "Samsung", "Huawei"));
+    public static final ArrayList<String> CONDITION = new ArrayList<>(Arrays.asList("Unused", "2nd Hand", "Worn out"));
+
     public static final String KEY_USER_ID = "userId";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_FCM_TOKEN = "fcmToken";

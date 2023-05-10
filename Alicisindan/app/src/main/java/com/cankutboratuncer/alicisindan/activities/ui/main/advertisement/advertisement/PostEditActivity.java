@@ -1,10 +1,5 @@
 package com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,13 +7,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Patterns;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.cankutboratuncer.alicisindan.R;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
+
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.PostAddCategoryActivity;
-import com.cankutboratuncer.alicisindan.activities.ui.main.forum.category.ForumAddCategoryActivity;
+import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivityPostEditBinding;
 
@@ -26,13 +28,18 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class PostEditActivity extends AppCompatActivity {
+import Alicisindan.Listing;
+
+public class PostEditActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private ActivityPostEditBinding binding;
     private String encodedImage;
     private LocalSave localSave;
     private int imageRow;
     private int imageCol;
+    String category;
+    String brand;
+    String condition;
     private AppCompatImageButton[][] imageButtons;
 
     @Override
@@ -42,13 +49,33 @@ public class PostEditActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         localSave = new LocalSave(getApplicationContext());
         Intent intent = getIntent();
-        String category = intent.getStringExtra("category");
+        category = intent.getStringExtra("category");
         binding.subTitle.setText(category);
         initImageButton();
+        initSpinners();
         setListeners();
+
+
     }
 
-    private void initImageButton(){
+    private void initSpinners() {
+        Spinner spinnerBrand = binding.brand;
+        Spinner spinnerCondition = binding.condition;
+
+        spinnerBrand.setOnItemSelectedListener(this);
+        spinnerCondition.setOnItemSelectedListener(this);
+
+        ArrayAdapter brandAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, Constants.CAR_CAR_BRAND);
+        brandAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBrand.setAdapter(brandAdapter);
+
+        ArrayAdapter conditionAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, Constants.CONDITION);
+        conditionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCondition.setAdapter(conditionAdapter);
+
+    }
+
+    private void initImageButton() {
         imageCol = 0;
         imageRow = 0;
         imageButtons = new AppCompatImageButton[3][3];
@@ -59,15 +86,15 @@ public class PostEditActivity extends AppCompatActivity {
     }
 
     private void adjustImage() {
-        for(int row = 0; row < imageButtons[0].length; row++){
-            for(int col = 0; col < imageButtons.length; col++){
+        for (int row = 0; row < imageButtons[0].length; row++) {
+            for (int col = 0; col < imageButtons.length; col++) {
                 imageButtons[row][col].setClipToOutline(true);
             }
         }
     }
 
-    private void updateImageRowCol(){
-        imageCol ++;
+    private void updateImageRowCol() {
+        imageCol++;
         imageRow += imageCol == 3 ? 1 : 0;
         imageCol = imageCol == 3 ? 0 : imageCol;
     }
@@ -86,33 +113,35 @@ public class PostEditActivity extends AppCompatActivity {
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 
-    private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == RESULT_OK) {
-                    if (result.getData() != null) {
-                        Uri imageUri = result.getData().getData();
-                        try {
-                            InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                            imageButtons[imageRow][imageCol].setImageBitmap(bitmap);
-                            updateImageRowCol();
-                            encodedImage = encodeImage(bitmap);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    }
+    private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == RESULT_OK) {
+            if (result.getData() != null) {
+                Uri imageUri = result.getData().getData();
+                try {
+                    InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    imageButtons[imageRow][imageCol].setImageBitmap(bitmap);
+                    updateImageRowCol();
+                    encodedImage = encodeImage(bitmap);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
-    );
+        }
+    });
 
     private void setListeners() {
-//        binding.buttonPost.setOnClickListener(v -> {
-//            if (isValidSignUpDetails()) {
-//                signUp();
-//            }
-//        });
-
+        binding.buttonPost.setOnClickListener(v -> {
+            try {
+                if (isValidPostDetails()) {
+                    postAdd();
+                    startActivity(new Intent(getApplicationContext(), CheckNewPostActivity.class));
+                    finish();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
         binding.change.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), PostAddCategoryActivity.class));
             finish();
@@ -146,37 +175,59 @@ public class PostEditActivity extends AppCompatActivity {
         });
     }
 
-    private void listenerFunction(){
+    private void postAdd() throws Exception {
+        String userID = localSave.getString(Constants.KEY_USER_ID);
+        String password = localSave.getString(Constants.KEY_PASSWORD);
+        Listing listing = new Listing(userID, Listing.SELL, binding.productTitle.getText().toString(), binding.details.getText().toString(), binding.price.getText().toString(), category, binding.location.getText().toString());
+        listing.addListing(userID, password);
+        Log.d("şişko", binding.productTitle.getText().toString());
+        String[] images = {encodedImage};
+        listing.addListingImage(userID, password, encodedImage);
+    }
+
+    private void listenerFunction() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         pickImage.launch(intent);
     }
 
-//    private Boolean isValidPostDetails() {
-//        if (encodedImage == null) {
-//            showToast("Select profile image");
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        if(adapterView == binding.brand){
+            brand = adapterView.getItemAtPosition(i).toString();
+        } else if (adapterView == binding.condition){
+            condition = adapterView.getItemAtPosition(i).toString();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    private Boolean isValidPostDetails() {
+        if (encodedImage == null) {
+            showToast("Select at least 1 image");
+            return false;
+        } else if (binding.productTitle.getText().toString().trim().isEmpty()) {
+            showToast("Title cannot be empty");
+            return false;
+        } else if (binding.price.getText().toString().trim().isEmpty()) {
+            showToast("Price cannot be empty");
+            return false;
+        } else if (binding.location.getText().toString().trim().isEmpty()) {
+            showToast("Location cannot be empty");
+            return false;
+        }
+//         else if (binding.brand.getCount() == 0) {
+//            showToast("Please select a brand");
 //            return false;
-//        } else if (binding.inputName.getText().toString().trim().isEmpty()) {
-//            showToast("Enter Name");
+//        } else if (binding.condition.getCount() == 0) {
+//            showToast("Please select a condition");
 //            return false;
-//        } else if (binding.inputEmail.getText().toString().trim().isEmpty()) {
-//            showToast("Enter Email");
-//            return false;
-//        } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.inputEmail.getText().toString()).matches()) {
-//            showToast("Error invalid email");
-//            return false;
-//        } else if (binding.inputPassword.getText().toString().trim().isEmpty()) {
-//            showToast("Enter password");
-//            return false;
-//        } else if (binding.inputConfirmPassword.getText().toString().trim().isEmpty()) {
-//            showToast("Confirm your password");
-//            return false;
-//        } else if (!binding.inputPassword.getText().toString().equals(binding.inputConfirmPassword.getText().toString())) {
-//            showToast("Password & confirm password are not matching");
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
+        else {
+            return true;
+        }
+    }
 
 }

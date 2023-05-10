@@ -2,6 +2,7 @@ package com.cankutboratuncer.alicisindan.activities.ui.main.home.pages;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +25,21 @@ import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
 import com.cankutboratuncer.alicisindan.activities.utilities.Category;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryFragment;
+import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
+import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
+
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import Alicisindan.Listing;
 
 public class HomeFragment extends Fragment implements AdvertisementInterface {
 
     ArrayList<Advertisement> advertisements;
     ArrayList<AllCategories> categories;
+    LocalSave localSave;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -52,6 +61,8 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        localSave = new LocalSave(getContext());
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         view.findViewById(R.id.buttonCreatePost).setOnClickListener(v -> {
@@ -70,7 +81,20 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.homeFragment_recyclerView_advertisements);
         RecyclerView recyclerViewForCategories = view.findViewById(R.id.homeFragment_recyclerView_categories);
 
-        advertisements = AdvertisementTest.advertisements;
+        advertisements = new ArrayList<>();
+        try {
+            Listing[] listings = Listing.searchListings(localSave.getString(Constants.KEY_USER_ID), "", "", "","", "");
+                for(Listing listing : listings){
+                    if(listing.getListingImages() != null){
+                        Log.d("imamag", String.valueOf(listing.getListingImages().length));
+                        Advertisement advertisement = new Advertisement(listing.getTitle(), listing.getDescription(), listing.getListingImages()[0], listing.getPrice(), listing.getID());
+                        advertisements.add(advertisement);
+                    }
+                }
+        } catch (Exception e) {
+            Advertisement advertisementTest = new Advertisement("Test", "Test", null, "Test", "123");
+            advertisements.add(advertisementTest);
+        }
         categories = CategoryTest.categories;
 
         recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(this.getContext(), 2));

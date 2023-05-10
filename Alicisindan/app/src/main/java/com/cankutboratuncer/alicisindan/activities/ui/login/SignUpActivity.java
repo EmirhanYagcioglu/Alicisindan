@@ -17,6 +17,7 @@ import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivitySignUpBinding;
 
+import Alicisindan.Password;
 import Alicisindan.User;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -42,7 +43,6 @@ public class SignUpActivity extends AppCompatActivity {
                     signUp();
                 } catch (Exception e) {
                     showToast("The register failed.");
-                    throw new RuntimeException(e);
                 }
             }
         });
@@ -77,20 +77,17 @@ public class SignUpActivity extends AppCompatActivity {
         loading(true);
         //testLog();
         if (!User.emailExists(binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString())) {
-            String id = "0";
             String username = binding.signUpActivityEditTextUserName.getText().toString();
-            System.out.println(username);
             String email = binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString();
             String password = binding.signUpActivityEditTextPassword.getText().toString();
             String name = binding.signUpActivityEditTextName.getText().toString();
             String surname = binding.signUpActivityEditTextSurname.getText().toString();
-            String phone = binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString();
-            String address = "123";
-            String birthday = "2000";
+            String phone = "0";
+            String address = binding.signUpActivityEditTextCountry.getText().toString() + "/"+ binding.signUpActivityEditTextCity.getText().toString();
+            String birthday = "0";
             User user = new User(username,name,surname,birthday,address,email,phone);
-            //User user = new User(id, username, name, surname, birthday, address, email, phone, "");
-            localSave.saveUser(user.getID(), user.getEmail(), user.getPhone(), user.getUsername(), password, user.getName(), "surname", user.getAddress());
             user.registerUser(password);
+            localSave.saveUser(Password.emailToID(email), email, phone, username, password, name, surname, address);
 
             if (User.emailExists(email)) {
                 loading(false);

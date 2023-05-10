@@ -42,8 +42,8 @@ public class SignInActivity extends AppCompatActivity {
         String userID = Password.emailToID(binding.signInActivityEditTextEmailOrPhoneNumber.getText().toString());
         String userPassword = binding.signInActivityEditTextPassword.getText().toString();
         if (Password.isCorrectPassword(userID, userPassword)) {
-            registerUser(userID, userPassword);
-            User user = User.getUser(userID);
+            User user =  User.getUser(userID);
+            localSave.saveUser(user.getID(), user.getEmail(), user.getPhone(), user.getUsername(), userPassword, user.getName(), user.getSurname(), user.getAddress());
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -51,16 +51,6 @@ public class SignInActivity extends AppCompatActivity {
         else {
             loading(false);
             showToast("Unable to sign in");
-        }
-    }
-
-    private void registerUser(String userID, String password) {
-        try {
-            User user = User.getUser(userID);
-            localSave.saveUser(user.getID(), user.getEmail(), user.getPhone(), user.getUsername(), password, user.getName(), "surname", user.getAddress());
-        } catch (Exception e) {
-            localSave.clear();
-            showToast("The user couldn't saved to the local");
         }
     }
 

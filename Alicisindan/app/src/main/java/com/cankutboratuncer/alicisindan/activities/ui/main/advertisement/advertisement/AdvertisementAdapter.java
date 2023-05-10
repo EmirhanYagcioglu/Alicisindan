@@ -1,5 +1,8 @@
 package com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +70,19 @@ public class AdvertisementAdapter extends RecyclerView.Adapter<AdvertisementAdap
 
         public void bind(Advertisement advertisement) {
             this.advertisementTitle.setText(advertisement.getTitle());
-            this.advertisementImage.setImageResource(advertisement.getImage());
+            if(advertisement.getImage() != null){
+                Bitmap image = getBitmapFromEncodedString(advertisement.getImage());
+                this.advertisementImage.setImageBitmap(image);
+            }
+        }
+
+        private Bitmap getBitmapFromEncodedString(String encodedImage) {
+            if (encodedImage != null) {
+                byte[] bytes = Base64.decode(encodedImage, Base64.DEFAULT);
+                return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            } else {
+                return null;
+            }
         }
     }
 }
