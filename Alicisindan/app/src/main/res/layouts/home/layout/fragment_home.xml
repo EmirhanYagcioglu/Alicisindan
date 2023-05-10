@@ -46,11 +46,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/homeFragment_editText_searchBar"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/homeFragment_searchBar"
+        android:background="@drawable/background_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/what_are_you_looking_for"
+        app:queryHint="@string/what_are_you_looking_for"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/homeFragment_layout_top"
@@ -58,14 +59,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeFragment_layout_top"
         app:layout_constraintWidth_percent="0.9"
-        app:startIconDrawable="@drawable/ic_search">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_search" />
+        app:iconifiedByDefault="false">
 
-    </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.appcompat.widget.SearchView>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/homeFragment_layout_categoryTop"
@@ -74,7 +73,7 @@
         android:layout_margin="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeFragment_editText_searchBar">
+        app:layout_constraintTop_toBottomOf="@+id/homeFragment_searchBar">
 
         <TextView
             android:id="@+id/homeFragment_textView_categories"

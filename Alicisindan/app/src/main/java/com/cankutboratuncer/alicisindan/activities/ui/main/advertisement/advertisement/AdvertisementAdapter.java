@@ -24,6 +24,12 @@ public class AdvertisementAdapter extends RecyclerView.Adapter<AdvertisementAdap
         this.advertisementInterface = advertisementInterface;
     }
 
+    public void setSearchedAdvertisements(ArrayList<Advertisement> advertisements)
+    {
+        this.advertisements = advertisements;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return this.advertisements.size();

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cankutboratuncer.alicisindan.R;
 import com.cankutboratuncer.alicisindan.activities.data.database.AdvertisementTest;
 import com.cankutboratuncer.alicisindan.activities.data.database.CategoryTest;
+import com.cankutboratuncer.alicisindan.activities.ui.main.SearchBar;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementFragment;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementInterface;
@@ -27,10 +29,14 @@ import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.Categor
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment implements AdvertisementInterface {
+import Alicisindan.Listing;
+
+public class HomeFragment extends Fragment implements AdvertisementInterface, SearchBar {
 
     ArrayList<Advertisement> advertisements;
     ArrayList<AllCategories> categories;
+    AdvertisementAdapter advertisementAdapter;
+    SearchView searchView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -76,7 +82,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(this.getContext(), 2));
         recyclerViewForCategories.setLayoutManager(horizontalRecyclerViewLayoutManager);
 
-        AdvertisementAdapter advertisementAdapter = new AdvertisementAdapter(advertisements, this);
+        advertisementAdapter = new AdvertisementAdapter(advertisements, this);
         CategoryAdapter categoryAdapter = new CategoryAdapter(categories);
         recyclerViewForAdvertisements.setAdapter(advertisementAdapter);
         recyclerViewForCategories.setAdapter(categoryAdapter);
@@ -100,4 +106,40 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         Fragment fragment = AdvertisementFragment.newInstance(advertisements.get(position).getAdvertisementID());
         loadFragment(fragment);
     }
+
+
+    public void createSearchBar(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        searchView = view.findViewById(R.id.homeFragment_searchBar);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        {
+            @Override
+            public boolean onQueryTextSubmit(String query)
+            {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText)
+            {
+                findFromList(newText);
+                return true;
+            }
+        });
+    }
+
+
+    public void findFromList(String text) {
+        try {
+            Listing.searchListings("", "", text, "", "10");
+            //ArrayList<Advertisement> newAdvertisements;
+            //advertisementAdapter.setSearchedAdvertisements(newAdvertisements);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
 }
