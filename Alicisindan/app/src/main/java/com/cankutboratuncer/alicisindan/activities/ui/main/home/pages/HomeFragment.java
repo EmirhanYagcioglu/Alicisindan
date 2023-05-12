@@ -130,11 +130,28 @@ public class HomeFragment extends Fragment implements AdvertisementInterface, Se
     }
 
 
-    public void findFromList(String text) {
+    public void findFromList(String searchedText) {
         try {
-            Listing.searchListings("", "", text, "", "10");
-            //ArrayList<Advertisement> newAdvertisements;
-            //advertisementAdapter.setSearchedAdvertisements(newAdvertisements);
+            String text = searchedText;
+            Listing[] listings;
+            ArrayList<Advertisement> newAdvertisements = new ArrayList<Advertisement>();
+            String title;
+            String description;
+            int image;
+            String price;
+            int ID;
+            listings = Listing.findListings("", "", "", text, "", "", "", "", "10");
+            for ( int i = 0; i < listings.length; i++ )
+            {
+                Listing listing = listings[i];
+                title = listing.getTitle();
+                description = listing.getDescription();
+                image = 0;
+                price = listing.getPrice();
+                ID = Integer.parseInt(listing.getID());
+                newAdvertisements.add( new Advertisement(title, description, image, price, ID));
+            }
+            advertisementAdapter.setSearchedAdvertisements(newAdvertisements);
         } catch (Exception e)
         {
             e.printStackTrace();
