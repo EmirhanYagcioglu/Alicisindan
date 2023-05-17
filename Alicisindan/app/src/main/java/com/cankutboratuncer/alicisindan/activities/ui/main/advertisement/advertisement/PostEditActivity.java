@@ -12,8 +12,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.cankutboratuncer.alicisindan.R;
@@ -33,6 +35,7 @@ public class PostEditActivity extends AppCompatActivity {
     private LocalSave localSave;
     private int imageRow;
     private int imageCol;
+    private String brand;
     private AppCompatImageButton[][] imageButtons;
 
     @Override
@@ -46,6 +49,9 @@ public class PostEditActivity extends AppCompatActivity {
         binding.subTitle.setText(category);
         initImageButton();
         setListeners();
+        EditText edit1 = findViewById(R.id.brand);
+        brand = edit1.getText().toString();
+
     }
 
     private void initImageButton(){
@@ -150,6 +156,11 @@ public class PostEditActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         pickImage.launch(intent);
+    }
+
+    public void getInformation(View view)
+    {
+        System.out.println(brand);
     }
 
 //    private Boolean isValidPostDetails() {

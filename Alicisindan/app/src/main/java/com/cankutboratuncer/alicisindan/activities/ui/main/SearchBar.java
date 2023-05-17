@@ -11,5 +11,5 @@ import com.cankutboratuncer.alicisindan.R;
 
 public interface SearchBar {
     public void createSearchBar(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
-    public void findFromList(String text);
+    public void findFromList(String text, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 }

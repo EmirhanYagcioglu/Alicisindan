@@ -449,6 +449,7 @@
                 android:background="@drawable/background_main_button"
                 android:fontFamily="@font/lato_bold"
                 android:text="Post Now"
+                android:onClick="getInformation"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16ssp"

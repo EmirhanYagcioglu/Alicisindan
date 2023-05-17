@@ -75,6 +75,28 @@ public class HomeFragment extends Fragment implements AdvertisementInterface, Se
 
         RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.homeFragment_recyclerView_advertisements);
         RecyclerView recyclerViewForCategories = view.findViewById(R.id.homeFragment_recyclerView_categories);
+        String title;
+        String description;
+        int image;
+        String price;
+        int ID;
+
+        Listing[] listings = new Listing[0];
+        try {
+            listings = Listing.findListings(null, null, null, null, null, null, null, null, null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        for ( int i = 0; i < listings.length; i++ )
+        {
+            Listing listing = listings[i];
+            title = listing.getTitle();
+            description = listing.getDescription();
+            image = 0;
+            price = listing.getPrice();
+            ID = Integer.parseInt(listing.getID());
+            advertisements.add( new Advertisement(title, description, image, price, ID));
+        }
 
         advertisements = AdvertisementTest.advertisements;
         categories = CategoryTest.categories;
@@ -92,7 +114,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface, Se
             Fragment fragment = new CategoryFragment();
             loadFragment(fragment);
         });
-
+        createSearchBar(inflater, container, savedInstanceState);
         return view;
     }
 
@@ -110,6 +132,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface, Se
 
     public void createSearchBar(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.homeFragment_recyclerView_advertisements);
         searchView = view.findViewById(R.id.homeFragment_searchBar);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
@@ -117,21 +140,24 @@ public class HomeFragment extends Fragment implements AdvertisementInterface, Se
             @Override
             public boolean onQueryTextSubmit(String query)
             {
+                findFromList(query, inflater, container, savedInstanceState);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText)
             {
-                findFromList(newText);
+                findFromList(newText, inflater, container, savedInstanceState);
                 return true;
             }
         });
     }
 
 
-    public void findFromList(String searchedText) {
+    public void findFromList(String searchedText, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         try {
+            View view = inflater.inflate(R.layout.fragment_home, container, false);
+            RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.homeFragment_recyclerView_advertisements);
             String text = searchedText;
             Listing[] listings;
             ArrayList<Advertisement> newAdvertisements = new ArrayList<Advertisement>();
@@ -151,7 +177,9 @@ public class HomeFragment extends Fragment implements AdvertisementInterface, Se
                 ID = Integer.parseInt(listing.getID());
                 newAdvertisements.add( new Advertisement(title, description, image, price, ID));
             }
-            advertisementAdapter.setSearchedAdvertisements(newAdvertisements);
+            recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(this.getContext(), 2));
+            advertisementAdapter = new AdvertisementAdapter(newAdvertisements, this);
+            recyclerViewForAdvertisements.setAdapter(advertisementAdapter);
         } catch (Exception e)
         {
             e.printStackTrace();
