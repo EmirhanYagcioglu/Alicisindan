@@ -4,7 +4,7 @@ public class Advertisement {
 
     // User advertisementOwner;
     // Category advertisementCategory;
-    String title, description, price, image, advertisementID;
+    String title, description, price, image, advertisementID, location, userID, username, brand;
 
     /*  after completing other classes, use this constructor instead.
         also change advertisementTest class members according to the new design
@@ -20,17 +20,26 @@ public class Advertisement {
     }
     */
 
-    public Advertisement(String title, String description, String image, String price, String advertisementID) {
+    public Advertisement(String title, String description, String image, String price, String advertisementID, String location, String userID, String username, String brand) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.image = image;
         this.advertisementID = advertisementID;
+        this.location = location;
+        this.userID = userID;
+        this.username = username;
+        this.brand = brand;
     }
 
     public String getTitle() {
         return title;
     }
+    public String getBrand(){ return brand;}
+    public String getUsername() {
+        return username;
+    }
+    public String getUserID(){ return userID;}
 
     public void setTitle(String title) {
         this.title = title;
@@ -55,6 +64,7 @@ public class Advertisement {
     public String getImage() {
         return image;
     }
+    public String getLocation() { return location; }
 
     public void setImage(String image) {
         this.image = image;

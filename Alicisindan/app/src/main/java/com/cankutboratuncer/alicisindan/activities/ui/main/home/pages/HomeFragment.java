@@ -21,6 +21,7 @@ import com.cankutboratuncer.alicisindan.activities.data.database.CategoryTest;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementFragment;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementInterface;
+import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.PostAddSubCategoryActivity;
 import com.cankutboratuncer.alicisindan.activities.utilities.Advertisement;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.PostAddCategoryActivity;
 import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
@@ -32,6 +33,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import Alicisindan.Listing;
+import Alicisindan.User;
 
 public class HomeFragment extends Fragment implements AdvertisementInterface {
 
@@ -42,6 +44,10 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     String image;
     String price;
     String ID;
+    String location;
+    String userID;
+    String username;
+    String brand;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -92,7 +98,19 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         {
           Listing listing = listings[i];
           title = listing.getTitle();
+          location = listing.getLocation();
           description = listing.getDescription();
+          userID = listing.getOwnerID();
+          brand = listing.getBrand();
+
+            try {
+                User user = User.getUser(userID);
+                username = user.getUsername();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+
             try {
                 image = listing.getListingsFirstImage();
             } catch (Exception e) {
@@ -110,7 +128,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
             }
             price = listing.getPrice();
           ID = listing.getID();
-          advertisements.add( new Advertisement(title, description, image, price, ID));
+          advertisements.add( new Advertisement(title, description, image, price, ID, location, userID, username, brand));
         }
 
         categories = CategoryTest.categories;
@@ -142,6 +160,18 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
 
     @Override
     public void onItemClick(int position) {
+        Intent intent = new Intent(getContext(), HomeFragment.class);
+        Advertisement advertisement = advertisements.get(position);
+        intent.putExtra("ID", advertisement.getAdvertisementID());
+        intent.putExtra("title", advertisement.getTitle());
+        intent.putExtra("price", advertisement.getPrice());
+        intent.putExtra("description", advertisement.getDescription());
+        intent.putExtra("location", advertisement.getLocation());
+        intent.putExtra("image", advertisement.getImage());
+        intent.putExtra("userID", advertisement.getUserID());
+        intent.putExtra("username", advertisement.getUsername());
+        intent.putExtra("brand", advertisement.getBrand());
+        startActivity(intent);
         Fragment fragment = AdvertisementFragment.newInstance(advertisements.get(position).getAdvertisementID());
         loadFragment(fragment);
     }
@@ -194,6 +224,10 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
             String image;
             String price;
             String ID;
+            String location;
+            String userID;
+            String username;
+            String brand;
             listings = Listing.findListings("", "", "", text, "", "", "", "", "", "", "", "10");
             for ( int i = 0; i < listings.length; i++ )
             {
@@ -202,8 +236,18 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
                 description = listing.getDescription();
                 image = "0";
                 price = listing.getPrice();
+                location = listing.getLocation();
                 ID = listing.getID();
-                newAdvertisements.add( new Advertisement(title, description, image, price, ID));
+                userID = listing.getOwnerID();
+                brand = listing.getBrand();
+                try {
+                    User user = User.getUser(userID);
+                    username = user.getUsername();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+                newAdvertisements.add( new Advertisement(title, description, image, price, ID, location, userID, username, brand));
             }
             recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(this.getContext(), 2));
             AdvertisementAdapter advertisementAdapter = new AdvertisementAdapter(newAdvertisements, this);
