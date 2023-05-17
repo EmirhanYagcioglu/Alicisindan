@@ -70,6 +70,7 @@ public class Constants {
     public static final ArrayList<String> stationaryCategory = new ArrayList<>(Arrays.asList("Pen and Pencil", "Notebooks", "Erasers & Lead", "Other"));
     public static final ArrayList<String> booksCategory = new ArrayList<>(Arrays.asList("University books", "Preschool books", "Other"));
     public static final ArrayList<Integer> categoryImages = new ArrayList<>(Arrays.asList(R.drawable.img_car, R.drawable.img_phone, R.drawable.img_sofa, R.drawable.img_pc, R.drawable.img_motorcycle, R.drawable.img_truck, R.drawable.img_baby, R.drawable.img_sport, R.drawable.img_music, R.drawable.img_shoe, R.drawable.img_book, R.drawable.img_pen));
+
     public static ArrayList<String> findSubCategory(String category){
         if(category.equals("Cars")){
             return carCategory;

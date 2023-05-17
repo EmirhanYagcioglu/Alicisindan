@@ -1,7 +1,10 @@
 package com.cankutboratuncer.alicisindan.activities.ui.main.home.pages;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,7 @@ import com.cankutboratuncer.alicisindan.activities.utilities.Category;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryFragment;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import Alicisindan.Listing;
@@ -33,6 +37,11 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
 
     ArrayList<Advertisement> advertisements;
     ArrayList<AllCategories> categories;
+    String title;
+    String description;
+    String image;
+    String price;
+    String ID;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -55,6 +64,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        advertisements = new ArrayList<>();
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         view.findViewById(R.id.buttonCreatePost).setOnClickListener(v -> {
             startActivity(new Intent(getContext(), PostAddCategoryActivity.class));
@@ -72,24 +82,37 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.homeFragment_recyclerView_advertisements);
         RecyclerView recyclerViewForCategories = view.findViewById(R.id.homeFragment_recyclerView_categories);
 
-        Listing[] listings = new Listing[0];
+        Listing[] listings;
         try {
-            //listings = Listing.findListings(null, null, null, null, null, null, null, null, null, null, null, null);
+            listings = Listing.findListings(null, null, null, null, null, null, null, null, null, null, null, "50");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        //for ( int i = 0; i < listings.length; i++ )
-        //{
-        //  Listing listing = listings[i];
-        //  title = listing.getTitle();
-        //  description = listing.getDescription();
-        //  image = 0;
-        //  price = listing.getPrice();
-        //  ID = Integer.parseInt(listing.getID());
-        //  advertisements.add( new Advertisement(title, description, image, price, ID));
-        //}
+        for ( int i = 0; i < listings.length; i++ )
+        {
+          Listing listing = listings[i];
+          title = listing.getTitle();
+          description = listing.getDescription();
+            try {
+                image = listing.getListingsFirstImage();
+            } catch (Exception e) {
+                Bitmap icon = BitmapFactory.decodeResource(getResources(),
+                        R.drawable.a_logo_main);
+                image = encodeImage(icon);
+            } finally {
+                if ( image == null )
+                {
+                    Bitmap icon = BitmapFactory.decodeResource(getResources(),
+                            R.drawable.a_logo_main);
+                    image = encodeImage(icon);
+                }
 
-        advertisements = AdvertisementTest.advertisements;
+            }
+            price = listing.getPrice();
+          ID = listing.getID();
+          advertisements.add( new Advertisement(title, description, image, price, ID));
+        }
+
         categories = CategoryTest.categories;
 
         recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(this.getContext(), 2));
@@ -122,6 +145,17 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         Fragment fragment = AdvertisementFragment.newInstance(advertisements.get(position).getAdvertisementID());
         loadFragment(fragment);
     }
+
+    private String encodeImage(Bitmap bitmap) {
+        int previewWidth = 150;
+        int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
+        Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth, previewHeight, false);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
+
 
 
 //    public void createSearchBar(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
