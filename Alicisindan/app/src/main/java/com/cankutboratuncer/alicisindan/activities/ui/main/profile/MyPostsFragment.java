@@ -3,12 +3,16 @@ package com.cankutboratuncer.alicisindan.activities.ui.main.profile;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.cankutboratuncer.alicisindan.R;
+import com.cankutboratuncer.alicisindan.activities.ui.main.profile.recycleview_necessities.myposts.MyPosts_Adapter;
+import com.cankutboratuncer.alicisindan.activities.ui.main.profile.recycleview_necessities.myposts._MyPosts;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +52,9 @@ public class MyPostsFragment extends Fragment {
         return fragment;
     }
 
+    private RecyclerView recyclerView;
+    private MyPosts_Adapter myposts_adapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +62,25 @@ public class MyPostsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_posts, container, false);
+        //return inflater.inflate(R.layout.fragment_my_posts, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_my_posts, container, false);
+
+        recyclerView = view.findViewById(R.id.mypostsFragment_recycleview);
+        myposts_adapter = new MyPosts_Adapter(_MyPosts.manageData(), this.getActivity());
+
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager manager = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(myposts_adapter);
+
+        return view;
     }
 }

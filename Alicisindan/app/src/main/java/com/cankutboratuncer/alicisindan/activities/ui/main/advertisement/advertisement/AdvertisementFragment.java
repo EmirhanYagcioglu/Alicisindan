@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cankutboratuncer.alicisindan.R;
-import com.cankutboratuncer.alicisindan.activities.data.database.AdvertisementTest;
+import com.cankutboratuncer.alicisindan.activities.ui.main.profile.database.AdvertisementTest;
 import com.cankutboratuncer.alicisindan.activities.ui.login.SignInActivity;
 import com.cankutboratuncer.alicisindan.activities.ui.messaging.activities.ChatActivity;
 import com.cankutboratuncer.alicisindan.activities.ui.messaging.models.Advertisement;

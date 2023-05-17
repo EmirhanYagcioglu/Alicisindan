@@ -16,6 +16,10 @@ import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivitySignUpBinding;
 
+// Password Hashing
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import Alicisindan.User;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -78,7 +82,8 @@ public class SignUpActivity extends AppCompatActivity {
             String id = "0";
             String username = binding.signUpActivityEditTextUserName.toString();
             String email = binding.signUpActivityEditTextEmailOrPhoneNumber.toString();
-            String password = binding.signUpActivityEditTextPassword.toString();
+            // Password Hashing
+            String password = get_SHA_256_SecurePassword(binding.signUpActivityEditTextPassword.toString(), "salt");
             String name = binding.signUpActivityEditTextName.toString();
             String surname = binding.signUpActivityEditTextSurname.toString();
             String phone = binding.signUpActivityEditTextEmailOrPhoneNumber.toString();
@@ -151,5 +156,24 @@ public class SignUpActivity extends AppCompatActivity {
             binding.signUpActivityButtonSignUp.setVisibility(View.VISIBLE);
             binding.signInActivityProgressBar.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private static String get_SHA_256_SecurePassword(String passwordToHash,
+                                                     String salt) {
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(salt.getBytes());
+            byte[] bytes = md.digest(passwordToHash.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16)
+                        .substring(1));
+            }
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return generatedPassword;
     }
 }
