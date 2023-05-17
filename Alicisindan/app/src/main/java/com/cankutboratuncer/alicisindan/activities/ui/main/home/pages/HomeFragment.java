@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cankutboratuncer.alicisindan.R;
 import com.cankutboratuncer.alicisindan.activities.data.database.AdvertisementTest;
 import com.cankutboratuncer.alicisindan.activities.data.database.CategoryTest;
-import com.cankutboratuncer.alicisindan.activities.ui.main.SearchBar;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementFragment;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementInterface;
@@ -31,12 +29,10 @@ import java.util.ArrayList;
 
 import Alicisindan.Listing;
 
-public class HomeFragment extends Fragment implements AdvertisementInterface, SearchBar {
+public class HomeFragment extends Fragment implements AdvertisementInterface {
 
     ArrayList<Advertisement> advertisements;
     ArrayList<AllCategories> categories;
-    AdvertisementAdapter advertisementAdapter;
-    SearchView searchView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -62,7 +58,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface, Se
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         view.findViewById(R.id.buttonCreatePost).setOnClickListener(v -> {
             startActivity(new Intent(getContext(), PostAddCategoryActivity.class));
-                });
+        });
 
         LinearLayoutManager horizontalRecyclerViewLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false) {
             @Override
@@ -75,28 +71,23 @@ public class HomeFragment extends Fragment implements AdvertisementInterface, Se
 
         RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.homeFragment_recyclerView_advertisements);
         RecyclerView recyclerViewForCategories = view.findViewById(R.id.homeFragment_recyclerView_categories);
-        String title;
-        String description;
-        int image;
-        String price;
-        int ID;
 
         Listing[] listings = new Listing[0];
         try {
-            listings = Listing.findListings(null, null, null, null, null, null, null, null, null);
+            //listings = Listing.findListings(null, null, null, null, null, null, null, null, null, null, null, null);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        for ( int i = 0; i < listings.length; i++ )
-        {
-            Listing listing = listings[i];
-            title = listing.getTitle();
-            description = listing.getDescription();
-            image = 0;
-            price = listing.getPrice();
-            ID = Integer.parseInt(listing.getID());
-            advertisements.add( new Advertisement(title, description, image, price, ID));
-        }
+        //for ( int i = 0; i < listings.length; i++ )
+        //{
+        //  Listing listing = listings[i];
+        //  title = listing.getTitle();
+        //  description = listing.getDescription();
+        //  image = 0;
+        //  price = listing.getPrice();
+        //  ID = Integer.parseInt(listing.getID());
+        //  advertisements.add( new Advertisement(title, description, image, price, ID));
+        //}
 
         advertisements = AdvertisementTest.advertisements;
         categories = CategoryTest.categories;
@@ -104,17 +95,20 @@ public class HomeFragment extends Fragment implements AdvertisementInterface, Se
         recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(this.getContext(), 2));
         recyclerViewForCategories.setLayoutManager(horizontalRecyclerViewLayoutManager);
 
-        advertisementAdapter = new AdvertisementAdapter(advertisements, this);
+        AdvertisementAdapter advertisementAdapter = new AdvertisementAdapter(advertisements, this);
         CategoryAdapter categoryAdapter = new CategoryAdapter(categories);
         recyclerViewForAdvertisements.setAdapter(advertisementAdapter);
         recyclerViewForCategories.setAdapter(categoryAdapter);
 
         TextView textView_seeAll = view.findViewById(R.id.homeFragment_textView_seeAll);
-        textView_seeAll.setOnClickListener(v -> {
-            Fragment fragment = new CategoryFragment();
-            loadFragment(fragment);
+        textView_seeAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new CategoryFragment();
+                loadFragment(fragment);
+            }
         });
-        createSearchBar(inflater, container, savedInstanceState);
+
         return view;
     }
 
@@ -130,28 +124,28 @@ public class HomeFragment extends Fragment implements AdvertisementInterface, Se
     }
 
 
-    public void createSearchBar(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.homeFragment_recyclerView_advertisements);
-        searchView = view.findViewById(R.id.homeFragment_searchBar);
-        searchView.clearFocus();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
-        {
-            @Override
-            public boolean onQueryTextSubmit(String query)
-            {
-                findFromList(query, inflater, container, savedInstanceState);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText)
-            {
-                findFromList(newText, inflater, container, savedInstanceState);
-                return true;
-            }
-        });
-    }
+//    public void createSearchBar(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.fragment_home, container, false);
+//        RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.homeFragment_recyclerView_advertisements);
+//        searchView = view.findViewById(R.id.homeFragment_searchBar);
+//        searchView.clearFocus();
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+//        {
+//            @Override
+//            public boolean onQueryTextSubmit(String query)
+//            {
+//                findFromList(query, inflater, container, savedInstanceState);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText)
+//            {
+//                findFromList(newText, inflater, container, savedInstanceState);
+//                return true;
+//            }
+//        });
+//    }
 
 
     public void findFromList(String searchedText, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -163,22 +157,22 @@ public class HomeFragment extends Fragment implements AdvertisementInterface, Se
             ArrayList<Advertisement> newAdvertisements = new ArrayList<Advertisement>();
             String title;
             String description;
-            int image;
+            String image;
             String price;
-            int ID;
-            listings = Listing.findListings("", "", "", text, "", "", "", "", "10");
+            String ID;
+            listings = Listing.findListings("", "", "", text, "", "", "", "", "", "", "", "10");
             for ( int i = 0; i < listings.length; i++ )
             {
                 Listing listing = listings[i];
                 title = listing.getTitle();
                 description = listing.getDescription();
-                image = 0;
+                image = "0";
                 price = listing.getPrice();
-                ID = Integer.parseInt(listing.getID());
+                ID = listing.getID();
                 newAdvertisements.add( new Advertisement(title, description, image, price, ID));
             }
             recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(this.getContext(), 2));
-            advertisementAdapter = new AdvertisementAdapter(newAdvertisements, this);
+            AdvertisementAdapter advertisementAdapter = new AdvertisementAdapter(newAdvertisements, this);
             recyclerViewForAdvertisements.setAdapter(advertisementAdapter);
         } catch (Exception e)
         {

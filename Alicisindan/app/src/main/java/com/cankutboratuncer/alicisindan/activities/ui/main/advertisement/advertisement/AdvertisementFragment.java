@@ -33,10 +33,10 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
     }
 
 
-    public static AdvertisementFragment newInstance(int advertisementID) {
+    public static AdvertisementFragment newInstance(String advertisementID) {
         AdvertisementFragment fragment = new AdvertisementFragment();
         Bundle args = new Bundle();
-        args.putInt(ADVERTISEMENT_ID, advertisementID);
+        args.putString(ADVERTISEMENT_ID, advertisementID);
         fragment.setArguments(args);
         return fragment;
     }

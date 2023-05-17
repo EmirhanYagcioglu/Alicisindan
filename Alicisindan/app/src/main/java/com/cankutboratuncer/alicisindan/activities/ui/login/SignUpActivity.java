@@ -8,7 +8,6 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
-import java.time.Instant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +15,10 @@ import com.cankutboratuncer.alicisindan.activities.ui.main.MainActivity;
 import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivitySignUpBinding;
+
+// Password Hashing
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import Alicisindan.User;
 
@@ -75,20 +78,20 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void signUp() throws Exception {
         loading(true);
-        //testLog();
-        if (!User.emailExists(binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString())) {
+        if (!User.emailExists(binding.signUpActivityEditTextEmailOrPhoneNumber.toString())) {
             String id = "0";
-            String username = binding.signUpActivityEditTextUserName.getText().toString();
-            System.out.println(username);
-            String email = binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString();
-            String password = binding.signUpActivityEditTextPassword.getText().toString();
-            String name = binding.signUpActivityEditTextName.getText().toString();
-            String surname = binding.signUpActivityEditTextSurname.getText().toString();
-            String phone = binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString();
+            String username = binding.signUpActivityEditTextUserName.toString();
+            String email = binding.signUpActivityEditTextEmailOrPhoneNumber.toString();
+            // Password Hashing
+            String password = get_SHA_256_SecurePassword(binding.signUpActivityEditTextPassword.toString(), "salt");
+            String name = binding.signUpActivityEditTextName.toString();
+            String surname = binding.signUpActivityEditTextSurname.toString();
+            String phone = binding.signUpActivityEditTextEmailOrPhoneNumber.toString();
+
             String address = "123";
             String birthday = "2000";
-            User user = new User(username,name,surname,birthday,address,email,phone);
-            //User user = new User(id, username, name, surname, birthday, address, email, phone, "");
+
+            User user = new User(username, name, surname, birthday, address, email, phone);
             localSave.saveUser(user.getID(), user.getEmail(), user.getPhone(), user.getUsername(), password, user.getName(), "surname", user.getAddress());
             user.registerUser(password);
 
@@ -155,18 +158,22 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    private void testLog(){
-        String id = "0";
-        String username = binding.signUpActivityEditTextUserName.getText().toString();
-        System.out.println(username);
-        String email = binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString();
-        String password = binding.signUpActivityEditTextPassword.getText().toString();
-        String name = binding.signUpActivityEditTextName.getText().toString();
-        String surname = binding.signUpActivityEditTextSurname.getText().toString();
-        String phone = binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString();
-        String address = "123";
-        String birthday = "2000";
-        User user = new User(username,name,surname,birthday,address,email,phone);
-        localSave.saveUser(user.getID(), user.getEmail(), user.getPhone(), user.getUsername(), password, user.getName(), "surname", user.getAddress());
+    private static String get_SHA_256_SecurePassword(String passwordToHash,
+                                                     String salt) {
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(salt.getBytes());
+            byte[] bytes = md.digest(passwordToHash.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16)
+                        .substring(1));
+            }
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return generatedPassword;
     }
 }

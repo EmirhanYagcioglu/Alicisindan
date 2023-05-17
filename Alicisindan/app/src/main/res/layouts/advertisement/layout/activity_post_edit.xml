@@ -111,7 +111,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title2" />
 
-            <EditText
+
+            <Spinner
                 android:id="@+id/brand"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
@@ -123,9 +124,17 @@
                 android:inputType="text"
                 android:paddingHorizontal="@dimen/_16sdp"
                 android:textColor="@color/primary_text"
-                app:drawableEndCompat="@drawable/ic_down_arrow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title2" />
+
+            <View
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:background="@drawable/ic_down_arrow"
+                app:layout_constraintBottom_toBottomOf="@id/brand"
+                app:layout_constraintEnd_toEndOf="@id/brand"
+                app:layout_constraintTop_toTopOf="@id/brand" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -139,7 +148,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/brand" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/condition"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
@@ -150,12 +159,21 @@
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:maxLines="1"
                 android:maxLength="10"
+                android:maxLines="1"
                 android:paddingHorizontal="@dimen/_16sdp"
                 android:textColor="@color/primary_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/brand" />
+
+            <View
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:background="@drawable/ic_down_arrow"
+                app:layout_constraintBottom_toBottomOf="@id/condition"
+                app:layout_constraintEnd_toEndOf="@id/condition"
+                app:layout_constraintTop_toTopOf="@id/condition" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -165,6 +183,7 @@
                 android:fontFamily="@font/lato_bold"
                 android:text="@string/title"
                 android:textColor="@color/text_dark"
+                android:textCursorDrawable="@null"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/condition" />
@@ -180,8 +199,8 @@
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:maxLines="1"
                 android:maxLength="10"
+                android:maxLines="1"
                 android:paddingHorizontal="@dimen/_16sdp"
                 android:textColor="@color/primary_text"
                 app:layout_constraintStart_toStartOf="parent"
@@ -207,13 +226,15 @@
                 android:layout_marginTop="@dimen/_28sdp"
                 android:background="@drawable/background_edit_text_add_post"
                 android:fontFamily="@font/lato"
+                android:gravity="top"
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
                 android:maxLines="4"
-                android:gravity="top"
+                android:padding="@dimen/_12sdp"
                 android:paddingHorizontal="@dimen/_16sdp"
                 android:textColor="@color/primary_text"
+                android:textCursorDrawable="@null"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/productTitle" />
 
@@ -248,8 +269,9 @@
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:inputType="number"
-                android:maxLines="1"
                 android:maxLength="5"
+                android:textCursorDrawable="@null"
+                android:maxLines="1"
                 android:paddingHorizontal="@dimen/_16sdp"
                 android:textColor="@color/primary_text"
                 app:layout_constraintStart_toStartOf="parent"
@@ -292,27 +314,27 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/background_edit_text_add_post"
                     android:clipToOutline="true"
-                    android:scaleType="fitXY"
-                    android:background="@drawable/background_edit_text_add_post" />
+                    android:scaleType="fitXY" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/imagesRow1_2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/background_edit_text_add_post"
                     android:clipToOutline="true"
-                    android:scaleType="fitXY"
-                    android:background="@drawable/background_edit_text_add_post" />
+                    android:scaleType="fitXY" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/imagesRow1_3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/background_edit_text_add_post"
                     android:clipToOutline="true"
-                    android:scaleType="fitXY"
-                    android:background="@drawable/background_edit_text_add_post" />
+                    android:scaleType="fitXY" />
             </LinearLayout>
 
             <LinearLayout
@@ -330,29 +352,29 @@
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/imagesRow2_1"
                     android:layout_width="0dp"
-                    android:clipToOutline="true"
-                    android:scaleType="fitXY"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/background_edit_text_add_post" />
+                    android:background="@drawable/background_edit_text_add_post"
+                    android:clipToOutline="true"
+                    android:scaleType="fitXY" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/imagesRow2_2"
                     android:layout_width="0dp"
-                    android:clipToOutline="true"
-                    android:scaleType="fitXY"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/background_edit_text_add_post" />
+                    android:background="@drawable/background_edit_text_add_post"
+                    android:clipToOutline="true"
+                    android:scaleType="fitXY" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/imagesRow2_3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/background_edit_text_add_post"
                     android:clipToOutline="true"
-                    android:scaleType="fitXY"
-                    android:background="@drawable/background_edit_text_add_post" />
+                    android:scaleType="fitXY" />
             </LinearLayout>
 
             <LinearLayout
@@ -370,29 +392,29 @@
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/imagesRow3_1"
                     android:layout_width="0dp"
-                    android:clipToOutline="true"
-                    android:scaleType="fitXY"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/background_edit_text_add_post" />
+                    android:background="@drawable/background_edit_text_add_post"
+                    android:clipToOutline="true"
+                    android:scaleType="fitXY" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/imagesRow3_2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/background_edit_text_add_post"
                     android:clipToOutline="true"
-                    android:scaleType="fitXY"
-                    android:background="@drawable/background_edit_text_add_post" />
+                    android:scaleType="fitXY" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/imagesRow3_3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/background_edit_text_add_post"
                     android:clipToOutline="true"
-                    android:scaleType="fitXY"
-                    android:background="@drawable/background_edit_text_add_post" />
+                    android:scaleType="fitXY" />
             </LinearLayout>
 
             <View
@@ -419,6 +441,7 @@
                 android:id="@+id/location"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
+                android:textCursorDrawable="@null"
                 android:layout_marginTop="@dimen/_36sdp"
                 android:background="@drawable/background_edit_text_add_post"
                 android:ellipsize="end"
@@ -426,8 +449,8 @@
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:maxLines="1"
                 android:maxLength="10"
+                android:maxLines="1"
                 android:paddingHorizontal="@dimen/_16sdp"
                 android:textColor="@color/primary_text"
                 app:layout_constraintStart_toStartOf="parent"
@@ -449,7 +472,6 @@
                 android:background="@drawable/background_main_button"
                 android:fontFamily="@font/lato_bold"
                 android:text="Post Now"
-                android:onClick="getInformation"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16ssp"
