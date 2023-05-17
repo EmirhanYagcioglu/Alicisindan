@@ -3,6 +3,9 @@ package com.cankutboratuncer.alicisindan.activities.ui.main.home.pages;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -10,23 +13,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cankutboratuncer.alicisindan.R;
-import com.cankutboratuncer.alicisindan.activities.data.database.AdvertisementTest;
 import com.cankutboratuncer.alicisindan.activities.data.database.CategoryTest;
-import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementFragment;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementAdapter;
+import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementFragment;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementInterface;
-import com.cankutboratuncer.alicisindan.activities.utilities.Advertisement;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.PostAddCategoryActivity;
-import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
-import com.cankutboratuncer.alicisindan.activities.utilities.Category;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryFragment;
+import com.cankutboratuncer.alicisindan.activities.utilities.Advertisement;
+import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -88,29 +90,26 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        for ( int i = 0; i < listings.length; i++ )
-        {
-          Listing listing = listings[i];
-          title = listing.getTitle();
-          description = listing.getDescription();
+        for (int i = 0; i < listings.length; i++) {
+            Listing listing = listings[i];
+            title = listing.getTitle();
+            description = listing.getDescription();
             try {
                 image = listing.getListingsFirstImage();
-            } catch (Exception e) {
-                Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                        R.drawable.a_logo_main);
-                image = encodeImage(icon);
-            } finally {
-                if ( image == null )
-                {
-                    Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.a_logo_main);
+                if(image == null){
+                    Bitmap icon = ((BitmapDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.img_baby, null)).getBitmap();
                     image = encodeImage(icon);
                 }
-
+            } catch (Exception e) {
+            } finally {
+                if(image == null){
+                    Bitmap icon = ((BitmapDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.img_baby, null)).getBitmap();
+                    image = encodeImage(icon);
+                }
             }
             price = listing.getPrice();
-          ID = listing.getID();
-          advertisements.add( new Advertisement(title, description, image, price, ID));
+            ID = listing.getID();
+            advertisements.add(new Advertisement(title, description, image, price, ID));
         }
 
         categories = CategoryTest.categories;
@@ -146,6 +145,28 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         loadFragment(fragment);
     }
 
+    public static Bitmap drawableToBitmap (Drawable drawable) {
+        Bitmap bitmap = null;
+
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if(bitmapDrawable.getBitmap() != null) {
+                return bitmapDrawable.getBitmap();
+            }
+        }
+
+        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
     private String encodeImage(Bitmap bitmap) {
         int previewWidth = 150;
         int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
@@ -155,7 +176,6 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         byte[] bytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
-
 
 
 //    public void createSearchBar(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -195,21 +215,19 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
             String price;
             String ID;
             listings = Listing.findListings("", "", "", text, "", "", "", "", "", "", "", "10");
-            for ( int i = 0; i < listings.length; i++ )
-            {
+            for (int i = 0; i < listings.length; i++) {
                 Listing listing = listings[i];
                 title = listing.getTitle();
                 description = listing.getDescription();
                 image = "0";
                 price = listing.getPrice();
                 ID = listing.getID();
-                newAdvertisements.add( new Advertisement(title, description, image, price, ID));
+                newAdvertisements.add(new Advertisement(title, description, image, price, ID));
             }
             recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(this.getContext(), 2));
             AdvertisementAdapter advertisementAdapter = new AdvertisementAdapter(newAdvertisements, this);
             recyclerViewForAdvertisements.setAdapter(advertisementAdapter);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
