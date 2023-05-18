@@ -84,7 +84,8 @@
             android:textSize="@dimen/_16ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <TextView
             android:id="@+id/homeFragment_textView_seeAll"
@@ -117,6 +118,7 @@
         android:id="@+id/homeFragment_textView_featured"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         android:layout_margin="@dimen/_12sdp"
         android:fontFamily="@font/lato"
         android:text="@string/featured"
@@ -134,6 +136,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeFragment_textView_featured" />
 
@@ -150,5 +153,16 @@
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="@id/homeFragment_recyclerView_advertisements"
+        app:layout_constraintTop_toTopOf="@id/homeFragment_recyclerView_advertisements"
+        app:layout_constraintEnd_toEndOf="@id/homeFragment_recyclerView_advertisements"
+        app:layout_constraintStart_toStartOf="@id/homeFragment_recyclerView_advertisements"
+        android:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
