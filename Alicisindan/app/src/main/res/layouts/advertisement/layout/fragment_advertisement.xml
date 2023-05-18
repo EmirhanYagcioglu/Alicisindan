@@ -29,17 +29,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:maxHeight="@dimen/_320sdp"
+                android:src="@drawable/product_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/product_image" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <FrameLayout
                 android:id="@+id/layoutMessage"
@@ -64,17 +63,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginTop="20dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/lato"
                 android:maxLines="3"
                 android:paddingHorizontal="@dimen/_4sdp"
+                android:text="Astylish Women Open Front Long Sleeve Chunky Knit Cardigan"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/_18ssp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageProduct"
-                android:text="Astylish Women Open Front Long Sleeve Chunky Knit Cardigan" />
+                app:layout_constraintTop_toBottomOf="@id/imageProduct" />
 
             <TextView
                 android:id="@+id/productPrice"
@@ -85,11 +85,11 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/lato_bold"
                 android:maxLines="3"
+                android:text="$89.99"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/_24ssp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/productTitle"
-                android:text="$89.99" />
+                app:layout_constraintTop_toBottomOf="@id/productTitle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -121,20 +121,20 @@
                 android:id="@+id/productDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginVertical="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:ellipsize="end"
                 android:fontFamily="@font/lato"
                 android:maxLines="3"
                 android:paddingHorizontal="@dimen/_4sdp"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/_14ssp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/productDetailsTitle"
                 android:text="Women's Casual V-Neck Pullover Sweater Long Sleeved
 Sweater Top with High Low Hemline is going to be the
 newest staple in your wardrobe! Living up to its namesake,
-this sweater is unbelievably soft, li..." />
+this sweater is unbelievably soft, li..."
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/productDetailsTitle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -168,59 +168,57 @@ this sweater is unbelievably soft, li..." />
                 android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginVertical="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:ellipsize="end"
                 android:fontFamily="@font/lato"
                 android:maxLines="3"
                 android:paddingHorizontal="@dimen/_4sdp"
+                android:text="Ankara, Çankaya"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/_14ssp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/locationTitle"
-                android:text="Ankara, Çankaya" />
+                app:layout_constraintTop_toBottomOf="@id/locationTitle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/relatedProductsCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:paddingHorizontal="@dimen/_12sdp"
-        android:paddingVertical="@dimen/_16sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/locationCard">
-
-        <TextView
-            android:id="@+id/relatedProductsTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:fontFamily="@font/lato"
-            android:paddingHorizontal="@dimen/_4sdp"
-            android:text="@string/products_related_to_this_item"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/_13ssp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/relatedProducts"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/relatedProductsCard"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:scrollbars="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:paddingHorizontal="@dimen/_12sdp"
+            android:paddingVertical="@dimen/_16sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relatedProductsTitle" />
+            app:layout_constraintTop_toBottomOf="@id/locationCard">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/relatedProductsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:fontFamily="@font/lato"
+                android:paddingHorizontal="@dimen/_4sdp"
+                android:text="@string/products_related_to_this_item"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/relatedProducts"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:scrollbars="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relatedProductsTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
-
-

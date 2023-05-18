@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -25,7 +26,17 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
 
     private static final String ADVERTISEMENT_ID = "Advertisement ID";
     ArrayList<com.cankutboratuncer.alicisindan.activities.utilities.Advertisement> advertisements;
-    private int advertisementID;
+    private String advertisementID;
+    private String advertisementTitle;
+    private String advertisementPrice;
+    private String advertisementBrand;
+
+    private String advertisementDescription;
+    private String advertisementLocation;
+    private String advertisementImage;
+    private String userID;
+    private String username;
+
     private ArrayList<Integer> images = new ArrayList<>();
     private LocalSave localSave;
     public AdvertisementFragment() {
@@ -45,7 +56,7 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            advertisementID = getArguments().getInt(ADVERTISEMENT_ID);
+            advertisementID = "" + getArguments().getInt(ADVERTISEMENT_ID);
         }
         localSave = new LocalSave(getContext());
     }
@@ -54,28 +65,38 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_advertisement, container, false);
+        Intent intent = getActivity().getIntent();
+        advertisementID = intent.getStringExtra("ID");
+        advertisementTitle = intent.getStringExtra("title");
+        advertisementPrice = intent.getStringExtra("price");
+        advertisementDescription = intent.getStringExtra("description");
+        advertisementLocation = intent.getStringExtra("location");
+        advertisementImage = intent.getStringExtra("image");
+        advertisementBrand = intent.getStringExtra("brand");
+        userID = intent.getStringExtra("userID");
+        username = intent.getStringExtra("username");
+        TextView productTitle = view.findViewById(R.id.productTitle);
+        productTitle.setText(advertisementTitle);
+        TextView productPrice = view.findViewById(R.id.productPrice);
+        productPrice.setText(advertisementPrice);
+        TextView productDetails = view.findViewById(R.id.productDetails);
+        productDetails.setText(advertisementDescription);
+        TextView productLocation = view.findViewById(R.id.location);
+        productLocation.setText(advertisementLocation);
 
         view.findViewById(R.id.buttonMessage).setOnClickListener(v -> {
 
             if (localSave.getBoolean(Constants.KEY_IS_SIGNED_IN) || true){
                 Advertisement advertisement = new Advertisement();
 
-                advertisement.title = "Samsung Galaxy Tab S8 Ultra | Az Kullanılmış";
-                advertisement.userId = "123";
-                advertisement.userName = "Bora Tuncer";
-                advertisement.id = ADVERTISEMENT_ID;
-                advertisement.location = "Ankara/ Çankaya";
-                advertisement.price = "$123.1";
-                advertisement.token = "ads";
-                advertisement.image = "1231231";
 
-                localSave.putString(Constants.KEY_ADVERTISEMENT_TITLE, advertisement.title);
-                localSave.putString(Constants.KEY_ADVERTISEMENT_USERID, advertisement.userId);
-                localSave.putString(Constants.KEY_ADVERTISEMENT_USERNAME, advertisement.userName);
-                localSave.putString(Constants.KEY_ADVERTISEMENT_ID, advertisement.id);
-                localSave.putString(Constants.KEY_ADVERTISEMENT_LOCATION, advertisement.location);
-                localSave.putString(Constants.KEY_ADVERTISEMENT_PRICE, advertisement.price);
-                localSave.putString(Constants.KEY_ADVERTISEMENT_TOKEN, advertisement.token);
+                localSave.putString(Constants.KEY_ADVERTISEMENT_TITLE, advertisementTitle);
+                localSave.putString(Constants.KEY_ADVERTISEMENT_USERID, userID);
+                localSave.putString(Constants.KEY_ADVERTISEMENT_USERNAME, username);
+                localSave.putString(Constants.KEY_ADVERTISEMENT_ID, advertisementID);
+                localSave.putString(Constants.KEY_ADVERTISEMENT_LOCATION, advertisementLocation);
+                localSave.putString(Constants.KEY_ADVERTISEMENT_PRICE, advertisementPrice);
+                localSave.putString(Constants.KEY_ADVERTISEMENT_TOKEN, "cnkd");
 
                 startActivity(new Intent(getContext(), ChatActivity.class));
             } else {
