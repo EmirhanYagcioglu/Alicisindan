@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cankutboratuncer.alicisindan.activities.ui.messaging.models.ChatMessage;
+import com.cankutboratuncer.alicisindan.activities.utilities.ChatMessage;
 import com.cankutboratuncer.alicisindan.databinding.ItemContainerForumCommentBinding;
 import com.cankutboratuncer.alicisindan.databinding.ItemContainerForumCommentSelfBinding;
-import com.cankutboratuncer.alicisindan.databinding.ItemContainerReceivedMessageBinding;
-import com.cankutboratuncer.alicisindan.databinding.ItemContainerSentMessageBinding;
 
 import java.util.List;
 

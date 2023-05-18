@@ -10,10 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cankutboratuncer.alicisindan.activities.ui.messaging.listeners.ConversionListener;
-import com.cankutboratuncer.alicisindan.activities.ui.messaging.models.ChatMessage;
+import com.cankutboratuncer.alicisindan.activities.utilities.Advertisement;
+import com.cankutboratuncer.alicisindan.activities.utilities.ChatMessage;
 
-import com.cankutboratuncer.alicisindan.activities.ui.messaging.models.User;
 import com.cankutboratuncer.alicisindan.databinding.ItemContainerRecentConversationsBinding;
+
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.List;
 
@@ -54,15 +56,24 @@ public class RecentConversationAdapter extends RecyclerView.Adapter<RecentConver
         }
 
         void setData(ChatMessage chatMessage) {
-            binding.imageProfile.setImageBitmap(getConversionImage(chatMessage.conversionImage));
-            binding.textName.setText(chatMessage.conversionName);
-            binding.textRecentMessage.setText(chatMessage.message);
+//            binding.imageProfile.setImageBitmap(getConversionImage(chatMessage.conversionImage));
+            binding.description.setText(chatMessage.productDescription);
+            binding.username.setText(chatMessage.conversionName);
+            binding.chat.setText(chatMessage.message);
             binding.getRoot().setOnClickListener(v -> {
-                User user = new User();
-                user.id = chatMessage.conversionId;
-                user.name = chatMessage.conversionName;
-                user.image = chatMessage.conversionImage;
-                conversionListener.onConversionClicked(user);
+                String productTitle = chatMessage.productTitle;
+                String productDescription = chatMessage.productDescription;
+                String userId = chatMessage.userId;
+                String userName = chatMessage.userName;
+                String productId = chatMessage.productId;
+                String location = chatMessage.location;
+                String price = chatMessage.price;
+                String image = chatMessage.image;
+                String brand = chatMessage.brand;
+
+                Advertisement advertisement = new Advertisement(productTitle, productDescription, image, price, productId, location,userId, userName, brand);
+                chatMessage.loadAdvertisement(advertisement);
+                conversionListener.onConversionClicked(chatMessage);
             });
         }
     }

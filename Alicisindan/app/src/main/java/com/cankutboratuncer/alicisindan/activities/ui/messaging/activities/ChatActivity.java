@@ -4,12 +4,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.cankutboratuncer.alicisindan.activities.ui.messaging.adapters.ChatAdapter;
-import com.cankutboratuncer.alicisindan.activities.ui.messaging.models.Advertisement;
-import com.cankutboratuncer.alicisindan.activities.ui.messaging.models.ChatMessage;
+import com.cankutboratuncer.alicisindan.activities.utilities.ChatMessage;
+import com.cankutboratuncer.alicisindan.activities.utilities.Advertisement;
 import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivityChatBinding;
@@ -21,6 +24,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.checkerframework.checker.units.qual.C;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,13 +35,14 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class ChatActivity extends BaseActivity {
+public class ChatActivity extends AppCompatActivity {
     private ActivityChatBinding binding;
-    private Advertisement advertisement;
+    private ChatMessage chatMessage;
     private List<ChatMessage> chatMessages;
     private ChatAdapter chatAdapter;
     private LocalSave localSave;
     private FirebaseFirestore database;
+    private Advertisement advertisement;
     private String conversionId = null;
 
     @Override
@@ -59,23 +65,34 @@ public class ChatActivity extends BaseActivity {
     }
 
     private void sendMessage() {
-
         HashMap<String, Object> message = new HashMap<>();
         message.put(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID));
-        message.put(Constants.KEY_RECEIVER_ID, advertisement.id);
+        message.put(Constants.KEY_RECEIVER_ID, chatMessage.receiverId);
         message.put(Constants.KEY_MESSAGE, binding.messageInputField.getText().toString());
+        message.put(Constants.KEY_ADVERTISEMENT_ID, chatMessage.getProductId());
         message.put(Constants.KEY_TIMESTAMP, new Date());
-        database.collection(Constants.KEY_COLLECTION_CHAT).add(message);
+        database.collection(Constants.KEY_COLLECTION_ADVERTISEMENT_CHAT).add(message);
         if (conversionId != null) {
             updateConversion(binding.messageInputField.getText().toString());
         } else {
             HashMap<String, Object> conversion = new HashMap<>();
             conversion.put(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID));
             conversion.put(Constants.KEY_SENDER_NAME, localSave.getString(Constants.KEY_USER_NAME));
-            conversion.put(Constants.KEY_SENDER_IMAGE, localSave.getString(Constants.KEY_IMAGE));
-            conversion.put(Constants.KEY_RECEIVER_ID, advertisement.id);
-            conversion.put(Constants.KEY_RECEIVER_NAME, advertisement.title);
-            //conversion.put(Constants.KEY_RECEIVER_IMAGE, advertisement.image);
+            conversion.put(Constants.KEY_RECEIVER_ID, chatMessage.getReceiverId());
+            conversion.put(Constants.KEY_RECEIVER_NAME, chatMessage.getUserName());
+
+            conversion.put(Constants.KEY_ADVERTISEMENT_TITLE, chatMessage.getProductTitle());
+            conversion.put(Constants.KEY_ADVERTISEMENT_DESCRIPTION, chatMessage.getProductDescription());
+            conversion.put(Constants.KEY_ADVERTISEMENT_ID, chatMessage.getProductId());
+            conversion.put(Constants.KEY_ADVERTISEMENT_LOCATION, chatMessage.getLocation());
+            conversion.put(Constants.KEY_ADVERTISEMENT_USERNAME, chatMessage.getUserName());
+            conversion.put(Constants.KEY_ADVERTISEMENT_USERID, chatMessage.getUserId());
+            conversion.put(Constants.KEY_ADVERTISEMENT_PRICE, chatMessage.getPrice());
+            conversion.put(Constants.KEY_ADVERTISEMENT_IMAGE, chatMessage.getImage());
+            conversion.put(Constants.KEY_ADVERTISEMENT_BRAND, chatMessage.getBrand());
+
+//            conversion.put(Constants.KEY_SENDER_IMAGE, localSave.getString(Constants.KEY_IMAGE));
+//            conversion.put(Constants.KEY_RECEIVER_IMAGE, advertisement.image);
             conversion.put(Constants.KEY_LAST_MESSAGE, binding.messageInputField.getText().toString());
             conversion.put(Constants.KEY_TIMESTAMP, new Date());
             addConversion(conversion);
@@ -165,14 +182,31 @@ public class ChatActivity extends BaseActivity {
     }*/
 
     private void listenMessages() {
-        database.collection(Constants.KEY_COLLECTION_CHAT)
-                .whereEqualTo(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID))
-                .whereEqualTo(Constants.KEY_RECEIVER_ID, advertisement.id)
-                .addSnapshotListener(eventListener);
-        database.collection(Constants.KEY_COLLECTION_CHAT)
-                .whereEqualTo(Constants.KEY_SENDER_ID, advertisement.id)
-                .whereEqualTo(Constants.KEY_RECEIVER_ID, localSave.getString(Constants.KEY_USER_ID))
-                .addSnapshotListener(eventListener);
+        if(chatMessage.userId.equals(localSave.getString(Constants.KEY_USER_ID))){
+            database.collection(Constants.KEY_COLLECTION_ADVERTISEMENT_CHAT)
+                    .whereEqualTo(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID))
+                    .whereEqualTo(Constants.KEY_RECEIVER_ID, chatMessage.receiverId)
+                    .whereEqualTo(Constants.KEY_ADVERTISEMENT_ID, chatMessage.getProductId())
+                    .addSnapshotListener(eventListener);
+
+            database.collection(Constants.KEY_COLLECTION_ADVERTISEMENT_CHAT)
+                    .whereEqualTo(Constants.KEY_SENDER_ID, chatMessage.receiverId)
+                    .whereEqualTo(Constants.KEY_RECEIVER_ID, localSave.getString(Constants.KEY_USER_ID))
+                    .whereEqualTo(Constants.KEY_ADVERTISEMENT_ID, chatMessage.getProductId())
+                    .addSnapshotListener(eventListener);
+        } else {
+            database.collection(Constants.KEY_COLLECTION_ADVERTISEMENT_CHAT)
+                    .whereEqualTo(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID))
+                    .whereEqualTo(Constants.KEY_RECEIVER_ID, chatMessage.receiverId)
+                    .whereEqualTo(Constants.KEY_ADVERTISEMENT_ID, chatMessage.getProductId())
+                    .addSnapshotListener(eventListener);
+
+            database.collection(Constants.KEY_COLLECTION_ADVERTISEMENT_CHAT)
+                    .whereEqualTo(Constants.KEY_SENDER_ID, chatMessage.receiverId)
+                    .whereEqualTo(Constants.KEY_RECEIVER_ID, localSave.getString(Constants.KEY_USER_ID))
+                    .whereEqualTo(Constants.KEY_ADVERTISEMENT_ID, chatMessage.getProductId())
+                    .addSnapshotListener(eventListener);
+        }
     }
 
     private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
@@ -189,6 +223,7 @@ public class ChatActivity extends BaseActivity {
                     chatMessage.message = documentChange.getDocument().getString(Constants.KEY_MESSAGE);
                     chatMessage.dateTime = getReadableDateTime(documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP));
                     chatMessage.dateObject = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);
+                    chatMessage.loadAdvertisement(advertisement);
                     chatMessages.add(chatMessage);
                 }
             }
@@ -219,21 +254,35 @@ public class ChatActivity extends BaseActivity {
     private void loadReceiverDetails() {
 
         loadAdvertisementData();
-        binding.productCardTitle.setText(advertisement.title);
-        binding.productCardPrice.setText(advertisement.price);
-        binding.productCardLocation.setText(advertisement.location);
-        binding.userCardName.setText(advertisement.userName);
+        binding.productCardTitle.setText(chatMessage.getProductTitle());
+        binding.productCardPrice.setText(chatMessage.getPrice());
+        binding.productCardLocation.setText(chatMessage.getLocation());
+        binding.userCardName.setText(chatMessage.getUserName());
+        binding.productCardImage.setImageBitmap(Advertisement.decodeImage(chatMessage.getImage()));
     }
 
     private void loadAdvertisementData(){
-        advertisement = new Advertisement();
-        advertisement.title = localSave.getString(Constants.KEY_ADVERTISEMENT_TITLE);
-        advertisement.userId = localSave.getString(Constants.KEY_ADVERTISEMENT_USERID);
-        advertisement.userName = localSave.getString(Constants.KEY_ADVERTISEMENT_USERNAME);
-        advertisement.id = localSave.getString(Constants.KEY_ADVERTISEMENT_ID);
-        advertisement.location = localSave.getString(Constants.KEY_ADVERTISEMENT_LOCATION);
-        advertisement.price = localSave.getString(Constants.KEY_ADVERTISEMENT_PRICE);
-        advertisement.token = localSave.getString(Constants.KEY_ADVERTISEMENT_TOKEN);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            String title = bundle.getString(Constants.KEY_ADVERTISEMENT_TITLE);
+            String description = bundle.getString(Constants.KEY_ADVERTISEMENT_TITLE);
+            String userId = bundle.getString(Constants.KEY_ADVERTISEMENT_USERID);
+            String userName = bundle.getString(Constants.KEY_ADVERTISEMENT_USERNAME);
+            String id = bundle.getString(Constants.KEY_ADVERTISEMENT_ID);
+            String location = bundle.getString(Constants.KEY_ADVERTISEMENT_LOCATION);
+            String price = bundle.getString(Constants.KEY_ADVERTISEMENT_PRICE);
+            String image = bundle.getString(Constants.KEY_ADVERTISEMENT_IMAGE);
+            String brand = bundle.getString(Constants.KEY_ADVERTISEMENT_LOCATION);
+            String senderId = bundle.getString(Constants.KEY_SENDER_ID);
+            String receiverId = bundle.getString(Constants.KEY_RECEIVER_ID);
+
+            advertisement = new Advertisement(title, description, image, price, id, location, userId, userName, brand);
+            chatMessage = new ChatMessage();
+            chatMessage.senderId = senderId;
+            chatMessage.receiverId = receiverId;
+            chatMessage.loadAdvertisement(advertisement);
+        }
     }
 
     private void setListeners() {
@@ -246,23 +295,23 @@ public class ChatActivity extends BaseActivity {
     }
 
     private void addConversion(HashMap<String, Object> conversion) {
-        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).add(conversion).addOnSuccessListener(documentReference -> conversionId = documentReference.getId());
+        database.collection(Constants.KEY_COLLECTION_ADVERTISEMENTS).add(conversion).addOnSuccessListener(documentReference -> conversionId = documentReference.getId());
     }
 
     private void updateConversion(String message) {
-        DocumentReference documentReference = database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).document(conversionId);
+        DocumentReference documentReference = database.collection(Constants.KEY_COLLECTION_ADVERTISEMENTS).document(conversionId);
         documentReference.update(Constants.KEY_LAST_MESSAGE, message, Constants.KEY_TIMESTAMP, new Date());
     }
 
     private void checkForConversion() {
         if (chatMessages.size() != 0) {
-            checkForConversionRemotely(localSave.getString(Constants.KEY_USER_ID), advertisement.id);
-            checkForConversionRemotely(advertisement.id, localSave.getString(Constants.KEY_USER_ID));
+            checkForConversionRemotely(localSave.getString(Constants.KEY_USER_ID), chatMessage.getUserId());
+            checkForConversionRemotely(chatMessage.getUserId(), localSave.getString(Constants.KEY_USER_ID));
         }
     }
 
     private void checkForConversionRemotely(String senderId, String receiverId) {
-        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).whereEqualTo(Constants.KEY_SENDER_ID, senderId).whereEqualTo(Constants.KEY_RECEIVER_ID, receiverId).get().addOnCompleteListener(conversionOnCompleteListener);
+        database.collection(Constants.KEY_COLLECTION_ADVERTISEMENTS).whereEqualTo(Constants.KEY_SENDER_ID, senderId).whereEqualTo(Constants.KEY_RECEIVER_ID, receiverId).get().addOnCompleteListener(conversionOnCompleteListener);
     }
 
     private final OnCompleteListener<QuerySnapshot> conversionOnCompleteListener = task -> {

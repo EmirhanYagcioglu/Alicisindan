@@ -1,5 +1,6 @@
 package com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement;
 
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,7 +21,7 @@ import com.cankutboratuncer.alicisindan.R;
 import com.cankutboratuncer.alicisindan.activities.data.database.AdvertisementTest;
 import com.cankutboratuncer.alicisindan.activities.ui.login.SignInActivity;
 import com.cankutboratuncer.alicisindan.activities.ui.messaging.activities.ChatActivity;
-import com.cankutboratuncer.alicisindan.activities.ui.messaging.models.Advertisement;
+import com.cankutboratuncer.alicisindan.activities.utilities.Advertisement;
 import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 
@@ -30,21 +31,14 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
 
     private static final String ADVERTISEMENT_ID = "Advertisement ID";
     ArrayList<com.cankutboratuncer.alicisindan.activities.utilities.Advertisement> advertisements;
+
+    private View view;
+
+    private Advertisement advertisement;
     private String advertisementID;
-    private String advertisementTitle;
-    private String advertisementPrice;
-    private String advertisementBrand;
-
-    private String advertisementDescription;
-    private String advertisementLocation;
-    private String advertisementImage;
-    private String userID;
-    private String username;
-
     private ArrayList<Integer> images = new ArrayList<>();
     private LocalSave localSave;
     public AdvertisementFragment() {
-
     }
 
 
@@ -59,6 +53,7 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             advertisementID = "" + getArguments().getInt(ADVERTISEMENT_ID);
         }
@@ -68,54 +63,38 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_advertisement, container, false);
+        view = inflater.inflate(R.layout.fragment_advertisement, container, false);
+        initListeners();
+
+
         Bundle args = getArguments();
         if (args != null) {
-//            String myString = args.getString("ID");
             advertisementID = args.getString("ID");
-            advertisementTitle = args.getString("title");
-            advertisementPrice = "$" + args.getString("price");
-            advertisementDescription = args.getString("description");
-            advertisementLocation = args.getString("location");
-            advertisementImage = args.getString("image");
-            advertisementBrand = args.getString("brand");
-            userID = args.getString("userID");
-            username = args.getString("username");
-            // Use the passed string as needed
+            String advertisementTitle = args.getString("title");
+            String advertisementPrice = "$" + args.getString("price");
+            String advertisementDescription = args.getString("description");
+            String advertisementLocation = args.getString("location");
+            String advertisementImage = args.getString("image");
+            String advertisementBrand = args.getString("brand");
+            String userID = args.getString("userID");
+            String username = args.getString("username");
+            advertisement = new Advertisement(advertisementTitle,advertisementDescription, advertisementImage, advertisementPrice, advertisementID, advertisementLocation, userID, username, advertisementBrand);
         }
 
+//        if(advertisement.getUserID().equals(localSave.getString(Constants.KEY_USER_ID))){
+//            view.findViewById(R.id.layoutMessage).setVisibility(View.GONE);
+//        }
+
         TextView productTitle = view.findViewById(R.id.productTitle);
-        productTitle.setText(advertisementTitle);
+        productTitle.setText(advertisement.getTitle());
         TextView productPrice = view.findViewById(R.id.productPrice);
-        productPrice.setText(advertisementPrice);
+        productPrice.setText(advertisement.getPrice());
         TextView productDetails = view.findViewById(R.id.productDetails);
-        productDetails.setText(advertisementDescription);
+        productDetails.setText(advertisement.getDescription());
         TextView productLocation = view.findViewById(R.id.location);
-        productLocation.setText(advertisementLocation);
+        productLocation.setText(advertisement.getLocation());
         ImageView productImage = view.findViewById(R.id.imageProduct);
-        productImage.setImageBitmap(decodeImage(advertisementImage));
-        view.findViewById(R.id.buttonMessage).setOnClickListener(v -> {
-
-            if (localSave.getBoolean(Constants.KEY_IS_SIGNED_IN) || true){
-                Advertisement advertisement = new Advertisement();
-
-                localSave.putString(Constants.KEY_ADVERTISEMENT_TITLE, advertisementTitle);
-                localSave.putString(Constants.KEY_ADVERTISEMENT_USERID, userID);
-                localSave.putString(Constants.KEY_ADVERTISEMENT_USERNAME, username);
-                localSave.putString(Constants.KEY_ADVERTISEMENT_ID, advertisementID);
-                localSave.putString(Constants.KEY_ADVERTISEMENT_LOCATION, advertisementLocation);
-                localSave.putString(Constants.KEY_ADVERTISEMENT_PRICE, advertisementPrice);
-                localSave.putString(Constants.KEY_ADVERTISEMENT_TOKEN, "cnkd");
-
-                startActivity(new Intent(getContext(), ChatActivity.class));
-            } else {
-                showToast("You have to sign in first");
-                localSave.putBoolean(Constants.KEY_IS_USER_SKIP, false);
-                startActivity(new Intent(getContext(), SignInActivity.class));
-            }
-
-
-        });
+        productImage.setImageBitmap(decodeImage(advertisement.getImage()));
 
         LinearLayoutManager horizontalRecyclerViewLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false) {
             @Override
@@ -125,8 +104,6 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
                 return true;
             }
         };
-
-
 
 
         RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.relatedProducts);
@@ -165,6 +142,29 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
         return view;
     }
 
+    public void initListeners(){
+        view.findViewById(R.id.buttonMessage).setOnClickListener(v -> {
+            if (localSave.getBoolean(Constants.KEY_IS_SIGNED_IN)){
+                Bundle args = new Bundle();
+                args.putString(Constants.KEY_ADVERTISEMENT_TITLE, advertisement.getTitle());
+                args.putString(Constants.KEY_ADVERTISEMENT_USERID, advertisement.getUserID());
+                args.putString(Constants.KEY_ADVERTISEMENT_USERNAME, advertisement.getUsername());
+                args.putString(Constants.KEY_ADVERTISEMENT_ID, advertisement.getAdvertisementID());
+                args.putString(Constants.KEY_ADVERTISEMENT_LOCATION, advertisement.getLocation());
+                args.putString(Constants.KEY_ADVERTISEMENT_PRICE, advertisement.getPrice());
+                args.putString(Constants.KEY_ADVERTISEMENT_IMAGE, advertisement.getImage());
+                args.putString(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID));
+                args.putString(Constants.KEY_RECEIVER_ID, advertisement.getUserID());
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                intent.putExtras(args);
+                startActivity(intent);
+            } else {
+                showToast("You have to sign in first");
+                localSave.putBoolean(Constants.KEY_IS_USER_SKIP, false);
+                startActivity(new Intent(getContext(), SignInActivity.class));
+            }
+        });
+    }
     void loadFragment(Fragment fragment) {
         //to attach fragment
         getParentFragmentManager().beginTransaction().replace(R.id.mainActivity_frameLayout_main, fragment).addToBackStack(null).commit();

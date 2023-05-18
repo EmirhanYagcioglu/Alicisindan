@@ -4,14 +4,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cankutboratuncer.alicisindan.activities.ui.messaging.models.Advertisement;
-import com.cankutboratuncer.alicisindan.activities.ui.messaging.models.ChatMessage;
+import com.cankutboratuncer.alicisindan.activities.utilities.ChatMessage;
+import com.cankutboratuncer.alicisindan.activities.utilities.Advertisement;
 import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivityForumChatBinding;
@@ -53,14 +52,15 @@ public class ForumChatActivity extends AppCompatActivity {
     }
 
     private void loadAdvertisementData() {
-        advertisement = new Advertisement();
-        advertisement.title = "aDLASJDLAKSDJa";
-        advertisement.userId = "123";
-        advertisement.userName = "aDLASJDLAKSDJa";
-        advertisement.id = "Advertisement ID";
-        advertisement.location = "aDLASJDLAKSDJa";
-        advertisement.price = "123";
-        advertisement.token = "123123";
+
+        String title = "aDLASJDLAKSDJa";
+        String userId = "123";
+        String userName = "aDLASJDLAKSDJa";
+        String id = "Advertisement ID";
+        String location = "aDLASJDLAKSDJa";
+        String price = "123";
+        String token = "123123";
+        advertisement = new Advertisement("", "", "", "", "", "", "", "","");
     }
 
     private void init() {
@@ -83,10 +83,10 @@ public class ForumChatActivity extends AppCompatActivity {
     private void listenMessages() {
         database.collection(Constants.KEY_COLLECTION_CHAT)
                 .whereEqualTo(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID))
-                .whereEqualTo(Constants.KEY_RECEIVER_ID, advertisement.id)
+                .whereEqualTo(Constants.KEY_RECEIVER_ID, advertisement.getAdvertisementID())
                 .addSnapshotListener(eventListener);
         database.collection(Constants.KEY_COLLECTION_CHAT)
-                .whereEqualTo(Constants.KEY_SENDER_ID, advertisement.id)
+                .whereEqualTo(Constants.KEY_SENDER_ID, advertisement.getAdvertisementID())
                 .whereEqualTo(Constants.KEY_RECEIVER_ID, localSave.getString(Constants.KEY_USER_ID))
                 .addSnapshotListener(eventListener);
     }
@@ -106,8 +106,8 @@ public class ForumChatActivity extends AppCompatActivity {
 
     private void checkForConversion() {
         if (chatMessages.size() != 0) {
-            checkForConversionRemotely(localSave.getString(Constants.KEY_USER_ID), advertisement.id);
-            checkForConversionRemotely(advertisement.id, localSave.getString(Constants.KEY_USER_ID));
+            checkForConversionRemotely(localSave.getString(Constants.KEY_USER_ID), advertisement.getAdvertisementID());
+            checkForConversionRemotely(advertisement.getAdvertisementID(), localSave.getString(Constants.KEY_USER_ID));
         }
     }
 
@@ -125,7 +125,7 @@ public class ForumChatActivity extends AppCompatActivity {
     private void sendMessage() {
         HashMap<String, Object> message = new HashMap<>();
         message.put(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID));
-        message.put(Constants.KEY_RECEIVER_ID, advertisement.id);
+        message.put(Constants.KEY_RECEIVER_ID, advertisement.getAdvertisementID());
 //        message.put(Constants.KEY_MESSAGE, binding.messageInputField.getText().toString());
         message.put(Constants.KEY_MESSAGE, "Hello");
         message.put(Constants.KEY_TIMESTAMP, new Date());
@@ -139,8 +139,8 @@ public class ForumChatActivity extends AppCompatActivity {
             conversion.put(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID));
             conversion.put(Constants.KEY_SENDER_NAME, localSave.getString(Constants.KEY_USER_NAME));
             conversion.put(Constants.KEY_SENDER_IMAGE, localSave.getString(Constants.KEY_IMAGE));
-            conversion.put(Constants.KEY_RECEIVER_ID, advertisement.id);
-            conversion.put(Constants.KEY_RECEIVER_NAME, advertisement.title);
+            conversion.put(Constants.KEY_RECEIVER_ID, advertisement.getAdvertisementID());
+            conversion.put(Constants.KEY_RECEIVER_NAME, advertisement.getTitle());
             //conversion.put(Constants.KEY_RECEIVER_IMAGE, advertisement.image);
 //            conversion.put(Constants.KEY_LAST_MESSAGE, binding.messageInputField.getText().toString());
             conversion.put(Constants.KEY_LAST_MESSAGE, "Hello");
