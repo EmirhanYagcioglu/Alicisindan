@@ -106,7 +106,7 @@ public class PostEditActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private String encodeImage(Bitmap bitmap) {
-        int previewWidth = 150;
+        int previewWidth = 300;
         int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
         Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth, previewHeight, false);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

@@ -81,9 +81,9 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
             advertisement = new Advertisement(advertisementTitle,advertisementDescription, advertisementImage, advertisementPrice, advertisementID, advertisementLocation, userID, username, advertisementBrand);
         }
 
-//        if(advertisement.getUserID().equals(localSave.getString(Constants.KEY_USER_ID))){
-//            view.findViewById(R.id.layoutMessage).setVisibility(View.GONE);
-//        }
+        if(advertisement.getUserID().equals(localSave.getString(Constants.KEY_USER_ID))){
+            view.findViewById(R.id.layoutMessage).setVisibility(View.GONE);
+        }
 
         TextView productTitle = view.findViewById(R.id.productTitle);
         productTitle.setText(advertisement.getTitle());

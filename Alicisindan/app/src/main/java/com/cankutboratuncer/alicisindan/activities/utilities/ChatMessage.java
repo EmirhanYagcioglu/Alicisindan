@@ -1,5 +1,9 @@
 package com.cankutboratuncer.alicisindan.activities.utilities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 import java.util.Date;
 
 public class ChatMessage {
@@ -19,6 +23,16 @@ public class ChatMessage {
         price = advertisement.getPrice();
         image = advertisement.getImage();
         brand = advertisement.getBrand();
+    }
+
+    public static Bitmap decodeImage(String encodedImage) {
+        try {
+            byte[] imageBytes = Base64.decode(encodedImage, Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String getSenderId() {

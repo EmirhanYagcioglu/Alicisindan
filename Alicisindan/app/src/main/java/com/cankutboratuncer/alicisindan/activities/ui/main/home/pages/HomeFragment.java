@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,9 +60,8 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     RecyclerView recyclerViewForCategories;
     Handler handler;
     LinearLayoutManager horizontalRecyclerViewLayoutManager;
-
+    private ViewModelTest viewModel;
     public HomeFragment() {
-        // Required empty public constructor
     }
 
     public static HomeFragment newInstance(int advertisementID) {
@@ -73,6 +74,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider((requireActivity())).get(ViewModelTest.class);
         if (getArguments() != null) {
         }
     }
@@ -91,9 +93,23 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        loading(true, view);
-        handler = new Handler(Looper.getMainLooper());
-        new BackgroundTask(getContext(), this).execute();
+        if (viewModel.getAdvertisements() != null) {
+            advertisements = viewModel.getAdvertisements();
+            initUI(viewModel.getAdvertisements());
+            Log.d("Tadaaa", "Here");
+        } else {
+            loading(true, view);
+            handler = new Handler(Looper.getMainLooper());
+            new BackgroundTask(getContext(), this).execute();
+
+        }
+    }
+
+    private void initUI(ArrayList<Advertisement> advertisements) {
+        AdvertisementAdapter advertisementAdapter = new AdvertisementAdapter(advertisements, this);
+        recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        recyclerViewForAdvertisements.setAdapter(advertisementAdapter);
+        loading(false, view);
     }
 
     public void initCategories(){
@@ -138,17 +154,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     public void onItemClick(int position) {
         Bundle args = new Bundle();
         Fragment fragment = AdvertisementFragment.newInstance(advertisements.get(position).getAdvertisementID());
-//        Intent intent = new Intent(getContext(), HomeFragment.class);
         Advertisement advertisement = advertisements.get(position);
-//        intent.putExtra("ID", advertisement.getAdvertisementID());
-//        intent.putExtra("title", advertisement.getTitle());
-//        intent.putExtra("price", advertisement.getPrice());
-//        intent.putExtra("description", advertisement.getDescription());
-//        intent.putExtra("location", advertisement.getLocation());
-//        intent.putExtra("image", advertisement.getImage());
-//        intent.putExtra("userID", advertisement.getUserID());
-//        intent.putExtra("username", advertisement.getUsername());
-//        intent.putExtra("brand", advertisement.getBrand());
         args.putString("ID", advertisement.getAdvertisementID());
         args.putString("title", advertisement.getTitle());
         args.putString("price", advertisement.getPrice());
@@ -159,9 +165,6 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         args.putString("username", advertisement.getUsername());
         args.putString("brand", advertisement.getBrand());
         fragment.setArguments(args);
-
-//        startActivity(intent);
-//        Fragment fragment = AdvertisementFragment.newInstance(advertisements.get(position).getAdvertisementID());
         loadFragment(fragment);
 
     }
@@ -223,6 +226,8 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
                                 recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(getContext(), 2));
                                 recyclerViewForCategories.setLayoutManager(horizontalRecyclerViewLayoutManager);
                                 loading(false, view);
+                                viewModel.setAdvertisements(advertisements);
+                                Log.d("Tadaaa", "adsadsa");
                             }
                         });
                     }
