@@ -2,6 +2,7 @@ package com.cankutboratuncer.alicisindan.activities.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class SignInActivity extends AppCompatActivity {
         String userID = Password.emailToID(binding.signInActivityEditTextEmailOrPhoneNumber.getText().toString());
         // Password Hashing
         String userPassword = get_SHA_256_SecurePassword(binding.signInActivityEditTextPassword.getText().toString(), "salt");
+        Log.d("PasswordCheck", "UserId: " + userID + "\nPassword: "+ userPassword);
         if (Password.isCorrectPassword(userID, userPassword)) {
             registerUser(userID, userPassword);
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -52,7 +54,7 @@ public class SignInActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             loading(false);
-            showToast("Unable to sign in");
+            showToast("Incorrect username or password");
         }
     }
 

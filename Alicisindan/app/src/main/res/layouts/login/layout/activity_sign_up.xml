@@ -246,7 +246,7 @@
                 android:textSize="@dimen/_16ssp" />
 
             <ProgressBar
-                android:id="@+id/signInActivity_progressBar"
+                android:id="@+id/signUpActivity_progressBar"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
                 android:layout_gravity="center"

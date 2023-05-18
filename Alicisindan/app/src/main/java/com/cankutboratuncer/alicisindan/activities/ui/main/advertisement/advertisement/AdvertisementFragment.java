@@ -89,7 +89,6 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
             if (localSave.getBoolean(Constants.KEY_IS_SIGNED_IN) || true){
                 Advertisement advertisement = new Advertisement();
 
-
                 localSave.putString(Constants.KEY_ADVERTISEMENT_TITLE, advertisementTitle);
                 localSave.putString(Constants.KEY_ADVERTISEMENT_USERID, userID);
                 localSave.putString(Constants.KEY_ADVERTISEMENT_USERNAME, username);

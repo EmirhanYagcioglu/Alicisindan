@@ -27,7 +27,7 @@ public class LoadingActivity extends AppCompatActivity {
 
     public void checkIfSignedIn() {
         LocalSave localSave = new LocalSave(getApplicationContext());
-        if (localSave.getBoolean(Constants.KEY_IS_SIGNED_IN)) {
+        if (localSave.getBoolean(Constants.KEY_IS_SIGNED_IN) || localSave.getBoolean(Constants.KEY_IS_USER_SKIP)) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();

@@ -16,7 +16,6 @@ import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivitySignUpBinding;
 
-// Password Hashing
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -69,45 +68,43 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 String country = binding.signUpActivityEditTextCountry.getText().toString();
-                if(Constants.COUNTRIES.contains(country)){
+                if (Constants.COUNTRIES.contains(country)) {
                     binding.signUpActivityEditTextCity.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, Constants.CITIES.get(0)));
                 }
             }
         });
     }
 
-    private void signUp() throws Exception {
+    private void signUp() {
         loading(true);
-        if (!User.emailExists(binding.signUpActivityEditTextEmailOrPhoneNumber.toString())) {
-            String id = "0";
-            String username = binding.signUpActivityEditTextUserName.toString();
-            String email = binding.signUpActivityEditTextEmailOrPhoneNumber.toString();
-            // Password Hashing
-            String password = get_SHA_256_SecurePassword(binding.signUpActivityEditTextPassword.toString(), "salt");
-            String name = binding.signUpActivityEditTextName.toString();
-            String surname = binding.signUpActivityEditTextSurname.toString();
-            String phone = binding.signUpActivityEditTextEmailOrPhoneNumber.toString();
+        try {
+            if (!User.emailExists(binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString())) {
+                String username = binding.signUpActivityEditTextUserName.getText().toString();
+                String email = binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString();
+                String password = get_SHA_256_SecurePassword(binding.signUpActivityEditTextPassword.getText().toString(), "salt");
+                String name = binding.signUpActivityEditTextName.getText().toString();
+                String surname = binding.signUpActivityEditTextSurname.getText().toString();
+                String phone = binding.signUpActivityEditTextEmailOrPhoneNumber.getText().toString();
+                String address = binding.signUpActivityEditTextCountry.getText().toString() + "/" + binding.signUpActivityEditTextCity.getText().toString();
+                String birthday = "";
 
-            String address = "123";
-            String birthday = "2000";
-
-            User user = new User(username, name, surname, birthday, address, email, phone);
-            localSave.saveUser(user.getID(), user.getEmail(), user.getPhone(), user.getUsername(), password, user.getName(), "surname", user.getAddress());
-            user.registerUser(password);
-
-            if (User.emailExists(email)) {
-                loading(false);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                User user = new User(username, name, surname, birthday, address, email, phone);
+                user.registerUser(password);
+                if (User.emailExists(email)) {
+                    localSave.saveUser(user.getID(), email, phone, username, password, name, surname, address);
+                    loading(false);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                } else {
+                    loading(false);
+                    showToast("The user already exists");
+                }
             } else {
-                loading(false);
-                showToast("The user couldn't registered");
+                showToast("There is already a user with this email.");
             }
-
-
-        } else {
-            showToast("There is already a user with this email.");
+        } catch (Exception e) {
+            showToast(e.getMessage());
         }
     }
 
@@ -151,10 +148,10 @@ public class SignUpActivity extends AppCompatActivity {
     private void loading(boolean isLoading) {
         if (isLoading) {
             binding.signUpActivityButtonSignUp.setVisibility(View.INVISIBLE);
-            binding.signInActivityProgressBar.setVisibility(View.VISIBLE);
+            binding.signUpActivityProgressBar.setVisibility(View.VISIBLE);
         } else {
             binding.signUpActivityButtonSignUp.setVisibility(View.VISIBLE);
-            binding.signInActivityProgressBar.setVisibility(View.INVISIBLE);
+            binding.signUpActivityProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 
