@@ -1,10 +1,14 @@
 package com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,16 +69,21 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_advertisement, container, false);
-        Intent intent = getActivity().getIntent();
-        advertisementID = intent.getStringExtra("ID");
-        advertisementTitle = intent.getStringExtra("title");
-        advertisementPrice = intent.getStringExtra("price");
-        advertisementDescription = intent.getStringExtra("description");
-        advertisementLocation = intent.getStringExtra("location");
-        advertisementImage = intent.getStringExtra("image");
-        advertisementBrand = intent.getStringExtra("brand");
-        userID = intent.getStringExtra("userID");
-        username = intent.getStringExtra("username");
+        Bundle args = getArguments();
+        if (args != null) {
+//            String myString = args.getString("ID");
+            advertisementID = args.getString("ID");
+            advertisementTitle = args.getString("title");
+            advertisementPrice = "$" + args.getString("price");
+            advertisementDescription = args.getString("description");
+            advertisementLocation = args.getString("location");
+            advertisementImage = args.getString("image");
+            advertisementBrand = args.getString("brand");
+            userID = args.getString("userID");
+            username = args.getString("username");
+            // Use the passed string as needed
+        }
+
         TextView productTitle = view.findViewById(R.id.productTitle);
         productTitle.setText(advertisementTitle);
         TextView productPrice = view.findViewById(R.id.productPrice);
@@ -83,7 +92,8 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
         productDetails.setText(advertisementDescription);
         TextView productLocation = view.findViewById(R.id.location);
         productLocation.setText(advertisementLocation);
-
+        ImageView productImage = view.findViewById(R.id.imageProduct);
+        productImage.setImageBitmap(decodeImage(advertisementImage));
         view.findViewById(R.id.buttonMessage).setOnClickListener(v -> {
 
             if (localSave.getBoolean(Constants.KEY_IS_SIGNED_IN) || true){
@@ -168,6 +178,16 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
 
     private void showToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    public Bitmap decodeImage(String encodedImage) {
+        try {
+            byte[] imageBytes = Base64.decode(encodedImage, Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

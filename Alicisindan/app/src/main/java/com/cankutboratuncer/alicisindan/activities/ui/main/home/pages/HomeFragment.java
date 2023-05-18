@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -113,29 +115,55 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         view.findViewById(R.id.buttonCreatePost).setOnClickListener(v -> {
             startActivity(new Intent(getContext(), PostAddCategoryActivity.class));
         });
+        TextView textView_seeAll = view.findViewById(R.id.homeFragment_textView_seeAll);
+        textView_seeAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new CategoryFragment();
+                loadFragment(fragment);
+            }
+        });
     }
 
     void loadFragment(Fragment fragment) {
-        //to attach fragment
-        getParentFragmentManager().beginTransaction().replace(R.id.mainActivity_frameLayout_main, fragment).addToBackStack(null).commit();
+
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainActivity_frameLayout_main, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     @Override
     public void onItemClick(int position) {
-        Intent intent = new Intent(getContext(), HomeFragment.class);
-        Advertisement advertisement = advertisements.get(position);
-        intent.putExtra("ID", advertisement.getAdvertisementID());
-        intent.putExtra("title", advertisement.getTitle());
-        intent.putExtra("price", advertisement.getPrice());
-        intent.putExtra("description", advertisement.getDescription());
-        intent.putExtra("location", advertisement.getLocation());
-        intent.putExtra("image", advertisement.getImage());
-        intent.putExtra("userID", advertisement.getUserID());
-        intent.putExtra("username", advertisement.getUsername());
-        intent.putExtra("brand", advertisement.getBrand());
-        startActivity(intent);
+        Bundle args = new Bundle();
         Fragment fragment = AdvertisementFragment.newInstance(advertisements.get(position).getAdvertisementID());
+//        Intent intent = new Intent(getContext(), HomeFragment.class);
+        Advertisement advertisement = advertisements.get(position);
+//        intent.putExtra("ID", advertisement.getAdvertisementID());
+//        intent.putExtra("title", advertisement.getTitle());
+//        intent.putExtra("price", advertisement.getPrice());
+//        intent.putExtra("description", advertisement.getDescription());
+//        intent.putExtra("location", advertisement.getLocation());
+//        intent.putExtra("image", advertisement.getImage());
+//        intent.putExtra("userID", advertisement.getUserID());
+//        intent.putExtra("username", advertisement.getUsername());
+//        intent.putExtra("brand", advertisement.getBrand());
+        args.putString("ID", advertisement.getAdvertisementID());
+        args.putString("title", advertisement.getTitle());
+        args.putString("price", advertisement.getPrice());
+        args.putString("description", advertisement.getDescription());
+        args.putString("location", advertisement.getLocation());
+        args.putString("image", advertisement.getImage());
+        args.putString("userID", advertisement.getUserID());
+        args.putString("username", advertisement.getUsername());
+        args.putString("brand", advertisement.getBrand());
+        fragment.setArguments(args);
+
+//        startActivity(intent);
+//        Fragment fragment = AdvertisementFragment.newInstance(advertisements.get(position).getAdvertisementID());
         loadFragment(fragment);
+
     }
 
 
@@ -188,14 +216,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
                         CategoryAdapter categoryAdapter = new CategoryAdapter(categories);
                         recyclerViewForAdvertisements.setAdapter(advertisementAdapter);
                         recyclerViewForCategories.setAdapter(categoryAdapter);
-                        TextView textView_seeAll = view.findViewById(R.id.homeFragment_textView_seeAll);
-                        textView_seeAll.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Fragment fragment = new CategoryFragment();
-                                loadFragment(fragment);
-                            }
-                        });
+
                         ((Activity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -251,51 +272,6 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     }
 
 
-    public void findFromList(String searchedText, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        try {
-            View view = inflater.inflate(R.layout.fragment_home, container, false);
-            RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.homeFragment_recyclerView_advertisements);
-            String text = searchedText;
-            Listing[] listings;
-            ArrayList<Advertisement> newAdvertisements = new ArrayList<Advertisement>();
-            String title;
-            String description;
-            String image;
-            String price;
-            String ID;
-            String location;
-            String userID;
-            String username;
-            String brand;
-            listings = Listing.findListings("", "", "", text, "", "", "", "", "", "", "", "10");
-            for (int i = 0; i < listings.length; i++) {
-                Listing listing = listings[i];
-                title = listing.getTitle();
-                description = listing.getDescription();
-                image = "0";
-                price = listing.getPrice();
-                location = listing.getLocation();
-                ID = listing.getID();
-                userID = listing.getOwnerID();
-                brand = listing.getBrand();
-                try {
-                    User user = User.getUser(userID);
-                    username = user.getUsername();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-
-                newAdvertisements.add(new Advertisement(title, description, image, price, ID, location, userID, username, brand));
-            }
-            recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(this.getContext(), 2));
-            AdvertisementAdapter advertisementAdapter = new AdvertisementAdapter(newAdvertisements, this);
-            recyclerViewForAdvertisements.setAdapter(advertisementAdapter);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
     private void loading(boolean isLoading, View view) {
         if (isLoading) {
             view.findViewById(R.id.homeFragment_textView_featured).setVisibility(View.INVISIBLE);
@@ -329,6 +305,51 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
 //                return true;
 //            }
 //        });
+//    }
+
+//    public void findFromList(String searchedText, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        try {
+//            View view = inflater.inflate(R.layout.fragment_home, container, false);
+//            RecyclerView recyclerViewForAdvertisements = view.findViewById(R.id.homeFragment_recyclerView_advertisements);
+//            String text = searchedText;
+//            Listing[] listings;
+//            ArrayList<Advertisement> newAdvertisements = new ArrayList<Advertisement>();
+//            String title;
+//            String description;
+//            String image;
+//            String price;
+//            String ID;
+//            String location;
+//            String userID;
+//            String username;
+//            String brand;
+//            listings = Listing.findListings("", "", "", text, "", "", "", "", "", "", "", "10");
+//            for (int i = 0; i < listings.length; i++) {
+//                Listing listing = listings[i];
+//                title = listing.getTitle();
+//                description = listing.getDescription();
+//                image = "0";
+//                price = listing.getPrice();
+//                location = listing.getLocation();
+//                ID = listing.getID();
+//                userID = listing.getOwnerID();
+//                brand = listing.getBrand();
+//                try {
+//                    User user = User.getUser(userID);
+//                    username = user.getUsername();
+//                } catch (Exception e) {
+//                    throw new RuntimeException(e);
+//                }
+//
+//                newAdvertisements.add(new Advertisement(title, description, image, price, ID, location, userID, username, brand));
+//            }
+//            recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(this.getContext(), 2));
+//            AdvertisementAdapter advertisementAdapter = new AdvertisementAdapter(newAdvertisements, this);
+//            recyclerViewForAdvertisements.setAdapter(advertisementAdapter);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
 //    }
 
 }
