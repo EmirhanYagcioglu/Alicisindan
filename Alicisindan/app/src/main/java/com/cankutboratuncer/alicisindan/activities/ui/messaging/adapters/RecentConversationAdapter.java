@@ -61,18 +61,6 @@ public class RecentConversationAdapter extends RecyclerView.Adapter<RecentConver
             binding.username.setText(chatMessage.conversionName);
             binding.chat.setText(chatMessage.message);
             binding.getRoot().setOnClickListener(v -> {
-                String productTitle = chatMessage.productTitle;
-                String productDescription = chatMessage.productDescription;
-                String userId = chatMessage.userId;
-                String userName = chatMessage.userName;
-                String productId = chatMessage.productId;
-                String location = chatMessage.location;
-                String price = chatMessage.price;
-                String image = chatMessage.image;
-                String brand = chatMessage.brand;
-
-                Advertisement advertisement = new Advertisement(productTitle, productDescription, image, price, productId, location,userId, userName, brand);
-                chatMessage.loadAdvertisement(advertisement);
                 conversionListener.onConversionClicked(chatMessage);
             });
         }

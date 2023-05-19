@@ -78,7 +78,7 @@ public class ChatActivity extends AppCompatActivity {
             HashMap<String, Object> conversion = new HashMap<>();
             conversion.put(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID));
             conversion.put(Constants.KEY_SENDER_NAME, localSave.getString(Constants.KEY_USER_NAME));
-            conversion.put(Constants.KEY_RECEIVER_ID, chatMessage.getReceiverId());
+            conversion.put(Constants.KEY_RECEIVER_ID, chatMessage.receiverId);
             conversion.put(Constants.KEY_RECEIVER_NAME, chatMessage.getUserName());
 
             conversion.put(Constants.KEY_ADVERTISEMENT_TITLE, chatMessage.getProductTitle());
@@ -182,7 +182,6 @@ public class ChatActivity extends AppCompatActivity {
     }*/
 
     private void listenMessages() {
-        if(chatMessage.userId.equals(localSave.getString(Constants.KEY_USER_ID))){
             database.collection(Constants.KEY_COLLECTION_ADVERTISEMENT_CHAT)
                     .whereEqualTo(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID))
                     .whereEqualTo(Constants.KEY_RECEIVER_ID, chatMessage.receiverId)
@@ -194,19 +193,6 @@ public class ChatActivity extends AppCompatActivity {
                     .whereEqualTo(Constants.KEY_RECEIVER_ID, localSave.getString(Constants.KEY_USER_ID))
                     .whereEqualTo(Constants.KEY_ADVERTISEMENT_ID, chatMessage.getProductId())
                     .addSnapshotListener(eventListener);
-        } else {
-            database.collection(Constants.KEY_COLLECTION_ADVERTISEMENT_CHAT)
-                    .whereEqualTo(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID))
-                    .whereEqualTo(Constants.KEY_RECEIVER_ID, chatMessage.receiverId)
-                    .whereEqualTo(Constants.KEY_ADVERTISEMENT_ID, chatMessage.getProductId())
-                    .addSnapshotListener(eventListener);
-
-            database.collection(Constants.KEY_COLLECTION_ADVERTISEMENT_CHAT)
-                    .whereEqualTo(Constants.KEY_SENDER_ID, chatMessage.receiverId)
-                    .whereEqualTo(Constants.KEY_RECEIVER_ID, localSave.getString(Constants.KEY_USER_ID))
-                    .whereEqualTo(Constants.KEY_ADVERTISEMENT_ID, chatMessage.getProductId())
-                    .addSnapshotListener(eventListener);
-        }
     }
 
     private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
@@ -223,7 +209,7 @@ public class ChatActivity extends AppCompatActivity {
                     chatMessage.message = documentChange.getDocument().getString(Constants.KEY_MESSAGE);
                     chatMessage.dateTime = getReadableDateTime(documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP));
                     chatMessage.dateObject = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);
-                    chatMessage.loadAdvertisement(advertisement);
+                    chatMessage.productId = documentChange.getDocument().getString(Constants.KEY_ADVERTISEMENT_ID);
                     chatMessages.add(chatMessage);
                 }
             }
@@ -295,7 +281,8 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void addConversion(HashMap<String, Object> conversion) {
-        database.collection(Constants.KEY_COLLECTION_ADVERTISEMENTS).add(conversion).addOnSuccessListener(documentReference -> conversionId = documentReference.getId());
+        database.collection(Constants.KEY_COLLECTION_ADVERTISEMENTS).add(conversion).
+                addOnSuccessListener(documentReference -> conversionId = documentReference.getId());
     }
 
     private void updateConversion(String message) {
@@ -305,13 +292,17 @@ public class ChatActivity extends AppCompatActivity {
 
     private void checkForConversion() {
         if (chatMessages.size() != 0) {
-            checkForConversionRemotely(localSave.getString(Constants.KEY_USER_ID), chatMessage.getUserId());
-            checkForConversionRemotely(chatMessage.getUserId(), localSave.getString(Constants.KEY_USER_ID));
+            checkForConversionRemotely(localSave.getString(Constants.KEY_USER_ID), chatMessage.receiverId, chatMessage.getProductId());
+            checkForConversionRemotely(chatMessage.receiverId, localSave.getString(Constants.KEY_USER_ID), chatMessage.getProductId());
         }
     }
 
-    private void checkForConversionRemotely(String senderId, String receiverId) {
-        database.collection(Constants.KEY_COLLECTION_ADVERTISEMENTS).whereEqualTo(Constants.KEY_SENDER_ID, senderId).whereEqualTo(Constants.KEY_RECEIVER_ID, receiverId).get().addOnCompleteListener(conversionOnCompleteListener);
+    private void checkForConversionRemotely(String senderId, String receiverId, String productId) {
+        database.collection(Constants.KEY_COLLECTION_ADVERTISEMENTS).
+                whereEqualTo(Constants.KEY_SENDER_ID, senderId).
+                whereEqualTo(Constants.KEY_RECEIVER_ID, receiverId).
+                whereEqualTo(Constants.KEY_ADVERTISEMENT_ID, productId).
+                get().addOnCompleteListener(conversionOnCompleteListener);
     }
 
     private final OnCompleteListener<QuerySnapshot> conversionOnCompleteListener = task -> {

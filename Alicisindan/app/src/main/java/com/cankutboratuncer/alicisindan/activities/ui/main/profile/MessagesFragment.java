@@ -129,8 +129,6 @@ public class MessagesFragment extends Fragment implements ConversionListener {
                         if (conversations.get(i).senderId.equals(senderId) && conversations.get(i).receiverId.equals(receiverId) && conversations.get(i).productId.equals(productId)) {
                             conversations.get(i).message = documentChange.getDocument().getString(Constants.KEY_LAST_MESSAGE);
                             conversations.get(i).dateObject = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);
-                            conversations.get(i).productTitle = documentChange.getDocument().getString(Constants.KEY_ADVERTISEMENT_TITLE);
-                            conversations.get(i).productId = documentChange.getDocument().getString(Constants.KEY_ADVERTISEMENT_ID);
                             break;
                         }
                     }
@@ -162,7 +160,6 @@ public class MessagesFragment extends Fragment implements ConversionListener {
     @Override
     public void onConversionClicked(ChatMessage chatMessage) {
         Bundle args = new Bundle();
-
         args.putString(Constants.KEY_ADVERTISEMENT_TITLE, chatMessage.getProductTitle());
         args.putString(Constants.KEY_ADVERTISEMENT_USERID, chatMessage.getUserId());
         args.putString(Constants.KEY_ADVERTISEMENT_USERNAME, chatMessage.getUserName());
@@ -170,9 +167,8 @@ public class MessagesFragment extends Fragment implements ConversionListener {
         args.putString(Constants.KEY_ADVERTISEMENT_LOCATION, chatMessage.getLocation());
         args.putString(Constants.KEY_ADVERTISEMENT_PRICE, chatMessage.getPrice());
         args.putString(Constants.KEY_ADVERTISEMENT_IMAGE, chatMessage.getImage());
-        args.putString(Constants.KEY_RECEIVER_ID, chatMessage.getReceiverId());
+        args.putString(Constants.KEY_RECEIVER_ID, chatMessage.conversionId);
         args.putString(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID));
-        args.putString(Constants.KEY_RECEIVER_ID, chatMessage.getSenderId());
         Intent intent = new Intent(getActivity(), ChatActivity.class);
         intent.putExtras(args);
         startActivity(intent);
