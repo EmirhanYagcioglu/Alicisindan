@@ -279,11 +279,9 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
 
     private void loading(boolean isLoading, View view) {
         if (isLoading) {
-            view.findViewById(R.id.homeFragment_textView_featured).setVisibility(View.INVISIBLE);
             view.findViewById(R.id.homeFragment_recyclerView_advertisements).setVisibility(View.INVISIBLE);
             view.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
         } else {
-            view.findViewById(R.id.homeFragment_textView_featured).setVisibility(View.VISIBLE);
             view.findViewById(R.id.homeFragment_recyclerView_advertisements).setVisibility(View.VISIBLE);
             view.findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
         }

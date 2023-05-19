@@ -137,7 +137,7 @@ public class PostEditActivity extends AppCompatActivity implements AdapterView.O
             try {
                 if (isValidPostDetails()) {
                     postAdd();
-                    startActivity(new Intent(getApplicationContext(), CheckNewPostActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }
             } catch (Exception e) {

@@ -118,7 +118,6 @@
         android:id="@+id/homeFragment_textView_featured"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
         android:layout_margin="@dimen/_12sdp"
         android:fontFamily="@font/lato"
         android:text="@string/featured"

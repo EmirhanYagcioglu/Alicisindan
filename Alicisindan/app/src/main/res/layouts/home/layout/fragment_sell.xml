@@ -133,10 +133,35 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_8sdp"
+        android:visibility="invisible"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sellFragment_textView_featured" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buttonCreatePost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_plus"
+        app:tint="@color/white"
+        android:backgroundTint="@color/primary"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="@id/sellFragment_recyclerView_advertisements"
+        app:layout_constraintTop_toTopOf="@id/sellFragment_recyclerView_advertisements"
+        app:layout_constraintEnd_toEndOf="@id/sellFragment_recyclerView_advertisements"
+        app:layout_constraintStart_toStartOf="@id/sellFragment_recyclerView_advertisements"
+        android:visibility="invisible" />
 </androidx.constraintlayout.widget.ConstraintLayout>
