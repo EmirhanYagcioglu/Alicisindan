@@ -31,6 +31,7 @@ public class PostAddSubCategoryActivity extends AppCompatActivity implements Cat
         Intent intent = getIntent();
         category = intent.getStringExtra("category");
         type = intent.getStringExtra("type");
+        binding.topPanel.setText("I want to " + type);
         subCategories = CategoryTest.createSubCategories(category);
         loadSubCategories();
 

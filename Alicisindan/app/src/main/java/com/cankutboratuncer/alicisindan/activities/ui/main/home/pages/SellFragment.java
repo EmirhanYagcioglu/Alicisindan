@@ -33,8 +33,10 @@ import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.adverti
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.PostAddCategoryActivity;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryFragment;
+import com.cankutboratuncer.alicisindan.activities.ui.messaging.activities.ChatActivity;
 import com.cankutboratuncer.alicisindan.activities.utilities.Advertisement;
 import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
+import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -95,9 +97,12 @@ public class SellFragment extends Fragment implements AdvertisementInterface {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (viewModel.getAdvertisements() != null) {
-            advertisements = viewModel.getAdvertisements();
-            initUI(viewModel.getAdvertisements());
-            Log.d("Tadaaa", "Here");
+//            advertisements = viewModel.getAdvertisements();
+//            initUI(viewModel.getAdvertisements());
+//            Log.d("Tadaaa", "Here");
+            loading(true, view);
+            handler = new Handler(Looper.getMainLooper());
+            new BackgroundTask(getContext(), this).execute();
         } else {
             loading(true, view);
             handler = new Handler(Looper.getMainLooper());
@@ -130,9 +135,11 @@ public class SellFragment extends Fragment implements AdvertisementInterface {
 
     public void initListeners(){
         view.findViewById(R.id.buttonCreatePost).setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.putExtra("type", "sell");
-            startActivity(new Intent(getContext(), PostAddCategoryActivity.class));
+            Bundle args = new Bundle();
+            args.putString("type", "sell");
+            Intent intent = new Intent(getContext(), PostAddCategoryActivity.class);
+            intent.putExtras(args);
+            startActivity(intent);
         });
         TextView textView_seeAll = view.findViewById(R.id.sellFragment_textView_seeAll);
         textView_seeAll.setOnClickListener(new View.OnClickListener() {

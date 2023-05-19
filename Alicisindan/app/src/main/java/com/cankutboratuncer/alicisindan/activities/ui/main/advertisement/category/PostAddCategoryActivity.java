@@ -2,6 +2,7 @@ package com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.catego
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,11 @@ public class PostAddCategoryActivity extends AppCompatActivity implements Catego
         setContentView(binding.getRoot());
         Intent intent = getIntent();
         type = intent.getStringExtra("type");
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            type = bundle.getString("type");
+        }
+        binding.topPanel.setText("I want to " + type);
         categories = CategoryTest.categories;
         loadCategories();
     }

@@ -96,9 +96,12 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (viewModel.getAdvertisements() != null) {
-            advertisements = viewModel.getAdvertisements();
-            initUI(viewModel.getAdvertisements());
-            Log.d("Tadaaa", "Here");
+//            advertisements = viewModel.getAdvertisements();
+//            initUI(viewModel.getAdvertisements());
+//            Log.d("Tadaaa", "Here");
+            loading(true, view);
+            handler = new Handler(Looper.getMainLooper());
+            new BackgroundTask(getContext(), this).execute();
         } else {
             loading(true, view);
             handler = new Handler(Looper.getMainLooper());

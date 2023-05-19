@@ -95,9 +95,12 @@ public class BuyFragment extends Fragment implements AdvertisementInterface {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (viewModel.getAdvertisements() != null) {
-            advertisements = viewModel.getAdvertisements();
-            initUI(viewModel.getAdvertisements());
-            Log.d("Tadaaa", "Here");
+//            advertisements = viewModel.getAdvertisements();
+//            initUI(viewModel.getAdvertisements());
+//            Log.d("Tadaaa", "Here");
+            loading(true, view);
+            handler = new Handler(Looper.getMainLooper());
+            new BackgroundTask(getContext(), this).execute();
         } else {
             loading(true, view);
             handler = new Handler(Looper.getMainLooper());
@@ -129,9 +132,11 @@ public class BuyFragment extends Fragment implements AdvertisementInterface {
 
     public void initListeners(){
         view.findViewById(R.id.buttonCreatePost).setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.putExtra("type", "buy");
-            startActivity(new Intent(getContext(), PostAddCategoryActivity.class));
+            Bundle args = new Bundle();
+            args.putString("type", "buy");
+            Intent intent = new Intent(getContext(), PostAddCategoryActivity.class);
+            intent.putExtras(args);
+            startActivity(intent);
         });
         TextView textView_seeAll = view.findViewById(R.id.buyFragment_textView_seeAll);
         textView_seeAll.setOnClickListener(new View.OnClickListener() {
