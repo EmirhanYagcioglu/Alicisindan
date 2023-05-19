@@ -30,7 +30,6 @@ import com.cankutboratuncer.alicisindan.activities.data.database.CategoryTest;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementFragment;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementInterface;
-import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.PostAddCategoryActivity;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.PostTypeActivity;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryFragment;
@@ -62,7 +61,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     RecyclerView recyclerViewForCategories;
     Handler handler;
     LinearLayoutManager horizontalRecyclerViewLayoutManager;
-    private ViewModelTest viewModel;
+    private ViewModelAdvertisement viewModel;
     public HomeFragment() {
     }
 
@@ -76,7 +75,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider((requireActivity())).get(ViewModelTest.class);
+        viewModel = new ViewModelProvider((requireActivity())).get(ViewModelAdvertisement.class);
         if (getArguments() != null) {
         }
     }
@@ -95,13 +94,10 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (viewModel.getAdvertisements() != null) {
-//            advertisements = viewModel.getAdvertisements();
-//            initUI(viewModel.getAdvertisements());
-//            Log.d("Tadaaa", "Here");
-            loading(true, view);
-            handler = new Handler(Looper.getMainLooper());
-            new BackgroundTask(getContext(), this).execute();
+        if (viewModel.getAdvertisements_home() != null) {
+            advertisements = viewModel.getAdvertisements_home();
+            initUI(viewModel.getAdvertisements_home());
+            Log.d("Tadaaa", "Here");
         } else {
             loading(true, view);
             handler = new Handler(Looper.getMainLooper());
@@ -232,7 +228,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
                                 recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(getContext(), 2));
                                 recyclerViewForCategories.setLayoutManager(horizontalRecyclerViewLayoutManager);
                                 loading(false, view);
-                                viewModel.setAdvertisements(advertisements);
+                                viewModel.setAdvertisements_home(advertisements);
                                 Log.d("Tadaaa", "adsadsa");
                             }
                         });

@@ -33,10 +33,8 @@ import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.adverti
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.PostAddCategoryActivity;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryFragment;
-import com.cankutboratuncer.alicisindan.activities.ui.messaging.activities.ChatActivity;
 import com.cankutboratuncer.alicisindan.activities.utilities.Advertisement;
 import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
-import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -63,7 +61,7 @@ public class SellFragment extends Fragment implements AdvertisementInterface {
     RecyclerView recyclerViewForCategories;
     Handler handler;
     LinearLayoutManager horizontalRecyclerViewLayoutManager;
-    private ViewModelTest viewModel;
+    private ViewModelAdvertisement viewModel;
     public SellFragment() {
     }
 
@@ -77,7 +75,7 @@ public class SellFragment extends Fragment implements AdvertisementInterface {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider((requireActivity())).get(ViewModelTest.class);
+        viewModel = new ViewModelProvider((requireActivity())).get(ViewModelAdvertisement.class);
         if (getArguments() != null) {
         }
     }
@@ -96,13 +94,10 @@ public class SellFragment extends Fragment implements AdvertisementInterface {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (viewModel.getAdvertisements() != null) {
-//            advertisements = viewModel.getAdvertisements();
-//            initUI(viewModel.getAdvertisements());
-//            Log.d("Tadaaa", "Here");
-            loading(true, view);
-            handler = new Handler(Looper.getMainLooper());
-            new BackgroundTask(getContext(), this).execute();
+        if (viewModel.getAdvertisements_sell() != null) {
+            advertisements = viewModel.getAdvertisements_sell();
+            initUI(viewModel.getAdvertisements_sell());
+            Log.d("Tadaaa", "Here");
         } else {
             loading(true, view);
             handler = new Handler(Looper.getMainLooper());
@@ -236,7 +231,7 @@ public class SellFragment extends Fragment implements AdvertisementInterface {
                                 recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(getContext(), 2));
                                 recyclerViewForCategories.setLayoutManager(horizontalRecyclerViewLayoutManager);
                                 loading(false, view);
-                                viewModel.setAdvertisements(advertisements);
+                                viewModel.setAdvertisements_sell(advertisements);
                                 Log.d("Tadaaa", "adsadsa");
                             }
                         });

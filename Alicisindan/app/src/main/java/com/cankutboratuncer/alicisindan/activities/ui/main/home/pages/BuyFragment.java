@@ -61,7 +61,7 @@ public class BuyFragment extends Fragment implements AdvertisementInterface {
     RecyclerView recyclerViewForCategories;
     Handler handler;
     LinearLayoutManager horizontalRecyclerViewLayoutManager;
-    private ViewModelTest viewModel;
+    private ViewModelAdvertisement viewModel;
     public BuyFragment() {
     }
 
@@ -75,7 +75,7 @@ public class BuyFragment extends Fragment implements AdvertisementInterface {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider((requireActivity())).get(ViewModelTest.class);
+        viewModel = new ViewModelProvider((requireActivity())).get(ViewModelAdvertisement.class);
         if (getArguments() != null) {
         }
     }
@@ -94,13 +94,10 @@ public class BuyFragment extends Fragment implements AdvertisementInterface {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (viewModel.getAdvertisements() != null) {
-//            advertisements = viewModel.getAdvertisements();
-//            initUI(viewModel.getAdvertisements());
-//            Log.d("Tadaaa", "Here");
-            loading(true, view);
-            handler = new Handler(Looper.getMainLooper());
-            new BackgroundTask(getContext(), this).execute();
+        if (viewModel.getAdvertisements_buy() != null) {
+            advertisements = viewModel.getAdvertisements_buy();
+            initUI(viewModel.getAdvertisements_buy());
+            Log.d("Tadaaa", "Here");
         } else {
             loading(true, view);
             handler = new Handler(Looper.getMainLooper());
@@ -233,7 +230,7 @@ public class BuyFragment extends Fragment implements AdvertisementInterface {
                                 recyclerViewForAdvertisements.setLayoutManager(new GridLayoutManager(getContext(), 2));
                                 recyclerViewForCategories.setLayoutManager(horizontalRecyclerViewLayoutManager);
                                 loading(false, view);
-                                viewModel.setAdvertisements(advertisements);
+                                viewModel.setAdvertisements_buy(advertisements);
                                 Log.d("Tadaaa", "adsadsa");
                             }
                         });
