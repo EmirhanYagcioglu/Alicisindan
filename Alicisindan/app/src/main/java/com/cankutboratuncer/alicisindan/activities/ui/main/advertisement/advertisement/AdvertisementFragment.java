@@ -66,7 +66,6 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
         view = inflater.inflate(R.layout.fragment_advertisement, container, false);
         initListeners();
 
-
         Bundle args = getArguments();
         if (args != null) {
             advertisementID = args.getString("ID");
@@ -78,7 +77,8 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
             String advertisementBrand = args.getString("brand");
             String userID = args.getString("userID");
             String username = args.getString("username");
-            advertisement = new Advertisement(advertisementTitle,advertisementDescription, advertisementImage, advertisementPrice, advertisementID, advertisementLocation, userID, username, advertisementBrand);
+            String type = args.getString("type");
+            advertisement = new Advertisement(advertisementTitle,advertisementDescription, advertisementImage, advertisementPrice, advertisementID, advertisementLocation, userID, username, advertisementBrand, type);
         }
 
         if(advertisement.getUserID().equals(localSave.getString(Constants.KEY_USER_ID))){
@@ -153,8 +153,10 @@ public class AdvertisementFragment extends Fragment implements AdvertisementInte
                 args.putString(Constants.KEY_ADVERTISEMENT_LOCATION, advertisement.getLocation());
                 args.putString(Constants.KEY_ADVERTISEMENT_PRICE, advertisement.getPrice());
                 args.putString(Constants.KEY_ADVERTISEMENT_IMAGE, advertisement.getImage());
+                args.putString(Constants.KEY_ADVERTISEMENT_TYPE, advertisement.getType());
                 args.putString(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID));
                 args.putString(Constants.KEY_RECEIVER_ID, advertisement.getUserID());
+
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 intent.putExtras(args);
                 startActivity(intent);

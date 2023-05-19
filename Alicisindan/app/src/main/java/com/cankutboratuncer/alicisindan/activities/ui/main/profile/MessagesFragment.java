@@ -120,6 +120,7 @@ public class MessagesFragment extends Fragment implements ConversionListener {
                     chatMessage.price = documentChange.getDocument().getString(Constants.KEY_ADVERTISEMENT_PRICE);
                     chatMessage.image = documentChange.getDocument().getString(Constants.KEY_ADVERTISEMENT_IMAGE);
                     chatMessage.brand = documentChange.getDocument().getString(Constants.KEY_ADVERTISEMENT_BRAND);
+                    chatMessage.type = documentChange.getDocument().getString(Constants.KEY_ADVERTISEMENT_TYPE);
                     conversations.add(chatMessage);
                 } else if (documentChange.getType() == DocumentChange.Type.MODIFIED) {
                     for (int i = 0; i < conversations.size(); i++) {
@@ -167,6 +168,8 @@ public class MessagesFragment extends Fragment implements ConversionListener {
         args.putString(Constants.KEY_ADVERTISEMENT_LOCATION, chatMessage.getLocation());
         args.putString(Constants.KEY_ADVERTISEMENT_PRICE, chatMessage.getPrice());
         args.putString(Constants.KEY_ADVERTISEMENT_IMAGE, chatMessage.getImage());
+        args.putString(Constants.KEY_ADVERTISEMENT_IMAGE, chatMessage.getImage());
+        args.putString(Constants.KEY_ADVERTISEMENT_TYPE, chatMessage.getType());
         args.putString(Constants.KEY_RECEIVER_ID, chatMessage.conversionId);
         args.putString(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID));
         Intent intent = new Intent(getActivity(), ChatActivity.class);

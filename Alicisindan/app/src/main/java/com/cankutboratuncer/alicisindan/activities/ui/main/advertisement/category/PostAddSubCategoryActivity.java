@@ -21,7 +21,7 @@ public class PostAddSubCategoryActivity extends AppCompatActivity implements Cat
 
     private ActivityPostAddSubCategoryBinding binding;
     private List<AllCategories> subCategories;
-    String category;
+    String category, type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class PostAddSubCategoryActivity extends AppCompatActivity implements Cat
         setContentView(binding.getRoot());
         Intent intent = getIntent();
         category = intent.getStringExtra("category");
+        type = intent.getStringExtra("type");
         subCategories = CategoryTest.createSubCategories(category);
         loadSubCategories();
 
@@ -46,6 +47,7 @@ public class PostAddSubCategoryActivity extends AppCompatActivity implements Cat
     public void onUserClicked(String subCategory) {
         Intent intent = new Intent(getApplicationContext(), PostEditActivity.class);
         intent.putExtra("category", category + "/" + subCategory);
+        intent.putExtra("type", type);
         startActivity(intent);
         finish();
     }

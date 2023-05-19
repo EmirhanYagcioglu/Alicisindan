@@ -43,6 +43,7 @@ public class PostEditActivity extends AppCompatActivity implements AdapterView.O
     String brand;
     String condition;
     private AppCompatImageButton[][] imageButtons;
+    String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +53,16 @@ public class PostEditActivity extends AppCompatActivity implements AdapterView.O
         localSave = new LocalSave(getApplicationContext());
         Intent intent = getIntent();
         category = intent.getStringExtra("category");
+        type = intent.getStringExtra("type");
+        if(type.equals("sell")){
+            binding.topPanel.setText("I want to sell...");
+        } else{
+            binding.topPanel.setText("I want to buy...");
+        }
         binding.subTitle.setText(category);
         initImageButton();
         initSpinners();
         setListeners();
-
 
     }
 
@@ -186,7 +192,7 @@ public class PostEditActivity extends AppCompatActivity implements AdapterView.O
         String price = binding.price.getText().toString();
         String location = binding.location.getText().toString();
 
-        Listing listing = new Listing(userID, "sell", productTitle, details, price, category, location, condition, "AKShdj");
+        Listing listing = new Listing(userID, type, productTitle, details, price, category, location, condition, "AKShdj");
         listing.addListing(userID, password);
         Log.d("şişko", binding.productTitle.getText().toString());
         String[] images = {encodedImage};

@@ -41,7 +41,8 @@ public class MessagingService extends FirebaseMessagingService {
         String price = remoteMessage.getData().get(Constants.KEY_ADVERTISEMENT_PRICE);
         String image = remoteMessage.getData().get(Constants.KEY_ADVERTISEMENT_IMAGE);
         String brand = remoteMessage.getData().get(Constants.KEY_ADVERTISEMENT_BRAND);
-        Advertisement advertisement = new Advertisement(productTitle, productDescription, image, price, productId, location,userId, userName, brand);
+        String type = remoteMessage.getData().get(Constants.KEY_ADVERTISEMENT_TYPE);
+        Advertisement advertisement = new Advertisement(productTitle, productDescription, image, price, productId, location,userId, userName, brand, type);
 
         int notificationId = new Random().nextInt();
         String channelId = "chat_message";

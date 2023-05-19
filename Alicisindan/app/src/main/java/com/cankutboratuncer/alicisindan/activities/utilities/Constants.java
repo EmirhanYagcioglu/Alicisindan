@@ -31,6 +31,7 @@ public class Constants {
     public static final String KEY_ADVERTISEMENT_IMAGE = "advertisement_image";
     public static final String KEY_ADVERTISEMENT_DESCRIPTION = "advertisement_description";
     public static final String KEY_ADVERTISEMENT_BRAND = "advertisement_brand";
+    public static final String KEY_ADVERTISEMENT_TYPE = "advertisement_type";
 
     public static final String KEY_ADVERTISEMENT_TOKEN = "advertisement_token";
 

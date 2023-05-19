@@ -31,6 +31,7 @@ import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.adverti
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementFragment;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.AdvertisementInterface;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.PostAddCategoryActivity;
+import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.PostTypeActivity;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryAdapter;
 import com.cankutboratuncer.alicisindan.activities.ui.main.home.category.CategoryFragment;
 import com.cankutboratuncer.alicisindan.activities.utilities.Advertisement;
@@ -56,6 +57,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     String userID;
     String username;
     String brand;
+    String type;
     RecyclerView recyclerViewForAdvertisements;
     RecyclerView recyclerViewForCategories;
     Handler handler;
@@ -129,7 +131,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
 
     public void initListeners(){
         view.findViewById(R.id.buttonCreatePost).setOnClickListener(v -> {
-            startActivity(new Intent(getContext(), PostAddCategoryActivity.class));
+            startActivity(new Intent(getContext(), PostTypeActivity.class));
         });
         TextView textView_seeAll = view.findViewById(R.id.homeFragment_textView_seeAll);
         textView_seeAll.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +166,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         args.putString("userID", advertisement.getUserID());
         args.putString("username", advertisement.getUsername());
         args.putString("brand", advertisement.getBrand());
+        args.putString("type", advertisement.getType());
         fragment.setArguments(args);
         loadFragment(fragment);
 
@@ -248,6 +251,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
                 description = listing.getDescription();
                 userID = listing.getOwnerID();
                 brand = listing.getBrand();
+                type = listing.getType();
 
                 try {
                     User user = User.getUser(userID);
@@ -271,7 +275,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
                 }
                 price = listing.getPrice();
                 ID = listing.getID();
-                advertisements.add(new Advertisement(title, description, image, price, ID, location, userID, username, brand));
+                advertisements.add(new Advertisement(title, description, image, price, ID, location, userID, username, brand, type));
             }
         }
     }

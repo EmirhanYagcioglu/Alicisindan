@@ -10,10 +10,10 @@ public class ChatMessage {
     public String senderId, receiverId, message, dateTime;
     public Date dateObject;
     public String conversionId, conversionName, conversionImage;
-    public String productTitle, productDescription, userId, userName, productId, location, price, image, brand;
+    public String productTitle, productDescription, userId, userName, productId, location, price, image, brand, type;
 
 
-    public void loadAdvertisement(Advertisement advertisement){
+    public void loadAdvertisement(Advertisement advertisement) {
         productTitle = advertisement.getTitle();
         productDescription = advertisement.getDescription();
         userId = advertisement.getUserID();
@@ -23,6 +23,7 @@ public class ChatMessage {
         price = advertisement.getPrice();
         image = advertisement.getImage();
         brand = advertisement.getBrand();
+        type = advertisement.getType();
     }
 
     public static Bitmap decodeImage(String encodedImage) {
@@ -41,6 +42,10 @@ public class ChatMessage {
 
     public String getReceiverId() {
         return receiverId;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getMessage() {

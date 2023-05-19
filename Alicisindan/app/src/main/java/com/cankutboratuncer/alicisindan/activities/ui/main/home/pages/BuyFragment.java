@@ -56,6 +56,7 @@ public class BuyFragment extends Fragment implements AdvertisementInterface {
     String userID;
     String username;
     String brand;
+    String type;
     RecyclerView recyclerViewForAdvertisements;
     RecyclerView recyclerViewForCategories;
     Handler handler;
@@ -128,6 +129,8 @@ public class BuyFragment extends Fragment implements AdvertisementInterface {
 
     public void initListeners(){
         view.findViewById(R.id.buttonCreatePost).setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.putExtra("type", "buy");
             startActivity(new Intent(getContext(), PostAddCategoryActivity.class));
         });
         TextView textView_seeAll = view.findViewById(R.id.buyFragment_textView_seeAll);
@@ -247,7 +250,7 @@ public class BuyFragment extends Fragment implements AdvertisementInterface {
                 description = listing.getDescription();
                 userID = listing.getOwnerID();
                 brand = listing.getBrand();
-
+                type = listing.getType();
                 try {
                     User user = User.getUser(userID);
                     username = user.getUsername();
@@ -270,7 +273,7 @@ public class BuyFragment extends Fragment implements AdvertisementInterface {
                 }
                 price = listing.getPrice();
                 ID = listing.getID();
-                advertisements.add(new Advertisement(title, description, image, price, ID, location, userID, username, brand));
+                advertisements.add(new Advertisement(title, description, image, price, ID, location, userID, username, brand, type));
             }
         }
     }

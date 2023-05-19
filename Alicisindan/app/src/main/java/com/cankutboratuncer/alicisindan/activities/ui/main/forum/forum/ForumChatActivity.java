@@ -60,7 +60,7 @@ public class ForumChatActivity extends AppCompatActivity {
         String location = "aDLASJDLAKSDJa";
         String price = "123";
         String token = "123123";
-        advertisement = new Advertisement("", "", "", "", "", "", "", "","");
+        advertisement = new Advertisement("", "", "", "", "", "", "", "","", "");
     }
 
     private void init() {

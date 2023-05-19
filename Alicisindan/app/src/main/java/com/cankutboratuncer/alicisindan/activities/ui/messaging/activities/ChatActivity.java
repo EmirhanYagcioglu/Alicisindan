@@ -90,6 +90,7 @@ public class ChatActivity extends AppCompatActivity {
             conversion.put(Constants.KEY_ADVERTISEMENT_PRICE, chatMessage.getPrice());
             conversion.put(Constants.KEY_ADVERTISEMENT_IMAGE, chatMessage.getImage());
             conversion.put(Constants.KEY_ADVERTISEMENT_BRAND, chatMessage.getBrand());
+            conversion.put(Constants.KEY_ADVERTISEMENT_TYPE, chatMessage.getType());
 
 //            conversion.put(Constants.KEY_SENDER_IMAGE, localSave.getString(Constants.KEY_IMAGE));
 //            conversion.put(Constants.KEY_RECEIVER_IMAGE, advertisement.image);
@@ -260,10 +261,11 @@ public class ChatActivity extends AppCompatActivity {
             String price = bundle.getString(Constants.KEY_ADVERTISEMENT_PRICE);
             String image = bundle.getString(Constants.KEY_ADVERTISEMENT_IMAGE);
             String brand = bundle.getString(Constants.KEY_ADVERTISEMENT_LOCATION);
+            String type = bundle.getString(Constants.KEY_ADVERTISEMENT_TYPE);
             String senderId = bundle.getString(Constants.KEY_SENDER_ID);
             String receiverId = bundle.getString(Constants.KEY_RECEIVER_ID);
 
-            advertisement = new Advertisement(title, description, image, price, id, location, userId, userName, brand);
+            advertisement = new Advertisement(title, description, image, price, id, location, userId, userName, brand, type);
             chatMessage = new ChatMessage();
             chatMessage.senderId = senderId;
             chatMessage.receiverId = receiverId;

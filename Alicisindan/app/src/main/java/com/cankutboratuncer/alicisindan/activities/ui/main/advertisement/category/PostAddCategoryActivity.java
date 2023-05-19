@@ -19,7 +19,7 @@ import java.util.List;
 public class PostAddCategoryActivity extends AppCompatActivity implements CategoryListener {
 
     private ActivityPostAddCategoryBinding binding;
-    private LocalSave localSave;
+    private String type;
     private List<AllCategories> categories;
 
     @Override
@@ -27,6 +27,8 @@ public class PostAddCategoryActivity extends AppCompatActivity implements Catego
         super.onCreate(savedInstanceState);
         binding = ActivityPostAddCategoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Intent intent = getIntent();
+        type = intent.getStringExtra("type");
         categories = CategoryTest.categories;
         loadCategories();
     }
@@ -43,6 +45,7 @@ public class PostAddCategoryActivity extends AppCompatActivity implements Catego
     public void onUserClicked(String category) {
        Intent intent = new Intent(getApplicationContext(), PostAddSubCategoryActivity.class);
        intent.putExtra("category", category);
+       intent.putExtra("type", type);
        startActivity(intent);
        finish();
     }

@@ -24,7 +24,7 @@ public class Advertisement {
     }
     */
 
-    public Advertisement(String title, String description, String image, String price, String advertisementID, String location, String userID, String username, String brand) {
+    public Advertisement(String title, String description, String image, String price, String advertisementID, String location, String userID, String username, String brand, String type) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -34,7 +34,7 @@ public class Advertisement {
         this.userID = userID;
         this.username = username;
         this.brand = brand;
-        this.type = "sell";
+        this.type = type;
     }
 
     public String getTitle() {
