@@ -35,21 +35,13 @@ public class ForumChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == VIEW_TYPE_SENT) {
-            return new SentMessageViewHolder(ItemContainerForumCommentSelfBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-        } else {
             return new ReceivedMessageViewHolder(ItemContainerForumCommentBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-        }
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (getItemViewType(position) == VIEW_TYPE_SENT) {
-            ((SentMessageViewHolder) holder).setData(chatMessages.get(position));
-        } else {
-            ((ReceivedMessageViewHolder) holder).setData(chatMessages.get(position), receiverProfileImage);
-        }
+            ((ReceivedMessageViewHolder) holder).setData(chatMessages.get(position));
     }
 
     @Override
@@ -57,44 +49,26 @@ public class ForumChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return chatMessages.size();
     }
 
-    public int getItemViewType(int position) {
-        Log.d("testos", (chatMessages == null) + " " + (position) + " " + senderId);
-        if (chatMessages.get(position).senderId.equals(senderId)) {
-            return VIEW_TYPE_SENT;
-        } else {
-            return VIEW_TYPE_RECEIVED;
-        }
-    }
-
-    static class SentMessageViewHolder extends RecyclerView.ViewHolder {
-        private final ItemContainerForumCommentSelfBinding binding;
-
-        SentMessageViewHolder(ItemContainerForumCommentSelfBinding itemContainerForumCommentSelfBinding) {
-            super(itemContainerForumCommentSelfBinding.getRoot());
-            binding = itemContainerForumCommentSelfBinding;
-        }
-
-        void setData(ChatMessage chatMessage) {
-            binding.textMessage.setText(chatMessage.message);
-            binding.textDateTime.setText(chatMessage.dateTime);
-        }
-    }
+//    public int getItemViewType(int position) {
+//        Log.d("testos", (chatMessages == null) + " " + (position) + " " + senderId);
+//        if (chatMessages.get(position).senderId.equals(senderId)) {
+//            return VIEW_TYPE_SENT;
+//        } else {
+//            return VIEW_TYPE_RECEIVED;
+//        }
+//    }
 
     static class ReceivedMessageViewHolder extends RecyclerView.ViewHolder {
-
         private final ItemContainerForumCommentBinding binding;
-
         ReceivedMessageViewHolder(ItemContainerForumCommentBinding itemContainerForumCommentBinding) {
             super(itemContainerForumCommentBinding.getRoot());
             binding = itemContainerForumCommentBinding;
         }
 
-        void setData(ChatMessage chatMessage, Bitmap receiverProfileImage) {
+        void setData(ChatMessage chatMessage) {
             binding.textMessage.setText(chatMessage.message);
             binding.textDateTime.setText(chatMessage.dateTime);
-            if (receiverProfileImage != null) {
-                binding.imageProfile.setImageBitmap(receiverProfileImage);
-            }
+            binding.username.setText(chatMessage.senderName);
         }
     }
 }

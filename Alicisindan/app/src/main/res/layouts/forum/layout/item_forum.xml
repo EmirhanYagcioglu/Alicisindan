@@ -43,7 +43,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_16sdp"
-                android:maxLines="2"
+                android:maxLines="4"
                 android:ellipsize="end"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:layout_marginStart="@dimen/_16sdp"
@@ -57,7 +57,7 @@
                 android:textAlignment="textStart" />
 
             <TextView
-                android:id="@+id/chat"
+                android:id="@+id/username"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_16sdp"

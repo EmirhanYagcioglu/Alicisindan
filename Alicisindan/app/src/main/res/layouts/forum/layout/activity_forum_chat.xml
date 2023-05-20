@@ -108,6 +108,27 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <EditText
+            android:id="@+id/comment"
+            android:layout_width="0dp"
+            tools:text="aksdjljasldkjsadlksaj"
+            android:paddingVertical="@dimen/_10sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:background="@drawable/background_edit_text_add_post"
+            android:fontFamily="@font/lato"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:textCursorDrawable="@null"
+            android:inputType="textMultiLine"
+            android:maxLines="4"
+            android:gravity="top"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:textColor="@color/primary_text"
+            app:layout_constraintEnd_toEndOf="@id/forumPost"
+            app:layout_constraintStart_toStartOf="@id/forumPost"
+            app:layout_constraintTop_toBottomOf="@id/forumPost" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonComment"
             android:layout_width="0dp"
@@ -121,7 +142,7 @@
             android:textSize="@dimen/_16ssp"
             app:layout_constraintEnd_toEndOf="@id/forumPost"
             app:layout_constraintStart_toStartOf="@id/forumPost"
-            app:layout_constraintTop_toBottomOf="@id/forumPost" />
+            app:layout_constraintTop_toBottomOf="@id/comment" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chatRecyclerView"

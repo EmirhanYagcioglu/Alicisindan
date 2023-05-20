@@ -68,13 +68,13 @@ public class ForumChatActivity extends AppCompatActivity {
         message.put(Constants.KEY_SENDER_USERNAME, localSave.getString(Constants.KEY_USER_USERNAME));
         message.put(Constants.KEY_FORUM_ID, forum.getForumID());
 //        message.put(Constants.KEY_MESSAGE, binding.messageInputField.getText().toString());
-        message.put(Constants.KEY_MESSAGE, "Hello");
+        message.put(Constants.KEY_MESSAGE, binding.comment.getText().toString());
         message.put(Constants.KEY_TIMESTAMP, new Date());
         database.collection(Constants.KEY_COLLECTION_FORUM_CHAT).add(message);
 
         if (forumID != null) {
 //            updateConversion(binding.messageInputField.getText().toString());
-            updateConversion("Hello");
+            updateConversion(binding.comment.getText().toString());
 //        } else {
 //            HashMap<String, Object> conversion = new HashMap<>();
 //            conversion.put(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID));
@@ -89,6 +89,7 @@ public class ForumChatActivity extends AppCompatActivity {
 //        }
 //        binding.messageInputField.setText(null);
         }
+        binding.comment.setText(null);
     }
 
     private void listenMessages() {
@@ -107,7 +108,7 @@ public class ForumChatActivity extends AppCompatActivity {
                 if (documentChange.getType() == DocumentChange.Type.ADDED) {
                     ChatMessage chatMessage = new ChatMessage();
                     chatMessage.senderId = documentChange.getDocument().getString(Constants.KEY_SENDER_ID);
-                    chatMessage.senderName = documentChange.getDocument().getString(Constants.KEY_SENDER_NAME);
+                    chatMessage.senderName = documentChange.getDocument().getString(Constants.KEY_SENDER_USERNAME);
                     chatMessage.message = documentChange.getDocument().getString(Constants.KEY_MESSAGE);
                     chatMessage.dateTime = getReadableDateTime(documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP));
                     chatMessage.dateObject = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);

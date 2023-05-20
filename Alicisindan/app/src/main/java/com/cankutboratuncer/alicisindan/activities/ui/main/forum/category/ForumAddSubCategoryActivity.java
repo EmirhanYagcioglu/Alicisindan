@@ -7,18 +7,22 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 
+import com.cankutboratuncer.alicisindan.activities.data.database.CategoryTest;
 import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.advertisement.PostEditActivity;
+import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.CategoryListener;
+import com.cankutboratuncer.alicisindan.activities.ui.main.advertisement.category.PostCategoryAdapter;
+import com.cankutboratuncer.alicisindan.activities.utilities.AllCategories;
 import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivityPostAddSubCategoryBinding;
 
 import java.util.List;
 
-public class ForumAddSubCategoryActivity extends AppCompatActivity implements ForumCategoryListener {
+public class ForumAddSubCategoryActivity extends AppCompatActivity implements CategoryListener {
 
     private ActivityPostAddSubCategoryBinding binding;
     private String category;
-    private List<String> subCategories;
+    private List<AllCategories> subCategories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +31,12 @@ public class ForumAddSubCategoryActivity extends AppCompatActivity implements Fo
         setContentView(binding.getRoot());
         Intent intent = getIntent();
         category = intent.getStringExtra("category");
-        subCategories = Constants.findSubCategory(category);
+        subCategories = CategoryTest.createSubCategories(category);
         loadSubCategories();
     }
 
     private void loadSubCategories() {
-        ForumCategoryAdapter usersAdapter = new ForumCategoryAdapter(subCategories, this);
+        PostCategoryAdapter usersAdapter = new PostCategoryAdapter(subCategories, this);
         binding.categoriesRecyclerView.setAdapter(usersAdapter);
         binding.categoriesRecyclerView.setVisibility(View.VISIBLE);
         binding.categoriesRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));

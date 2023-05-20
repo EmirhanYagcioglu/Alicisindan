@@ -51,6 +51,7 @@ public class RecentForumPostsAdapter extends RecyclerView.Adapter<RecentForumPos
             binding.image.setImageBitmap(Forum.decodeImage(forum.getForumImage()));
             binding.description.setText(forum.getForumDescription());
             binding.title.setText(forum.getForumTitle());
+            binding.username.setText(forum.getForumOwnerName());
             binding.getRoot().setOnClickListener(v -> {
                 forumListener.onForumPostClicked(forum);
             });
