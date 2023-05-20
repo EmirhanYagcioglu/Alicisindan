@@ -9,6 +9,8 @@ public class Constants {
     public static final String KEY_COLLECTION_USERS = "users";
     public static final String KEY_COLLECTION_ADVERTISEMENTS = "advertisements";
     public static final String KEY_COLLECTION_ADVERTISEMENT_CHAT = "advertisement_chat";
+    public static final String KEY_COLLECTION_FORUM_POSTS = "forumPosts";
+    public static final String KEY_COLLECTION_FORUM_CHAT = "forum_chat";
     public static final String KEY_COLLECTION_CHAT = "ALDKSJD";
     public static final String KEY_COLLECTION_CONVERSATIONS = "ASDkj";
     public static final String KEY_USER_NAME = "userName";
@@ -34,6 +36,16 @@ public class Constants {
     public static final String KEY_ADVERTISEMENT_TYPE = "advertisement_type";
 
     public static final String KEY_ADVERTISEMENT_TOKEN = "advertisement_token";
+
+    public static final String KEY_FORUM_ID = "forum_id";
+    public static final String KEY_FORUM_OWNER_ID = "forum_owner_id";
+    public static final String KEY_FORUM_OWNER_NAME = "forum_owner_name";
+    public static final String KEY_FORUM_TITLE = "forum_title";
+    public static final String KEY_FORUM_DESCRIPTION = "forum_description";
+    public static final String KEY_FORUM_IMAGE = "forum_image";
+
+
+
 
 
 

@@ -26,7 +26,7 @@
             android:background="@drawable/background_main_gradient"
             android:fontFamily="@font/lato"
             android:gravity="center"
-            android:text="@string/i_want_to_buy"
+            android:text="Create a forum post"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +116,7 @@
                 app:layout_constraintTop_toBottomOf="@id/title2" />
 
             <EditText
-                android:id="@+id/productTitle"
+                android:id="@+id/forumTitle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginTop="@dimen/_28sdp"
@@ -145,7 +145,7 @@
                 android:textColor="@color/text_dark"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/productTitle" />
+                app:layout_constraintTop_toBottomOf="@id/forumTitle" />
 
             <EditText
                 android:id="@+id/details"
@@ -165,7 +165,7 @@
                 android:paddingHorizontal="@dimen/_16sdp"
                 android:textColor="@color/primary_text"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/productTitle" />
+                app:layout_constraintTop_toBottomOf="@id/forumTitle" />
 
             <TextView
                 android:layout_width="wrap_content"
