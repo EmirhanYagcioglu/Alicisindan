@@ -44,7 +44,6 @@ public class SignInActivity extends AppCompatActivity {
     private void signIn() throws Exception {
         loading(true);
         String userID = Password.emailToID(binding.signInActivityEditTextEmailOrPhoneNumber.getText().toString());
-        // Password Hashing
         String userPassword = get_SHA_256_SecurePassword(binding.signInActivityEditTextPassword.getText().toString(), "salt");
         Log.d("PasswordCheck", "UserId: " + userID + "\nPassword: "+ userPassword);
         if (Password.isCorrectPassword(userID, userPassword)) {

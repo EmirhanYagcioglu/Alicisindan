@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.cankutboratuncer.alicisindan.R;
 import com.cankutboratuncer.alicisindan.activities.data.database.CategoryTest;
@@ -61,6 +62,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
     RecyclerView recyclerViewForCategories;
     Handler handler;
     LinearLayoutManager horizontalRecyclerViewLayoutManager;
+    SwipeRefreshLayout swipeRefreshLayout;
     private ViewModelAdvertisement viewModel;
     public HomeFragment() {
     }
@@ -86,6 +88,7 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerViewForAdvertisements = view.findViewById(R.id.homeFragment_recyclerView_advertisements);
         recyclerViewForCategories = view.findViewById(R.id.homeFragment_recyclerView_categories);
+        swipeRefreshLayout = view.findViewById(R.id.homeFragment_recyclerView_container);
         initCategories();
         initListeners();
         return view;
@@ -99,11 +102,14 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
             initUI(viewModel.getAdvertisements_home());
             Log.d("Tadaaa", "Here");
         } else {
-            loading(true, view);
-            handler = new Handler(Looper.getMainLooper());
-            new BackgroundTask(getContext(), this).execute();
-
+            refreshList();
         }
+    }
+
+    public void refreshList(){
+        loading(true, view);
+        handler = new Handler(Looper.getMainLooper());
+        new BackgroundTask(getContext(), this).execute();
     }
 
     private void initUI(ArrayList<Advertisement> advertisements) {
@@ -138,6 +144,15 @@ public class HomeFragment extends Fragment implements AdvertisementInterface {
             public void onClick(View view) {
                 Fragment fragment = new CategoryFragment();
                 loadFragment(fragment);
+            }
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+                refreshList();
+
             }
         });
     }
