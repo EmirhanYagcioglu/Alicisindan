@@ -7,7 +7,7 @@ import android.util.Base64;
 import java.util.Date;
 
 public class ChatMessage {
-    public String senderId, receiverId, message, dateTime;
+    public String senderId, senderName, receiverId, message, dateTime, forumId;
     public Date dateObject;
     public String conversionId, conversionName, conversionImage;
     public String productTitle, productDescription, userId, userName, productId, location, price, image, brand, type;

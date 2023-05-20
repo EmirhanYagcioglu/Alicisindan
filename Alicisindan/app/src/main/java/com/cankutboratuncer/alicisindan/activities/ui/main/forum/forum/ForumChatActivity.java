@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.cankutboratuncer.alicisindan.activities.utilities.ChatMessage;
 import com.cankutboratuncer.alicisindan.activities.utilities.Advertisement;
 import com.cankutboratuncer.alicisindan.activities.utilities.Constants;
+import com.cankutboratuncer.alicisindan.activities.utilities.Forum;
 import com.cankutboratuncer.alicisindan.activities.utilities.LocalSave;
 import com.cankutboratuncer.alicisindan.databinding.ActivityForumChatBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,12 +36,12 @@ import java.util.Locale;
 public class ForumChatActivity extends AppCompatActivity {
 
     ActivityForumChatBinding binding;
-    private Advertisement advertisement;
+    private Forum forum;
     private List<ChatMessage> chatMessages;
     private ForumChatAdapter forumChatAdapter;
     private LocalSave localSave;
     private FirebaseFirestore database;
-    private String conversionId = null;
+    private String forumID = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +54,6 @@ public class ForumChatActivity extends AppCompatActivity {
         listenMessages();
     }
 
-    private void loadAdvertisementData() {
-
-        String title = "aDLASJDLAKSDJa";
-        String userId = "123";
-        String userName = "aDLASJDLAKSDJa";
-        String id = "Advertisement ID";
-        String location = "aDLASJDLAKSDJa";
-        String price = "123";
-        String token = "123123";
-        advertisement = new Advertisement("", "", "", "", "", "", "", "","", "");
-    }
-
     private void init() {
         localSave = new LocalSave(getApplicationContext());
         chatMessages = new ArrayList<>();
@@ -71,85 +62,40 @@ public class ForumChatActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
     }
 
-    private void setListeners() {
-        //binding.imageBack.setOnClickListener(v -> onBackPressed());
-        binding.buttonComment.setOnClickListener(v -> sendMessage());
-    }
-
-    private void showToast(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    private void listenMessages() {
-        database.collection(Constants.KEY_COLLECTION_CHAT)
-                .whereEqualTo(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID))
-                .whereEqualTo(Constants.KEY_RECEIVER_ID, advertisement.getAdvertisementID())
-                .addSnapshotListener(eventListener);
-        database.collection(Constants.KEY_COLLECTION_CHAT)
-                .whereEqualTo(Constants.KEY_SENDER_ID, advertisement.getAdvertisementID())
-                .whereEqualTo(Constants.KEY_RECEIVER_ID, localSave.getString(Constants.KEY_USER_ID))
-                .addSnapshotListener(eventListener);
-    }
-
-    private String getReadableDateTime(Date date) {
-        return new SimpleDateFormat("MMMM dd, yyyy - hh: mm a", Locale.getDefault()).format(date);
-    }
-
-    private void addConversion(HashMap<String, Object> conversion) {
-        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).add(conversion).addOnSuccessListener(documentReference -> conversionId = documentReference.getId());
-    }
-
-    private void updateConversion(String message) {
-        DocumentReference documentReference = database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).document(conversionId);
-        documentReference.update(Constants.KEY_LAST_MESSAGE, message, Constants.KEY_TIMESTAMP, new Date());
-    }
-
-    private void checkForConversion() {
-        if (chatMessages.size() != 0) {
-            checkForConversionRemotely(localSave.getString(Constants.KEY_USER_ID), advertisement.getAdvertisementID());
-            checkForConversionRemotely(advertisement.getAdvertisementID(), localSave.getString(Constants.KEY_USER_ID));
-        }
-    }
-
-    private void checkForConversionRemotely(String senderId, String receiverId) {
-        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).whereEqualTo(Constants.KEY_SENDER_ID, senderId).whereEqualTo(Constants.KEY_RECEIVER_ID, receiverId).get().addOnCompleteListener(conversionOnCompleteListener);
-    }
-
-    private final OnCompleteListener<QuerySnapshot> conversionOnCompleteListener = task -> {
-        if (task.isSuccessful() && task.getResult() != null && task.getResult().getDocuments().size() > 0) {
-            DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
-            conversionId = documentSnapshot.getId();
-        }
-    };
-
     private void sendMessage() {
         HashMap<String, Object> message = new HashMap<>();
         message.put(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID));
-        message.put(Constants.KEY_RECEIVER_ID, advertisement.getAdvertisementID());
+        message.put(Constants.KEY_SENDER_USERNAME, localSave.getString(Constants.KEY_USER_USERNAME));
+        message.put(Constants.KEY_FORUM_ID, forum.getForumID());
 //        message.put(Constants.KEY_MESSAGE, binding.messageInputField.getText().toString());
         message.put(Constants.KEY_MESSAGE, "Hello");
         message.put(Constants.KEY_TIMESTAMP, new Date());
-        database.collection(Constants.KEY_COLLECTION_CHAT).add(message);
+        database.collection(Constants.KEY_COLLECTION_FORUM_CHAT).add(message);
 
-        if (conversionId != null) {
+        if (forumID != null) {
 //            updateConversion(binding.messageInputField.getText().toString());
             updateConversion("Hello");
-        } else {
-            HashMap<String, Object> conversion = new HashMap<>();
-            conversion.put(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID));
-            conversion.put(Constants.KEY_SENDER_NAME, localSave.getString(Constants.KEY_USER_NAME));
-            conversion.put(Constants.KEY_SENDER_IMAGE, localSave.getString(Constants.KEY_IMAGE));
-            conversion.put(Constants.KEY_RECEIVER_ID, advertisement.getAdvertisementID());
-            conversion.put(Constants.KEY_RECEIVER_NAME, advertisement.getTitle());
-            //conversion.put(Constants.KEY_RECEIVER_IMAGE, advertisement.image);
-//            conversion.put(Constants.KEY_LAST_MESSAGE, binding.messageInputField.getText().toString());
-            conversion.put(Constants.KEY_LAST_MESSAGE, "Hello");
-            conversion.put(Constants.KEY_TIMESTAMP, new Date());
-            addConversion(conversion);
-        }
+//        } else {
+//            HashMap<String, Object> conversion = new HashMap<>();
+//            conversion.put(Constants.KEY_SENDER_ID, localSave.getString(Constants.KEY_USER_ID));
+//            conversion.put(Constants.KEY_SENDER_NAME, localSave.getString(Constants.KEY_USER_NAME));
+//            conversion.put(Constants.KEY_SENDER_IMAGE, localSave.getString(Constants.KEY_IMAGE));
+//
+//            //conversion.put(Constants.KEY_RECEIVER_IMAGE, advertisement.image);
+////            conversion.put(Constants.KEY_LAST_MESSAGE, binding.messageInputField.getText().toString());
+//            conversion.put(Constants.KEY_LAST_MESSAGE, "Hello");
+//            conversion.put(Constants.KEY_TIMESTAMP, new Date());
+//            addConversion(conversion);
+//        }
 //        binding.messageInputField.setText(null);
+        }
     }
 
+    private void listenMessages() {
+        database.collection(Constants.KEY_COLLECTION_FORUM_CHAT)
+                .whereEqualTo(Constants.KEY_FORUM_ID, forum.getForumID())
+                .addSnapshotListener(eventListener);
+    }
 
     private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
         if (error != null) {
@@ -161,14 +107,15 @@ public class ForumChatActivity extends AppCompatActivity {
                 if (documentChange.getType() == DocumentChange.Type.ADDED) {
                     ChatMessage chatMessage = new ChatMessage();
                     chatMessage.senderId = documentChange.getDocument().getString(Constants.KEY_SENDER_ID);
-                    chatMessage.receiverId = documentChange.getDocument().getString(Constants.KEY_RECEIVER_ID);
+                    chatMessage.senderName = documentChange.getDocument().getString(Constants.KEY_SENDER_NAME);
                     chatMessage.message = documentChange.getDocument().getString(Constants.KEY_MESSAGE);
                     chatMessage.dateTime = getReadableDateTime(documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP));
                     chatMessage.dateObject = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);
+                    chatMessage.forumId = documentChange.getDocument().getString(Constants.KEY_FORUM_ID);
                     chatMessages.add(chatMessage);
                 }
             }
-            Collections.sort(chatMessages, (obj1, obj2) -> obj1.dateObject.compareTo(obj2.dateObject));
+            Collections.sort(chatMessages, Comparator.comparing(obj -> obj.dateObject));
             if (count == 0) {
                 forumChatAdapter.notifyDataSetChanged();
             } else {
@@ -178,10 +125,58 @@ public class ForumChatActivity extends AppCompatActivity {
             binding.chatRecyclerView.setVisibility(View.VISIBLE);
         }
         binding.progressBar.setVisibility(View.GONE);
-        if (conversionId == null) {
+        if (forumID == null) {
             checkForConversion();
         }
     };
+
+    private void setListeners() {
+        //binding.imageBack.setOnClickListener(v -> onBackPressed());
+        binding.buttonComment.setOnClickListener(v -> sendMessage());
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+    private String getReadableDateTime(Date date) {
+        return new SimpleDateFormat("MMMM dd, yyyy - hh: mm a", Locale.getDefault()).format(date);
+    }
+
+//    private void addConversion(HashMap<String, Object> conversion) {
+//        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).add(conversion).addOnSuccessListener(documentReference -> conversionId = documentReference.getId());
+//    }
+
+    private void updateConversion(String message) {
+        DocumentReference documentReference = database.collection(Constants.KEY_COLLECTION_FORUM_POSTS).document(forumID);
+        documentReference.update(Constants.KEY_LAST_MESSAGE, message, Constants.KEY_TIMESTAMP, new Date());
+    }
+
+    private void checkForConversion() {
+//        if (chatMessages.size() != 0) {
+            Log.d("logologlog2", "check");
+            database.collection(Constants.KEY_COLLECTION_FORUM_POSTS).whereEqualTo(Constants.KEY_FORUM_ID, forumID).get().addOnCompleteListener(conversionOnCompleteListener);
+//        }
+    }
+
+//    private void checkForConversionRemotely(String senderId, String receiverId) {
+//        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).whereEqualTo(Constants.KEY_SENDER_ID, senderId).whereEqualTo(Constants.KEY_RECEIVER_ID, receiverId).get().addOnCompleteListener(conversionOnCompleteListener);
+//    }
+
+    private final OnCompleteListener<QuerySnapshot> conversionOnCompleteListener = task -> {
+        if (task.isSuccessful() && task.getResult() != null && task.getResult().getDocuments().size() > 0) {
+            DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+            forumID = documentSnapshot.getString(Constants.KEY_FORUM_ID);
+            Log.d("logologlog", forumID);
+        }
+    };
+
+
+
+
+
 
     private Bitmap getBitmapFromEncodedString(String encodedImage) {
         if (encodedImage != null) {
@@ -193,12 +188,25 @@ public class ForumChatActivity extends AppCompatActivity {
     }
 
     private void loadReceiverDetails() {
+        loadForumData();
+        binding.forumPostTitle.setText(forum.getForumTitle());
+        binding.forumPostUser.setText(forum.getForumOwnerName());
+        binding.forumPostDescription.setText(forum.getForumDescription());
+        binding.forumPostImage.setImageBitmap(Forum.decodeImage(forum.getForumImage()));
+        forumID = forum.getForumID();
+    }
 
-        loadAdvertisementData();
-//        binding.productCardTitle.setText(advertisement.title);
-//        binding.productCardPrice.setText(advertisement.price);
-//        binding.productCardLocation.setText(advertisement.location);
-//        binding.userCardName.setText(advertisement.userName);
+    private void loadForumData() {
+        forum = new Forum();
+        Bundle args = getIntent().getExtras();
+        if(args != null){
+            forum.setForumID(args.getString(Constants.KEY_FORUM_ID));
+            forum.setForumOwnerID(args.getString(Constants.KEY_FORUM_OWNER_ID));
+            forum.setForumOwnerName(args.getString(Constants.KEY_FORUM_OWNER_NAME));
+            forum.setForumTitle(args.getString(Constants.KEY_FORUM_TITLE));
+            forum.setForumDescription(args.getString(Constants.KEY_FORUM_DESCRIPTION));
+            forum.setForumImage(args.getString(Constants.KEY_FORUM_IMAGE));
+        }
     }
 
 }

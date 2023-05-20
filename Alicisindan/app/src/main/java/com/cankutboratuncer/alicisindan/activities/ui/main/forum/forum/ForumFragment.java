@@ -64,14 +64,6 @@ public class ForumFragment extends Fragment implements ForumListener {
         init();
         initListeners();
         listenForumPosts();
-//        RecyclerView recyclerViewForForums = view.findViewById(R.id.recyclerViewForum);
-//        forums = ForumTest.forums;
-//
-//        recyclerViewForForums.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-//        ForumAdapter forumAdapter = new ForumAdapter(forums, this);
-//        recyclerViewForForums.setAdapter(forumAdapter);
-
-
         return view;
     }
 
@@ -108,7 +100,7 @@ public class ForumFragment extends Fragment implements ForumListener {
                     forum.setForumID(documentChange.getDocument().getString(Constants.KEY_FORUM_ID));
                     forum.setForumOwnerID(documentChange.getDocument().getString(Constants.KEY_FORUM_OWNER_ID));
                     forum.setForumTitle(documentChange.getDocument().getString(Constants.KEY_FORUM_TITLE));
-                    forum.setForumOwnerName(documentChange.getDocument().getString(Constants.KEY_FORUM_OWNER_ID));
+                    forum.setForumOwnerName(documentChange.getDocument().getString(Constants.KEY_FORUM_OWNER_NAME));
                     forum.setForumImage(documentChange.getDocument().getString(Constants.KEY_FORUM_IMAGE));
                     forum.setForumDescription(documentChange.getDocument().getString(Constants.KEY_FORUM_DESCRIPTION));
                     forum.setTimeStamp(documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP));
@@ -144,7 +136,7 @@ public class ForumFragment extends Fragment implements ForumListener {
         args.putString(Constants.KEY_FORUM_OWNER_NAME, forum.getForumOwnerName());
         args.putString(Constants.KEY_FORUM_TITLE, forum.getForumTitle());
         args.putString(Constants.KEY_FORUM_DESCRIPTION, forum.getForumDescription());
-        args.putString(Constants.KEY_FORUM_IMAGE, forum.getForumDescription());
+        args.putString(Constants.KEY_FORUM_IMAGE, forum.getForumImage());
         args.putString(Constants.KEY_TIMESTAMP, forum.getTimeStamp().toString());
 
         Intent intent = new Intent(getActivity(), ForumChatActivity.class);

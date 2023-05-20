@@ -58,7 +58,7 @@ public class ForumEditActivity extends AppCompatActivity {
         HashMap<String, Object> forum = new HashMap<>();
         forum.put(Constants.KEY_FORUM_ID, UUID.randomUUID().toString());
         forum.put(Constants.KEY_FORUM_OWNER_ID, localSave.getString(Constants.KEY_USER_ID));
-        forum.put(Constants.KEY_FORUM_OWNER_NAME, localSave.getString(Constants.KEY_USER_ID));
+        forum.put(Constants.KEY_FORUM_OWNER_NAME, localSave.getString(Constants.KEY_USER_USERNAME));
         forum.put(Constants.KEY_FORUM_TITLE, binding.forumTitle.getText().toString());
         forum.put(Constants.KEY_FORUM_DESCRIPTION, binding.details.getText().toString());
         forum.put(Constants.KEY_FORUM_IMAGE, encodedImage);
@@ -70,7 +70,6 @@ public class ForumEditActivity extends AppCompatActivity {
         database.collection(Constants.KEY_COLLECTION_FORUM_POSTS).add(forum)
                 .addOnSuccessListener(v -> {
                     showToast("Post successfully posted.");
-//                    startActivity(new Intent(getApplicationContext(), ForumFragment.class));
                     Fragment fragment = new ForumFragment();
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.mainActivity_frameLayout_main, fragment).commit();

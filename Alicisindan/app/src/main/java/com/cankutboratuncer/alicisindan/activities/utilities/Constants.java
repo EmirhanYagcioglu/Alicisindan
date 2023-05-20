@@ -11,8 +11,6 @@ public class Constants {
     public static final String KEY_COLLECTION_ADVERTISEMENT_CHAT = "advertisement_chat";
     public static final String KEY_COLLECTION_FORUM_POSTS = "forumPosts";
     public static final String KEY_COLLECTION_FORUM_CHAT = "forum_chat";
-    public static final String KEY_COLLECTION_CHAT = "ALDKSJD";
-    public static final String KEY_COLLECTION_CONVERSATIONS = "ASDkj";
     public static final String KEY_USER_NAME = "userName";
     public static final String KEY_USER_SURNAME = "userSurname";
     public static final String KEY_USER_USERNAME = "userUsername";
@@ -62,6 +60,7 @@ public class Constants {
     public static final String KEY_USER = "user";
 
     public static final String KEY_SENDER_ID = "senderId";
+    public static final String KEY_SENDER_USERNAME = "senderUserName";
     public static final String KEY_RECEIVER_ID = "receiverId";
     public static final String KEY_MESSAGE = "message";
     public static final String KEY_TIMESTAMP = "timestamp";
